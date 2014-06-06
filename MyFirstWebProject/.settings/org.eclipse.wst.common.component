@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="MyFirstWebProject">
+    <wb-module deploy-name="Portail LLT">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/MyFirstWebProject/build/classes"/>
-        <property name="context-root" value="MyFirstWebProject"/>
+        <property name="java-output-path" value="/Portail LLT/build/classes"/>
+        <property name="context-root" value="Portail LLT"/>
     </wb-module>
 </project-modules>

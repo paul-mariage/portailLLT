@@ -3,32 +3,27 @@ package com.llt.servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.llt.beans.Group;
 import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
 /**
- * Servlet implementation class createUserAdmin
+ * Servlet implementation class createUser
  */
-public class createUserAdmin extends HttpServlet {
+public class createUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public createUserAdmin() {
+	public createUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -54,8 +49,6 @@ public class createUserAdmin extends HttpServlet {
 
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String group = request.getParameter("nomGroup");
-		String allowed = request.getParameter("allowed");
 
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
@@ -79,7 +72,7 @@ public class createUserAdmin extends HttpServlet {
 
 			// Récupération des utilisateurs
 			stmt.executeUpdate("INSERT INTO user VALUES ('" + login + "','"
-					+ password + "','" + group + "','0');");
+					+ password + "','invité','0');");
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */
@@ -120,8 +113,9 @@ public class createUserAdmin extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-
-		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
+		request.getSession().setAttribute("user", new User(login,password,"invité",false));
+		request.getRequestDispatcher("/compteCree.jsp").forward(request,
 				response);
 	}
+
 }

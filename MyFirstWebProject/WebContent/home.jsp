@@ -18,8 +18,11 @@
 		<form action="LoginServlet" method="post">
 			Login : <input type="text" name="login" />
 			Password : <input type="password" name="password" />
-			<input type="submit" value="connexion" />
-		</form>
+			<input type="submit" value="Connexion" />
+		</form><br />
+		<form action="redirection" method="post">
+			<input type="submit" name="link" value="Créer un compte" />
+		</form><br />
 	</div></center>
 </body>
 </html>

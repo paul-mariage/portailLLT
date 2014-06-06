@@ -32,8 +32,16 @@
             %>
             <TR>
                 <TD> <%= currentGroup.getNomGroup() %></td>
-                <TD> <%= currentGroup.getLink() %></TD>
+                <TD><form action="RecuperationUsersGroup" method="post">
+               		<center><button type="submit"onclick="onClickButton();"><%= currentGroup.getNomGroup() %></button></center>		
+                	</form>
+                </TD>
             </TR>
             <% } %>
 </body>
 </html>
+<script type="text/javascript"> 
+   function onClicBouton(){ 
+	   request.setParameter("nomGroup",currentGroup.getNomGroup());
+   } 
+</script>

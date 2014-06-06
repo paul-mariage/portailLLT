@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>MyFirstWebProject</display-name>
 	<servlet>
 		<description>
 		</description>
 		<display-name>LoginServlet</display-name>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>
-		com.llt.servlets.LoginServlet</servlet-class>
+		<servlet-class>com.llt.servlets.LoginServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
 		</description>
 		<display-name>LogoutServlet</display-name>
 		<servlet-name>LogoutServlet</servlet-name>
-		<servlet-class>
-		com.llt.servlets.LogoutServlet</servlet-class>
+		<servlet-class>com.llt.servlets.LogoutServlet
+		</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
@@ -45,6 +48,20 @@
 		<servlet-name>createUserAdmin</servlet-name>
 		<servlet-class>com.llt.servlets.createUserAdmin</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>createUser</display-name>
+		<servlet-name>createUser</servlet-name>
+		<servlet-class>com.llt.servlets.createUser</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>redirection</display-name>
+		<servlet-name>redirection</servlet-name>
+		<servlet-class>com.llt.servlets.redirection</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
@@ -57,7 +74,7 @@
 		<servlet-name>RecuperationGroup</servlet-name>
 		<url-pattern>/RecuperationGroup</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>RecuperationUsers</servlet-name>
 		<url-pattern>/RecuperationUsers</url-pattern>
 	</servlet-mapping>
@@ -68,6 +85,14 @@
 	<servlet-mapping>
 		<servlet-name>createUserAdmin</servlet-name>
 		<url-pattern>/createUserAdmin</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>createUser</servlet-name>
+		<url-pattern>/createUser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>redirection</servlet-name>
+		<url-pattern>/redirection</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>

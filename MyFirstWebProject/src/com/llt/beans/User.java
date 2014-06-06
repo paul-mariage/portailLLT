@@ -9,9 +9,8 @@ package com.llt.beans;
 public class User {
 
 	private String login, password,groupe;
-
-
 	private boolean autorisation;
+	private int userCount = 0;
 	
 	public User(){
 		this.login = "anonyme";
@@ -23,6 +22,7 @@ public class User {
 		this.password = password;
 		this.groupe = groupe;
 		this.autorisation=autorisation;
+		userCount++;
 	}
 
 	public String getLogin() {

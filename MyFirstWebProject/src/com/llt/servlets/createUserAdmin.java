@@ -63,6 +63,8 @@ public class createUserAdmin extends HttpServlet {
 		String motDePasse = "root";
 		Connection connexion = null;
 		Statement stmt = null;
+		ResultSet getUsers = null;
+		List<User> listeUser = new ArrayList<User>();
 
 		try {
 
@@ -77,9 +79,26 @@ public class createUserAdmin extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 
-			// Récupération des utilisateurs
+			// Création du nouvel utilisateur
 			stmt.executeUpdate("INSERT INTO user VALUES ('" + login + "','"
 					+ password + "','" + group + "','0');");
+			
+			//récupération de la nouvelle liste d'utilisateur
+			getUsers = stmt.executeQuery("SELECT * FROM user;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getUsers.next()) {
+
+				listeUser.add(new User(getUsers.getString("login"),
+						getUsers.getString("password"), getUsers
+								.getString("nomGroup"), getUsers
+								.getBoolean("allowed")));
+
+			}
+
+			request.setAttribute("listeUser", listeUser);
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */

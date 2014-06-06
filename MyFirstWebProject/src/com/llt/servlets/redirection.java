@@ -32,10 +32,13 @@ public class redirection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String link = "";
 		
-		if ((request.getParameter("link")).matches("Créer un compte"))		
-			request.getRequestDispatcher("/createUser.jsp").forward(request, response);
+		System.out.println("--------------Redirection-----------");
+		System.out.println("Recupération du lien");
+		String link = (String) request.getAttribute("link");
+		System.out.println("link = "+link);
+			
+			request.getRequestDispatcher(link).forward(request, response);
 	}
 
 }

@@ -28,6 +28,7 @@
                 <TH>Password</TH>
                 <TH>Nom du groupe</TH>
                 <TH>Activé</TH>
+                <TH>Supprimer</TH>
             </TR>
             <% while(it.hasNext()){ 
             User currentUser = it.next();
@@ -37,9 +38,14 @@
                 <TD> <%= currentUser.getPassword() %></TD>
                 <TD> <%= currentUser.getGroupe() %></TD>
                 <TD> <%= currentUser.isAllowed() %></TD>
+                <TD> <FORM action="deleteUser" method="post">
+       						<input type="hidden" name="login" value=<%=currentUser.getLogin()%>>
+        					<center><INPUT TYPE="submit" VALUE="Delete"></center>
+    					</FORM></TD>
             </TR>
             <% } %>
             </TABLE>
-            <a href="createUserAdmin.jsp">Créer un nouvel utilisateur</a></center>
+            <br>
+            <a href="createUserAdmin.jsp"><button>Créer un nouvel utilisateur</button></a>
 </body>
 </html>

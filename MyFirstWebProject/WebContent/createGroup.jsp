@@ -9,19 +9,16 @@
 <body>
 	<img src="image/logo-llt.png" align="left" height="200" />
 	<br><br><br><br>
-	<h1 style="FONT-SIZE: xx-large" align=center ><b>Portail de reporting Leroux et Lotz</b></h1>
+	<h1 style="FONT-SIZE: xx-large" align=center ><b>Création d'un nouvel utilisateur</b></h1>
 	<br><br>
 	<br><br>
-	<center><h3>Formulaire de connexion</h3>
+	<center><h3>Formulaire</h3></center>
 	
-	<div>
-		<form action="LoginServlet" method="post">
-			Login : <input type="text" name="login" />
-			Password : <input type="password" name="password" />
-			<input type="submit" value="Connexion" />
-		</form><br />
-		<a href="createUser.jsp"><button>Créer un compte</button> </a>
-	</div></center>
-
+	<div><center>
+		<form action="createGroupAdmin" method="post">
+			Nom du groupe d'utilisateurs : <input type="text" name="nomGroup" /><br><br>
+			<input type="submit" value="connexion" />
+		</form></center>
+	</div>
 </body>
 </html>

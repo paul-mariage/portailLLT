@@ -4,7 +4,7 @@ public class Group {
 
 	private String nomGroup, link;
 
-	public Group(String nomGroup, String link) {
+	public Group(String nomGroup, String link,int numeroGroup) {
 		this.nomGroup=nomGroup;
 		this.link=link;
 	}
@@ -32,7 +32,7 @@ public class Group {
 	public String toString() {
 		return "Group [nomGroup=" + nomGroup + ", link=" + link + "]";
 	}
-	
+
 	
 	
 }

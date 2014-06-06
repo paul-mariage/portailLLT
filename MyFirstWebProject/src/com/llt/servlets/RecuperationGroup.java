@@ -80,7 +80,7 @@ public class RecuperationGroup extends HttpServlet {
 
 			while (getGroups.next()) {
 
-				listeGroup.add(new Group(getGroups.getString("nomGroup"),getGroups.getString("link")));
+				listeGroup.add(new Group(getGroups.getString("nomGroup"),getGroups.getString("link"),1));
 
 			}
 

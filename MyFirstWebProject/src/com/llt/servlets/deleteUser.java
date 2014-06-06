@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,15 +18,15 @@ import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
 /**
- * Servlet implementation class RecuperationUsersGroup
+ * Servlet implementation class deleteUser
  */
-public class RecuperationUsersGroup extends HttpServlet {
+public class deleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RecuperationUsersGroup() {
+	public deleteUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,10 +47,12 @@ public class RecuperationUsersGroup extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out
-				.println("-----------------RecuperationUsersGroups------------------");
-		System.out.println("Début doPost RecuperationUsers");
+				.println("-----------------CreateUserAdmin------------------");
+		System.out.println("Début doPost CreateUserAdmin");
+
+		String login = request.getParameter("login");
+
 		/* Connexion à la base de données */
-		String nomGroup = request.getParameter("nomGroup");
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
 		String utilisateur = "root";
 		String motDePasse = "root";
@@ -59,7 +60,7 @@ public class RecuperationUsersGroup extends HttpServlet {
 		Statement stmt = null;
 		ResultSet getUsers = null;
 		List<User> listeUser = new ArrayList<User>();
-		System.out.println("nomGroup = "+nomGroup);
+
 		try {
 
 			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
@@ -73,8 +74,11 @@ public class RecuperationUsersGroup extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 
-			// Récupération des utilisateurs
-			getUsers = stmt.executeQuery("SELECT * FROM user WHERE nomGroup='"+nomGroup+"';");
+			// Création du nouvel utilisateur
+			stmt.executeUpdate("DELETE FROM user WHERE login='"+login+"';");
+
+			// récupération de la nouvelle liste d'utilisateur
+			getUsers = stmt.executeQuery("SELECT * FROM user;");
 
 			// Boucle de parcours getUsers
 
@@ -87,12 +91,6 @@ public class RecuperationUsersGroup extends HttpServlet {
 			}
 
 			request.setAttribute("listeUser", listeUser);
-
-			// Affichage sur la console des utilisateurs pour test
-			Iterator<User> it = listeUser.iterator();
-			while (it.hasNext()) {
-				System.out.println(it.next().toString());
-			}
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */
@@ -108,18 +106,6 @@ public class RecuperationUsersGroup extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if (getUsers != null)
-				try {
-					System.out.println("Fermeture getInfosUser");
-					/* Fermeture de la connexion */
-					getUsers.close();
-				} catch (SQLException ignore) {
-					/*
-					 * Si une erreur survient lors de la fermeture, il suffit de
-					 * l'ignorer.
-					 */
-					System.out.println("Erreur SQLExeption 2");
-				}
 			if (stmt != null)
 				try {
 					System.out.println("Fermeture des statements");
@@ -146,8 +132,8 @@ public class RecuperationUsersGroup extends HttpServlet {
 				}
 		}
 
-		request.getRequestDispatcher("ShowUsers.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
+				response);
 	}
 
 }

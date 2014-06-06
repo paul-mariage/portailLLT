@@ -131,6 +131,8 @@ public class LoginServlet extends HttpServlet {
 				/* Gérer les éventuelles erreurs ici */
 				System.out.println("Erreur SQLExeption 1: ");
 				e.printStackTrace();
+				request.getRequestDispatcher("/errorDB").forward(request, response);
+				
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

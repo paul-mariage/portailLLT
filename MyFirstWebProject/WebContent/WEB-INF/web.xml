@@ -62,6 +62,27 @@
 		<servlet-name>redirection</servlet-name>
 		<servlet-class>com.llt.servlets.redirection</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>createGroupAdmin</display-name>
+		<servlet-name>createGroupAdmin</servlet-name>
+		<servlet-class>com.llt.servlets.createGroupAdmin</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>deleteUser</display-name>
+		<servlet-name>deleteUser</servlet-name>
+		<servlet-class>com.llt.servlets.deleteUser</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>deleteGroup</display-name>
+		<servlet-name>deleteGroup</servlet-name>
+		<servlet-class>com.llt.servlets.deleteGroup</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/LoginServlet</url-pattern>
@@ -93,6 +114,18 @@
 	<servlet-mapping>
 		<servlet-name>redirection</servlet-name>
 		<url-pattern>/redirection</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>createGroupAdmin</servlet-name>
+		<url-pattern>/createGroupAdmin</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>deleteUser</servlet-name>
+		<url-pattern>/deleteUser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>deleteGroup</servlet-name>
+		<url-pattern>/deleteGroup</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>

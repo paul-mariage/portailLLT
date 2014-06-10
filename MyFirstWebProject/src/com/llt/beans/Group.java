@@ -4,7 +4,7 @@ public class Group {
 
 	private String nomGroup, link;
 
-	public Group(String nomGroup, String link,int numeroGroup) {
+	public Group(String nomGroup, String link) {
 		this.nomGroup=nomGroup;
 		this.link=link;
 	}

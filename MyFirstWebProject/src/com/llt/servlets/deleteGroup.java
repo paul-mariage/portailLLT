@@ -45,8 +45,8 @@ public class deleteGroup extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out
-				.println("-----------------CreateGroupAdmin------------------");
-		System.out.println("Début doPost CreateGroupAdmin");
+				.println("-----------------deleteGroup------------------");
+		System.out.println("Début doPost deleteGroup");
 
 		String nomGroup = request.getParameter("nomGroup");
 		String link = new String(nomGroup + ".jsp");
@@ -87,7 +87,7 @@ public class deleteGroup extends HttpServlet {
 			while (getGroups.next()) {
 
 				listeGroup.add(new Group(getGroups.getString("nomGroup"),
-						getGroups.getString("link"), 1));
+						getGroups.getString("link")));
 
 			}
 

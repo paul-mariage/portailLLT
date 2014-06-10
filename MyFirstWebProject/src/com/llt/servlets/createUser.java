@@ -44,8 +44,8 @@ public class createUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out
-				.println("-----------------CreateUserAdmin------------------");
-		System.out.println("Début doPost CreateUserAdmin");
+				.println("-----------------CreateUser------------------");
+		System.out.println("Début doPost CreateUser");
 
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");

@@ -14,19 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.llt.beans.Group;
+import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
 /**
- * Servlet implementation class createGroupAdmin
+ * Servlet implementation class changeGroupUser
  */
-public class createGroupAdmin extends HttpServlet {
+public class changeGroupUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public createGroupAdmin() {
+	public changeGroupUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,14 +47,13 @@ public class createGroupAdmin extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out
-				.println("-----------------CreateGroupAdmin------------------");
-		System.out.println("Début doPost CreateGroupAdmin");
+				.println("-----------------changeGroupUser------------------");
+		System.out.println("Début doPost changeGroupUser");
 
-		String nomGroup = request.getParameter("nomGroup");
-		String link = new String(nomGroup + ".jsp");
+		String login = request.getParameter("login");
+		String newGroup = request.getParameter("group");
 
-		System.out.println("Le groupe a créer : " + nomGroup
-				+ " avec comme lien :" + link);
+		System.out.println("L'user " + login + ": groupe =" + newGroup);
 
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
@@ -62,8 +61,8 @@ public class createGroupAdmin extends HttpServlet {
 		String motDePasse = "root";
 		Connection connexion = null;
 		Statement stmt = null;
-		ResultSet getGroups = null;
-		List<Group> listeGroup = new ArrayList<Group>();
+		ResultSet getUsers = null;
+		List<User> listeUser = new ArrayList<User>();
 
 		try {
 
@@ -78,23 +77,26 @@ public class createGroupAdmin extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 
-			// Récupération des utilisateurs
-			stmt.executeUpdate("INSERT INTO groups VALUES ('" + nomGroup
-					+ "','" + link + "');");
+			System.out.println("Requete : UPDATE user SET nomGroup='" + newGroup
+					+ "' WHERE login='" + login + "';");
+			// Création du nouvel utilisateur
+			stmt.executeUpdate("UPDATE user SET nomGroup='" + newGroup
+					+ "' WHERE login='" + login + "';");
 
-			// récupération de la nouvelle liste de groupe
-			getGroups = stmt.executeQuery("SELECT * FROM groups;");
+			// récupération de la nouvelle liste d'utilisateur
+			getUsers = stmt.executeQuery("SELECT * FROM user;");
 
 			// Boucle de parcours getUsers
 
-			while (getGroups.next()) {
+			while (getUsers.next()) {
 
-				listeGroup.add(new Group(getGroups.getString("nomGroup"),
-						getGroups.getString("link")));
+				listeUser.add(new User(getUsers.getString("login"), getUsers
+						.getString("password"), getUsers.getString("nomGroup"),
+						getUsers.getBoolean("allowed")));
 
 			}
 
-			request.setAttribute("listeGroup", listeGroup);
+			request.setAttribute("listeUser", listeUser);
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */
@@ -136,7 +138,7 @@ public class createGroupAdmin extends HttpServlet {
 				}
 		}
 
-		request.getRequestDispatcher("/ShowGroups.jsp").forward(request,
+		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
 				response);
 	}
 

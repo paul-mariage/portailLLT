@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.llt.beans.Group;
 import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
@@ -58,6 +59,8 @@ public class RecuperationUsers extends HttpServlet {
 		Statement stmt = null;
 		ResultSet getUsers = null;
 		List<User> listeUser = new ArrayList<User>();
+		ResultSet getGroups = null;
+		List<Group> listeGroup = new ArrayList<Group>();
 
 		try {
 
@@ -93,6 +96,27 @@ public class RecuperationUsers extends HttpServlet {
 			Iterator<User> it = listeUser.iterator();
 			while (it.hasNext()) {
 				System.out.println(it.next().toString());
+			}
+			
+			//Récupération des groupes
+			getGroups = stmt.executeQuery("SELECT * FROM groups;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getGroups.next()) {
+
+				listeGroup.add(new Group(getGroups.getString("nomGroup"),
+						getGroups.getString("link")));
+
+			}
+
+			request.setAttribute("listeGroup", listeGroup);
+
+			//Affichage sur la console des utilisateurs pour test
+			Iterator<Group> it2 = listeGroup.iterator();
+			while (it2.hasNext()) {
+				System.out.println(it2.next().toString());
 			}
 
 		} catch (SQLException e) {

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Outil de reporting Leroux & Lotz - Liste des utilisateurs</title>
 </head>
 <%@page import="com.llt.beans.User" %>
 <%@page import="com.llt.beans.Group" %>
@@ -40,40 +40,44 @@
                 <TD> <%= currentUser.getLogin() %></td>
                 <TD> <%= currentUser.getPassword() %></TD>
                <td><FORM action="changeGroupUser" method="post">
-               		<input type="hidden" name="login" value=<%=currentUser.getLogin()%>>
-					<SELECT name="group" size="1">
+               		<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+					<center><SELECT name="group" onChange="this.form.submit()" size="1">
 					<% 
 					Iterator<Group> it2 = listeGroup.iterator();
 					while(it2.hasNext()){ 
             			Group currentGroup = it2.next();
            			 %>
-					<OPTION value="<%=currentGroup.getNomGroup()%>"><%=currentGroup.getNomGroup()%></OPTION>
+					<OPTION <% if (currentUser.getGroupe().equals(currentGroup.getNomGroup())){%>SELECTED <%} %>value="<%=currentGroup.getNomGroup()%>"><%=currentGroup.getNomGroup()%></OPTION>
 						<%} %>
-						</SELECT>
-						<input type="submit" value="Edit">
+						</SELECT></center>
 						</FORM>
 					</td>
                	<% if (currentUser.isAllowed()){ %>
                			<TD> <FORM action="changeStateUser" method="post">
-       						<input type="hidden" name="login" value=<%=currentUser.getLogin()%>>
+       						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
        						<input type="hidden" name="allowed" value="0">
         					<center><INPUT TYPE="submit" VALUE="Désactiver"></center>
     					</FORM></TD>
     			<%} else { %>
     					<TD> <FORM action="changeStateUser" method="post">
-       						<input type="hidden" name="login" value=<%=currentUser.getLogin()%>>
+       						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
        						<input type="hidden" name="allowed" value="1">
         					<center><INPUT TYPE="submit" VALUE="Activer"></center>
     					</FORM></TD>
             	<% } %>
                 <TD> <FORM action="deleteUser" method="post">
-       						<input type="hidden" name="login" value=<%=currentUser.getLogin()%>>
+       						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
         					<center><INPUT TYPE="submit" VALUE="Delete"></center>
     					</FORM></TD>
             </TR>
             <% } %>
             </TABLE>
             <br>
-            <a href="createUserAdmin.jsp"><button>Créer un nouvel utilisateur</button></a>
+            <form action="RecuperationGroup" method="post">
+            		<input type="hidden" name="link" value="createUserAdmin.jsp">
+					<input type="submit" value="Créer un compte" />
+			</form><BR>
+			<a href="admin.jsp"><button>Retour</button></a>
 </body>
 </html>

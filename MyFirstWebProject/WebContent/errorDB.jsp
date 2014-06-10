@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Erreur Database</title>
+<title>Outil de reporting Leroux & Lotz - Erreur DB</title>
 </head>
 <body>
-ERREUR DANS LA BASE DE DONNEE
+ERREUR DANS LA BASE DE DONNEE<br>
+<button onClick="history.back()">Retour</button>
 </body>
 </html>

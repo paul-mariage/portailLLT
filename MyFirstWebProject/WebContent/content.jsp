@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>page de contenu</title>
+<title>Outil de reporting Leroux & Lotz</title>itle>
 </head>
 
 <%@page import="com.llt.beans.User" %>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Outil de reporting Leroux & Lotz - Liste des groupes</title>
 <script language="JavaScript">
 	function onClicBouton() {
 		request.setParameter("nomGroup", "invité");
@@ -63,7 +63,7 @@
 				}
 			%>
 		</TABLE>
-		<br> <a href="createGroup.jsp"><button>Créer un
-				groupe</button> </a>
+		<br> <a href="createGroup.jsp"><button>Créer un groupe</button></a>
+		<a href="admin.jsp"><button>Retour</button></a>
 </body>
 </html>

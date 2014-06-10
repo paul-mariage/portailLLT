@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Page d'administration</title>
+<title>Outil de reporting Leroux & Lotz - Administation</title>
 </head>
 
 <%@page import="com.llt.beans.User" %>
@@ -29,13 +29,13 @@
 		<input type="submit" value="Gestion des utilisateurs" />
 	</form>
 	<br>
-	<br>
 	<form action="RecuperationGroup" method="post">
+		<input type="hidden" name="link" value="ShowGroups.jsp">
 		<input type="submit" value="Gestion des groupes" />
+	</form><br><br>
+	<form action="LogoutServlet" method="get">
+		<input type="submit" value="Déconnection" />
 	</form>
-	<%
-				out.print("<p><a href=\"LogoutServlet\">Déconnexion</a></p>");
-	%>
 </center>
 </body>
 </html>

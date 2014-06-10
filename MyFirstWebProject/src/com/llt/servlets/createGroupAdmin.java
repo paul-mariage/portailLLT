@@ -51,10 +51,10 @@ public class createGroupAdmin extends HttpServlet {
 		System.out.println("Début doPost CreateGroupAdmin");
 
 		String nomGroup = request.getParameter("nomGroup");
-		String link = new String(nomGroup + ".jsp");
+		String link = new String("user.jsp");
 
 		System.out.println("Le groupe a créer : " + nomGroup
-				+ " avec comme lien :" + link);
+				);
 
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";

@@ -55,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 		// on récupère les valeurs des deux champs du formulaire de la page de
 		// login
 		boolean autorisationDB = false;
+		String groupeDB = "";
 		String link="";
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -70,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 			currentUser.setPassword(password);
 			System.out.println("user crée");
 			
-			System.out.println("Login : "+currentUser.getLogin()+" password : "+currentUser.getPassword());
+			System.out.println("Login : "+currentUser.getLogin()+" password : '"+currentUser.getPassword()+"'");
 
 			System.out.println("Recherche de l'utilisateur existant");
 			// On parcourt les utilisateurs sur la base de donnée pour vérifier
@@ -86,6 +87,9 @@ public class LoginServlet extends HttpServlet {
 			Statement stmt1 = null;
 			Statement stmt2 = null;
 			ResultSet getInfosUser = null;
+			ResultSet getInfosGroups = null;
+			boolean vide = false;
+			boolean badPassword = false;
 
 			try {
 				
@@ -97,35 +101,46 @@ public class LoginServlet extends HttpServlet {
 						motDePasse);
 
 				stmt1 = connexion.createStatement();
+				stmt2 = connexion.createStatement();
 
 				getInfosUser = stmt1
 						.executeQuery("SELECT * FROM user WHERE login='"
-								+ currentUser.getLogin() + "' AND password='"
-								+ currentUser.getPassword()+"';");
+								+ currentUser.getLogin()+"';");
 				
-				getInfosUser.next();
-
+				
+				if (getInfosUser.next())
+				{
 				String loginDB = getInfosUser.getString("login");
 				System.out.println("login : "+loginDB);
 				String passwordDB = getInfosUser.getString("password");
-				System.out.println("password : "+passwordDB);
+				System.out.println("passwordDB : '"+passwordDB+"'");
 				autorisationDB = getInfosUser.getBoolean("allowed");
 				System.out.println("autorisation : "+autorisationDB);
-				String groupeDB = getInfosUser.getString("nomGroup");
+				groupeDB = getInfosUser.getString("nomGroup");
 				System.out.println("groupe : "+groupeDB);
 				
-				getInfosUser.close();
+				System.out.println("Test de mot de passe");				
+				if (passwordDB.compareTo(password)!=0)
+				{
+					System.out.println("BAD PASSWORD");
+					badPassword = true;
+				}
 				
-				stmt2 = connexion.createStatement();
 				
-				getInfosUser = stmt2
+				getInfosUser.close();				
+				
+				getInfosGroups = stmt2
 						.executeQuery("SELECT * FROM groups WHERE nomGroup='"+groupeDB+"';");
 				
-				getInfosUser.next();
+				getInfosGroups.next();
 				
-				 link = getInfosUser.getString("link");
+				 link = getInfosGroups.getString("link");
 				 System.out.println("link : "+link);
-				 
+				}
+				else {
+					System.out.println("getInfosUser est vide");
+					vide = true;
+				}
 
 			} catch (SQLException e) {
 				/* Gérer les éventuelles erreurs ici */
@@ -182,12 +197,20 @@ public class LoginServlet extends HttpServlet {
 					}
 			}
 
+			if (vide) request.getRequestDispatcher("userInexistant.jsp").forward(request, response);
 			
+			if (!vide & badPassword) 
+				{
+				System.out.println("        Redirection car mauvais mot de passe");
+				request.getRequestDispatcher("badPassword.jsp").forward(request, response);
+				}
 
-			System.out.println("redirection si utilisateur autorisé par l'admin");
-			if (autorisationDB) {
+
+			if (!vide & !badPassword & autorisationDB) {
 				// Si il est activé,on le redirige vers son lien
 				//On stocke l'utilisateur dans la session
+				System.out.println("        Redirection user autorisé");
+				currentUser.setGroupe(groupeDB);
 				request.getSession().setAttribute("user", currentUser);
 				
 				//On redirige vers la page
@@ -195,9 +218,9 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/"+link).forward(request, response);
 				//request.getRequestDispatcher("content.jsp").forward(request, response);
 			}
-			else  {
-				System.out.println("Utilisateur inexistant ou non autorisé");
-				response.sendRedirect("/home.jsp");
+			if(!vide & !badPassword & !autorisationDB)  {
+				System.out.println("        Redirection car utilisateur non autorisé");
+				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			}
 
 

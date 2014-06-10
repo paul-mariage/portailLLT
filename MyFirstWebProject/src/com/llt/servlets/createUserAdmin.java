@@ -55,7 +55,12 @@ public class createUserAdmin extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String group = request.getParameter("nomGroup");
-		String allowed = request.getParameter("allowed");
+		int allowed = 0;
+		if(request.getParameter("allowed") != null) {
+			allowed = 1;
+        }
+
+		
 
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
@@ -65,6 +70,8 @@ public class createUserAdmin extends HttpServlet {
 		Statement stmt = null;
 		ResultSet getUsers = null;
 		List<User> listeUser = new ArrayList<User>();
+		ResultSet getGroups = null;
+		List<Group> listeGroup = new ArrayList<Group>();
 
 		try {
 
@@ -81,7 +88,7 @@ public class createUserAdmin extends HttpServlet {
 
 			// Création du nouvel utilisateur
 			stmt.executeUpdate("INSERT INTO user VALUES ('" + login + "','"
-					+ password + "','" + group + "','0');");
+					+ password + "','" + group + "','"+allowed+"');");
 			
 			//récupération de la nouvelle liste d'utilisateur
 			getUsers = stmt.executeQuery("SELECT * FROM user;");
@@ -99,6 +106,21 @@ public class createUserAdmin extends HttpServlet {
 			}
 
 			request.setAttribute("listeUser", listeUser);
+			
+			//Récupération des groupes
+			getGroups = stmt.executeQuery("SELECT * FROM groups;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getGroups.next()) {
+
+				listeGroup.add(new Group(getGroups.getString("nomGroup"),
+						getGroups.getString("link")));
+
+			}
+
+			request.setAttribute("listeGroup", listeGroup);
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */

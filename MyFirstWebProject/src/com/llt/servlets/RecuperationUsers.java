@@ -76,7 +76,7 @@ public class RecuperationUsers extends HttpServlet {
 			stmt = connexion.createStatement();
 
 			//Récupération des utilisateurs
-			getUsers = stmt.executeQuery("SELECT * FROM user;");
+			getUsers = stmt.executeQuery("SELECT * FROM user ORDER BY nomGroup;");
 
 
 			//Boucle de parcours getUsers

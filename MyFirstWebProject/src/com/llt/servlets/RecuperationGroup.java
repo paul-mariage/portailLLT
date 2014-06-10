@@ -51,6 +51,9 @@ public class RecuperationGroup extends HttpServlet {
 		System.out
 				.println("-----------------RecuperationGroups------------------");
 		System.out.println("Début doPost RecuperationGroups");
+		
+		String link = request.getParameter("link");
+		
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
 		String utilisateur = "root";
@@ -144,7 +147,7 @@ public class RecuperationGroup extends HttpServlet {
 				}
 		}
 
-		request.getRequestDispatcher("ShowGroups.jsp")
+		request.getRequestDispatcher(link)
 				.forward(request, response);
 	}
 

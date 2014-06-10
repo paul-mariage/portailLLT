@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.llt.beans.Group;
 import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
@@ -60,6 +61,8 @@ public class deleteUser extends HttpServlet {
 		Statement stmt = null;
 		ResultSet getUsers = null;
 		List<User> listeUser = new ArrayList<User>();
+		ResultSet getGroups = null;
+		List<Group> listeGroup = new ArrayList<Group>();
 
 		try {
 
@@ -91,6 +94,21 @@ public class deleteUser extends HttpServlet {
 			}
 
 			request.setAttribute("listeUser", listeUser);
+			
+			//Récupération des groupes
+			getGroups = stmt.executeQuery("SELECT * FROM groups;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getGroups.next()) {
+
+				listeGroup.add(new Group(getGroups.getString("nomGroup"),
+						getGroups.getString("link")));
+
+			}
+
+			request.setAttribute("listeGroup", listeGroup);
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */

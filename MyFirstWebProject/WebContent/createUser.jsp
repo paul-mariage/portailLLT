@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Accueil Visiteur</title>
+<title>Outil de reporting Leroux & Lotz- Création d'un utilisateur</title>
 </head>
 <body>
 	<img src="image/logo-llt.png" align="left" height="200" />
@@ -19,7 +19,9 @@
 			Login : <input type="text" name="login" /><br>
 			Password : <input type="password" name="password" /><br>
 			<input type="submit" value="Créer compte" />
-		</form></center>
+		</form>
+		<button onClick="history.back()">Retour</button>
+		</center>
 	</div>
 </body>
 </html>

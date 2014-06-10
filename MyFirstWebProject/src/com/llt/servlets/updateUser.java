@@ -20,15 +20,15 @@ import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
 /**
- * Servlet implementation class changeStateUser
+ * Servlet implementation class updateUser
  */
-public class changeStateUser extends HttpServlet {
+public class updateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public changeStateUser() {
+	public updateUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -49,14 +49,16 @@ public class changeStateUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out
-				.println("-----------------changeStateUser------------------");
-		System.out.println("Début doPost changeStateUser");
+				.println("-----------------changeGroupUser------------------");
+		System.out.println("Début doPost changeGroupUser");
 
-		String login = request.getParameter("login");
+		String oldlogin = request.getParameter("currentlogin");
+		String newlogin = request.getParameter("login");
+		String password = request.getParameter("password");
 		String groupe = request.getParameter("groupe");
-		String allowed = request.getParameter("allowed");
-		
-		System.out.println("L'user "+login+" du groupe "+groupe+": allowed ="+allowed);
+		boolean autorisation = true;
+
+		System.out.println("L'user " + oldlogin + ": a pour nouveau login "+newlogin+"et pour nouveau password :"+ password);
 
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
@@ -64,10 +66,6 @@ public class changeStateUser extends HttpServlet {
 		String motDePasse = "root";
 		Connection connexion = null;
 		Statement stmt = null;
-		ResultSet getUsers = null;
-		List<User> listeUser = new ArrayList<User>();
-		ResultSet getGroups = null;
-		List<Group> listeGroup = new ArrayList<Group>();
 
 		try {
 
@@ -82,49 +80,13 @@ public class changeStateUser extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 
-			System.out.println("Requete : UPDATE user SET allowed='" + allowed
-					+ "' WHERE login='" + login + "';");
+			System.out.println("Requete : UPDATE user SET login='" + newlogin
+					+ "',password='" + password
+					+ "'  WHERE login='" + oldlogin + "';");
 			// Création du nouvel utilisateur
-			stmt.executeUpdate("UPDATE user SET allowed='" + allowed
-					+ "' WHERE login='" + login + "';");
-
-			
-			System.out.println("Requete : SELECT * FROM user where nomGroup='"+groupe+"';");
-			// récupération de la nouvelle liste d'utilisateur
-			getUsers = stmt.executeQuery("SELECT * FROM user where nomGroup='"+groupe+"';");
-
-			// Boucle de parcours getUsers
-
-			while (getUsers.next()) {
-
-				listeUser.add(new User(getUsers.getString("login"), getUsers
-						.getString("password"), getUsers.getString("nomGroup"),
-						getUsers.getBoolean("allowed")));
-
-			}
-
-			request.setAttribute("listeUser", listeUser);
-			
-			//Récupération des groupes
-			getGroups = stmt.executeQuery("SELECT * FROM groups;");
-
-
-			//Boucle de parcours getUsers
-
-			while (getGroups.next()) {
-
-				listeGroup.add(new Group(getGroups.getString("nomGroup"),
-						getGroups.getString("link")));
-
-			}
-
-			request.setAttribute("listeGroup", listeGroup);
-
-			//Affichage sur la console des utilisateurs pour test
-			Iterator<Group> it2 = listeGroup.iterator();
-			while (it2.hasNext()) {
-				System.out.println(it2.next().toString());
-			}
+			stmt.executeUpdate("UPDATE user SET login='" + newlogin
+					+ "',password='" + password
+					+ "'  WHERE login='" + oldlogin + "';");
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */
@@ -165,10 +127,9 @@ public class changeStateUser extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-
-		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
+		request.getSession().setAttribute("user", new User(newlogin,password,groupe,autorisation));
+		request.getRequestDispatcher("/user.jsp").forward(request,
 				response);
-
 	}
 
 }

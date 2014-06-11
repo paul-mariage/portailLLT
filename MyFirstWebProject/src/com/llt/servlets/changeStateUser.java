@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +44,9 @@ public class changeStateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet changeStateUser");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -87,6 +94,8 @@ public class changeStateUser extends HttpServlet {
 			// Création du nouvel utilisateur
 			stmt.executeUpdate("UPDATE user SET allowed='" + allowed
 					+ "' WHERE login='" + login + "';");
+			
+			envoyerMailSMTP(true);
 
 			
 			System.out.println("Requete : SELECT * FROM user where nomGroup='"+groupe+"';");
@@ -98,7 +107,7 @@ public class changeStateUser extends HttpServlet {
 			while (getUsers.next()) {
 
 				listeUser.add(new User(getUsers.getString("login"), getUsers
-						.getString("password"), getUsers.getString("nomGroup"),
+						.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),getUsers.getString("email"), getUsers.getString("nomGroup"),
 						getUsers.getBoolean("allowed")));
 
 			}
@@ -168,6 +177,44 @@ public class changeStateUser extends HttpServlet {
 
 		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
 				response);
+
+	}
+	
+	public static boolean envoyerMailSMTP(boolean debug) {
+		boolean result = false;
+		
+			Session session = null;
+			try {
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			session = (Session) envCtx.lookup("mail/NomDeLaRessource");
+			} catch (Exception ex) {
+			System.out.println("erreur au lookup");
+			System.out.println( ex.getMessage());
+			}
+			
+		Message message = new MimeMessage(session);
+		System.out.println("Compte activé, Envoi d'un mail ici");
+		
+		//Problème avec librairie
+		
+		/*message.setFrom(new InternetAddress("no-reply@portailLLT.fr"));
+		InternetAddress[] internetAddresses = new InternetAddress[1];
+		internetAddresses[0] = new InternetAddress("paul.mariage@live.fr");
+		message.setRecipients(Message.RecipientType.TO,internetAddresses);
+		message.setSubject("Test");
+		message.setText("test mail");
+		message.setHeader("X-Mailer", "Java");
+		message.setSentDate(new Date());
+		session.setDebug(debug);
+		Transport.send(message);*/
+		
+		
+		result = true;
+	
+		return result;
+		
+		
 
 	}
 

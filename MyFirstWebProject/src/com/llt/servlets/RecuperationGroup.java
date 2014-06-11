@@ -39,7 +39,9 @@ public class RecuperationGroup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet RecuperationGroup");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**

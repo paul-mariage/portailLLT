@@ -18,6 +18,9 @@
 		<form action="createUser" method="post">
 			Login : <input type="text" name="login" /><br>
 			Password : <input type="password" name="password" /><br>
+			Nom : <input type="text" name="nom" /><br>
+			Prenom : <input type="text" name="prenom" /><br>
+			Email : <input type="text" name="email" /><br>
 			<input type="submit" value="Créer compte" />
 		</form>
 		<button onClick="history.back()">Retour</button>

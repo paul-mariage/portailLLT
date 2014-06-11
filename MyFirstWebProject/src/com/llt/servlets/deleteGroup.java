@@ -36,7 +36,9 @@ public class deleteGroup extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet deleteGroup");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**

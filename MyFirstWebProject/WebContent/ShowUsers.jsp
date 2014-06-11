@@ -17,15 +17,24 @@
 	<br><br><br><br>
 	<h1 style="FONT-SIZE: xx-large" align=center ><b>Liste de tous les utilisateurs du portail</b></h1>
 	<br><br>
-	<br><br>
-<%
-        List<User> listeUser = (ArrayList<User>) request.getAttribute("listeUser");
-        Iterator<User> it = listeUser.iterator();
+	<br><br><center>
+        <%
+	// si l'utilisateur tape l'adresse de la page content.jsp sans s'être logué auparavant, on affiche...
+	if(request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getGroupe().compareTo("admin")!=0 ){
+		out.print("Vous n'êtes pas connecté en tant qu'administrateur.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+		
+	} else { 
+		if (request.getAttribute("listeUser")==null || request.getAttribute("listeGroup")==null){
+			out.print("Impossible d'accéder directement à cet page.");
+			%><br><br><button onClick="history.back()">Retour</button><%
+        }
+		else {
+		List<User> listeUser = (ArrayList<User>) request.getAttribute("listeUser");
         List<Group> listeGroup = (ArrayList<Group>) request.getAttribute("listeGroup");
-        
-        
+		
         %>
-<center><TABLE BORDER="1">
+<TABLE BORDER="1">
             <TR>
                 <TH>Login</TH>
                 <TH>Password</TH>
@@ -33,7 +42,10 @@
                 <TH>Activé</TH>
                 <TH>Supprimer</TH>
             </TR>
-            <% while(it.hasNext()){ 
+            <% 
+           
+            Iterator<User> it = listeUser.iterator();	
+            while(it.hasNext()){ 
             User currentUser = it.next();
             %>
             <TR>
@@ -55,6 +67,7 @@
                	<% if (currentUser.isAllowed()){ %>
                			<TD> <FORM action="changeStateUser" method="post">
        						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
        						<input type="hidden" name="allowed" value="0">
         					<center><INPUT TYPE="submit" VALUE="Désactiver"></center>
     					</FORM></TD>
@@ -79,5 +92,8 @@
 					<input type="submit" value="Créer un compte" />
 			</form><BR>
 			<a href="admin.jsp"><button>Retour</button></a>
+			<%}
+        	} %>
+        	</center>
 </body>
 </html>

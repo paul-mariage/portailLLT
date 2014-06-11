@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8">
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/MySQL/Connector J 5.1.30/mysql-connector-java-5.1.30-bin.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Program Files/MySQL/Connector J 5.1.30/mysql-connector-java-5.1.30-bin.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
+	<classpathentry kind="lib" path="C:/apache-tomcat-7.0.54/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/activation.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

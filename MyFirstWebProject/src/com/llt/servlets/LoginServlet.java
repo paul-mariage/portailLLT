@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		 * si l'utilisateur tape l'adresse de la servlet directement dans la
 		 * barre d'adresse, il est renvoyé sur la page d'accueil !
 		 */
+		System.out.println("Tentative d'accès direct à la servlet LoginServlet");
 		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
 				response);
 	}
@@ -56,6 +58,9 @@ public class LoginServlet extends HttpServlet {
 		// login
 		boolean autorisationDB = false;
 		String groupeDB = "";
+		String nom = "";
+		String prenom = "";
+		String email = "";
 		String link="";
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -114,6 +119,12 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("login : "+loginDB);
 				String passwordDB = getInfosUser.getString("password");
 				System.out.println("passwordDB : '"+passwordDB+"'");
+				nom = getInfosUser.getString("nom");
+				System.out.println("nom : '"+nom+"'");
+				prenom = getInfosUser.getString("prenom");
+				System.out.println("prenom : '"+passwordDB+"'");
+				email = getInfosUser.getString("email");
+				System.out.println("email : '"+passwordDB+"'");
 				autorisationDB = getInfosUser.getBoolean("allowed");
 				System.out.println("autorisation : "+autorisationDB);
 				groupeDB = getInfosUser.getString("nomGroup");
@@ -132,10 +143,13 @@ public class LoginServlet extends HttpServlet {
 				getInfosGroups = stmt2
 						.executeQuery("SELECT * FROM groups WHERE nomGroup='"+groupeDB+"';");
 				
-				getInfosGroups.next();
 				
-				 link = getInfosGroups.getString("link");
-				 System.out.println("link : "+link);
+				if (getInfosGroups.next())
+				{
+					 link = getInfosGroups.getString("link");
+					 System.out.println("link : "+link);
+				}
+
 				}
 				else {
 					System.out.println("getInfosUser est vide");
@@ -211,6 +225,9 @@ public class LoginServlet extends HttpServlet {
 				//On stocke l'utilisateur dans la session
 				System.out.println("        Redirection user autorisé");
 				currentUser.setGroupe(groupeDB);
+				currentUser.setNom(nom);
+				currentUser.setPrenom(prenom);
+				currentUser.setEmail(email);
 				request.getSession().setAttribute("user", currentUser);
 				
 				//On redirige vers la page
@@ -220,15 +237,15 @@ public class LoginServlet extends HttpServlet {
 			}
 			if(!vide & !badPassword & !autorisationDB)  {
 				System.out.println("        Redirection car utilisateur non autorisé");
-				request.getRequestDispatcher("/home.jsp").forward(request, response);
+				request.getRequestDispatcher("/nonAutorise.jsp").forward(request, response);
 			}
 
 
 		} else {
 			// Si l'utilisateur n'a pas rempli les deux champs du formulaire, il
 			// est renvoyé sur home.jsp
-			System.out.println("Saisie incorrecte");
-			response.sendRedirect("home.jsp");
+			System.out.println("Donnée manquante");
+			response.sendRedirect("missingValue.jsp");
 		}
 	}
 

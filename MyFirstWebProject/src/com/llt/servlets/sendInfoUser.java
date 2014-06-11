@@ -27,7 +27,9 @@ public class sendInfoUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet sendInfoUser");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -36,11 +38,14 @@ public class sendInfoUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
 		String groupe = request.getParameter("groupe");
 		boolean autorisation = true;
 
 		
-		request.getSession().setAttribute("user", new User(login,password,groupe,autorisation));
+		request.getSession().setAttribute("user", new User(login,password,nom,prenom,email,groupe,autorisation));
 		
 
 		request.getRequestDispatcher("modifyUser.jsp").forward(request, response);

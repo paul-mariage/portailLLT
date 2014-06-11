@@ -39,7 +39,9 @@ public class RecuperationUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet RecuperationUsers");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -83,10 +85,9 @@ public class RecuperationUsers extends HttpServlet {
 
 			while (getUsers.next()) {
 
-				listeUser.add(new User(getUsers.getString("login"),
-						getUsers.getString("password"), getUsers
-								.getString("nomGroup"), getUsers
-								.getBoolean("allowed")));
+				listeUser.add(new User(getUsers.getString("login"), getUsers
+						.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),getUsers.getString("email"), getUsers.getString("nomGroup"),
+						getUsers.getBoolean("allowed")));
 
 			}
 

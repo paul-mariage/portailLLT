@@ -8,7 +8,7 @@ package com.llt.beans;
 
 public class User {
 
-	private String login, password,groupe;
+	private String login,password,nom,prenom,email,groupe;
 	private boolean autorisation;
 	private int userCount = 0;
 	
@@ -17,10 +17,13 @@ public class User {
 		this.password = "default";
 	}
 	
-	public User(String login, String password,String groupe, boolean autorisation){
+	public User(String login, String password,String nom,String prenom,String email,String groupe, boolean autorisation){
 		this.login = login;
 		this.password = password;
 		this.groupe = groupe;
+		this.nom=nom;
+		this.prenom=prenom;
+		this.email=email;
 		this.autorisation=autorisation;
 		userCount++;
 	}
@@ -56,10 +59,51 @@ public class User {
 	public void setGroupe(String groupe) {
 		this.groupe = groupe;
 	}
-	
-	public String toString()
-	{
-		return new String("Login : "+this.getLogin()+",Password : "+this.getPassword()+",Groupe : "+this.getGroupe()+",Allowed : "+this.isAllowed());
+
+	public String getNom() {
+		return nom;
 	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
+	}
+
+	public boolean isAutorisation() {
+		return autorisation;
+	}
+
+	@Override
+	public String toString() {
+		return "User [login=" + login + ", password=" + password + ", nom="
+				+ nom + ", prenom=" + prenom + ", email=" + email + ", groupe="
+				+ groupe + ", autorisation=" + autorisation + ", userCount="
+				+ userCount + "]";
+	}
+	
+	
 	
 }

@@ -16,6 +16,12 @@
 	<br><br>
 <center>
 	<%
+	// si l'utilisateur tape l'adresse de la page content.jsp sans s'être logué auparavant, on affiche...
+	if(request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getGroupe().compareTo("admin")!=0 ){
+		out.print("Vous n'êtes pas connecté en tant qu'administrateur.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+		
+	} else {
 			// S'il s'est loggué, on affiche...
 			User currentUser = (User) request.getSession().getAttribute("user");
 			out.print(String.format("Bonjour ! Tu es connecté en tant que : %s", currentUser.getLogin()));
@@ -36,6 +42,7 @@
 	<form action="LogoutServlet" method="get">
 		<input type="submit" value="Déconnection" />
 	</form>
+	<% } %>
 </center>
 </body>
 </html>

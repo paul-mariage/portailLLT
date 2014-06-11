@@ -39,7 +39,9 @@ public class createUserAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet createUserAdmin");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -54,18 +56,22 @@ public class createUserAdmin extends HttpServlet {
 
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String group = request.getParameter("nomGroup");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String group = request.getParameter("group");
 		int allowed = 0;
 		if(request.getParameter("allowed") != null) {
 			allowed = 1;
         }
 
 		
-
+		if (!login.isEmpty() && !password.isEmpty() && !nom.isEmpty() && !prenom.isEmpty() && !email.isEmpty()) {
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
 		String utilisateur = "root";
 		String motDePasse = "root";
+		boolean existe=false;
 		Connection connexion = null;
 		Statement stmt = null;
 		ResultSet getUsers = null;
@@ -85,11 +91,31 @@ public class createUserAdmin extends HttpServlet {
 
 			// Création du statement
 			stmt = connexion.createStatement();
-
-			// Création du nouvel utilisateur
-			stmt.executeUpdate("INSERT INTO user VALUES ('" + login + "','"
-					+ password + "','" + group + "','"+allowed+"');");
 			
+			//Récupération des utilisateurs
+			getUsers = stmt.executeQuery("SELECT * FROM user ORDER BY nomGroup;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getUsers.next()) {
+				System.out.println("User a tester : '"+getUsers.getString("login")+"' -- user a inserer : '"+login+"'");
+				if (getUsers.getString("login").compareTo(login)==0)
+				{
+					existe = true;
+				}
+
+			}
+			
+			if(!existe)
+			{
+			
+			// Création du nouvel utilisateur
+			System.out.println("Requete : INSERT INTO user VALUES ('" + login + "','"
+					+ password + "','" + nom + "','" + prenom + "','" + email + "','"+group+"','"+allowed+"');");
+			stmt.executeUpdate("INSERT INTO user VALUES ('" + login + "','"
+					+ password + "','" + nom + "','" + prenom + "','" + email + "','"+group+"','"+allowed+"');");
+			}
 			//récupération de la nouvelle liste d'utilisateur
 			getUsers = stmt.executeQuery("SELECT * FROM user;");
 
@@ -98,10 +124,9 @@ public class createUserAdmin extends HttpServlet {
 
 			while (getUsers.next()) {
 
-				listeUser.add(new User(getUsers.getString("login"),
-						getUsers.getString("password"), getUsers
-								.getString("nomGroup"), getUsers
-								.getBoolean("allowed")));
+				listeUser.add(new User(getUsers.getString("login"), getUsers
+						.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),getUsers.getString("email"), getUsers.getString("nomGroup"),
+						getUsers.getBoolean("allowed")));
 
 			}
 
@@ -161,8 +186,18 @@ public class createUserAdmin extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-
+		if(!existe)
+		{
 		request.getRequestDispatcher("/ShowUsers.jsp").forward(request,
 				response);
+		}
+		else request.getRequestDispatcher("/userExist.jsp").forward(request,
+				response);
+		} else {
+			// Si l'utilisateur n'a pas rempli les deux champs du formulaire, il
+			// est renvoyé sur home.jsp
+			System.out.println("Donnée manquante");
+			response.sendRedirect("missingValue.jsp");
+		}
 	}
 }

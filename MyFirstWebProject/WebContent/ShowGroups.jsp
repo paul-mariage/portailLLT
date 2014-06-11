@@ -12,6 +12,7 @@
 </script>
 </head>
 <%@page import="com.llt.beans.Group"%>
+<%@page import="com.llt.beans.User"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
@@ -29,11 +30,23 @@
 	<br>
 	<br>
 	<br>
+	<center>
 	<%
+	// si l'utilisateur tape l'adresse de la page content.jsp sans s'être logué auparavant, on affiche...
+	if(request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getGroupe().compareTo("admin")!=0 ){
+		out.print("Vous n'êtes pas connecté en tant qu'administrateur.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+		
+	} else if (request.getAttribute("listeGroup")==null){
+		out.print("Impossible d'accéder directement à cet page.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+    	}
+		else {
+	
 		List<Group> listeGroups = (ArrayList<Group>) request.getAttribute("listeGroup");
 		        Iterator<Group> it = listeGroups.iterator();
 	%>
-	<center>
+	
 		<TABLE BORDER="1">
 			<TR>
 				<TH>Nom du groupe</TH>
@@ -65,5 +78,7 @@
 		</TABLE>
 		<br> <a href="createGroup.jsp"><button>Créer un groupe</button></a>
 		<a href="admin.jsp"><button>Retour</button></a>
+		<%} %>
+		</center>
 </body>
 </html>

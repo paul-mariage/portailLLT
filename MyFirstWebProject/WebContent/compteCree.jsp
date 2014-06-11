@@ -21,7 +21,10 @@
 			out.print("<br />");
 			out.print("Rappel des informations du compte : <br>");
 			out.print(String.format("Votre login :  %s<br>", currentUser.getLogin()));
-			out.print(String.format("Votre password :%s<br>", currentUser.getPassword()));
+			out.print(String.format("Votre password : %s<br>", currentUser.getPassword()));
+			out.print(String.format("Votre nom : %s<br>", currentUser.getNom()));
+			out.print(String.format("Votre prenom : %s<br>", currentUser.getPrenom()));
+			out.print(String.format("Votre email : %s<br>", currentUser.getEmail()));
 			out.print("Un email a été envoyé à l'administrateur pour qu'il valide votre compte");
 			out.print("<p><a href=\"LogoutServlet\">Retour Accueil</a></p>");
 

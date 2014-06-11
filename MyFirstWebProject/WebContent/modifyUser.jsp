@@ -23,8 +23,9 @@
 			<input type="hidden" name=groupe value="<%=currentUser.getGroupe()%>">
 			<input type="hidden" name="allowed" value="<%=currentUser.isAllowed()%>">
 			Login : <input type="text" name="login" value="<%=currentUser.getLogin() %>"/><br>
-			Nom : <input type="text" name="nom" value=""/><br>
-			Prénom : <input type="text" name="prenom" value="" /><br>
+			Nom : <input type="text" name="nom" value="<%=currentUser.getNom() %>"/><br>
+			Prénom : <input type="text" name="prenom" value="<%=currentUser.getPrenom() %>" /><br>
+			Email : <input type="text" name="email" value="<%=currentUser.getEmail() %>" /><br>
 			Password : <input type="text" name="password" value="<%=currentUser.getPassword() %>"><br><br>
 			<input type="submit" value="Modifier mes infos" />
 		</form><br>

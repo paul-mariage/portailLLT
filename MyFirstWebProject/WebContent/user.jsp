@@ -15,10 +15,16 @@
 	<br><br>
 	<br><br>
 <center>
-	<%
+	<%		
+	// si l'utilisateur tape l'adresse de la page content.jsp sans s'être logué auparavant, on affiche...
+	if(request.getSession().getAttribute("user") == null){
+		out.print("Vous n'êtes pas connecté. Veuillez vous authentifier.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+		
+	} else {
 			// S'il s'est loggué, on affiche...
 			User currentUser = (User) request.getSession().getAttribute("user");
-			out.print(String.format("Bonjour ! Tu es connecté en tant que : %s", currentUser.getLogin()));
+			out.print(String.format("Bonjour %s %s! Vous êtes connecté en tant que : %s",currentUser.getNom(),currentUser.getPrenom(), currentUser.getLogin()));
 			out.print("<br />");
 			out.print(String.format("Ton mot de passe est : %s", currentUser.getPassword()));out.print("<br />");
 			out.print(String.format("Vous appartenez au groupe : %s", currentUser.getGroupe()));
@@ -38,6 +44,9 @@
 	<form action="sendInfoUser" method="post">
 		<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
 		<input type="hidden" name="password" value="<%=currentUser.getPassword()%>">
+		<input type="hidden" name="nom" value="<%=currentUser.getNom()%>">
+		<input type="hidden" name="prenom" value="<%=currentUser.getPrenom()%>">
+		<input type="hidden" name="email" value="<%=currentUser.getEmail()%>">
 		<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
 		<input type="submit" value="Modifier mes infos" />
 	</form><br><br>
@@ -45,5 +54,6 @@
 		<input type="submit" value="Déconnection" />
 	</form>
 </center>
+<%}%>
 </body>
 </html>

@@ -39,7 +39,9 @@ public class updateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet updateUser");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -55,6 +57,9 @@ public class updateUser extends HttpServlet {
 		String oldlogin = request.getParameter("currentlogin");
 		String newlogin = request.getParameter("login");
 		String password = request.getParameter("password");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
 		String groupe = request.getParameter("groupe");
 		boolean autorisation = true;
 
@@ -127,7 +132,7 @@ public class updateUser extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-		request.getSession().setAttribute("user", new User(newlogin,password,groupe,autorisation));
+		request.getSession().setAttribute("user", new User(newlogin,password,nom,prenom,email,groupe,autorisation));
 		request.getRequestDispatcher("/user.jsp").forward(request,
 				response);
 	}

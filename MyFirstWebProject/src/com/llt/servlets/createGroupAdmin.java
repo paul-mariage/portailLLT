@@ -37,7 +37,9 @@ public class createGroupAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet createGroupAdmin");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -52,10 +54,11 @@ public class createGroupAdmin extends HttpServlet {
 
 		String nomGroup = request.getParameter("nomGroup");
 		String link = new String("user.jsp");
+		boolean existe=false;
 
 		System.out.println("Le groupe a créer : " + nomGroup
 				);
-
+		if(!nomGroup.isEmpty()){
 		/* Connexion à la base de données */
 		String url = "jdbc:mysql://localhost:8082/gestionPortail";
 		String utilisateur = "root";
@@ -78,10 +81,29 @@ public class createGroupAdmin extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 
+			//Récupération des utilisateurs
+			getGroups = stmt.executeQuery("SELECT * FROM groups;");
+
+
+			//Boucle de parcours getUsers
+
+			while (getGroups.next()) {
+				
+				System.out.println("Current groupe : '"+getGroups.getString("nomGroup")+ "' - groupe a créer : '"+nomGroup+"'");
+				if (getGroups.getString("nomGroup").compareTo(nomGroup)==0)
+				{
+					System.out.println("Groupe existant!");
+					existe = true;
+				}
+
+			}
+			
+			if(!existe){
 			// Récupération des utilisateurs
 			stmt.executeUpdate("INSERT INTO groups VALUES ('" + nomGroup
 					+ "','" + link + "');");
-
+			}
+			
 			// récupération de la nouvelle liste de groupe
 			getGroups = stmt.executeQuery("SELECT * FROM groups;");
 
@@ -135,9 +157,15 @@ public class createGroupAdmin extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-
+		
 		request.getRequestDispatcher("/ShowGroups.jsp").forward(request,
 				response);
+			} else {
+				// Si l'utilisateur n'a pas rempli les deux champs du formulaire, il
+				// est renvoyé sur home.jsp
+				System.out.println("Donnée manquante");
+				response.sendRedirect("missingValue.jsp");
+			}
 	}
 
 }

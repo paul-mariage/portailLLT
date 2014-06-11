@@ -18,12 +18,23 @@
 	<h1 style="FONT-SIZE: xx-large" align=center ><b>Création d'un nouvel utilisateur</b></h1>
 	<br><br>
 	<br><br>
-	<center><h3>Formulaire</h3></center>
+	<center>
+	<%
+	// si l'utilisateur tape l'adresse de la page content.jsp sans s'être logué auparavant, on affiche...
+	if(request.getSession().getAttribute("user") == null || ((User) request.getSession().getAttribute("user")).getGroupe().compareTo("admin")!=0 ){
+		out.print("Vous n'êtes pas connecté en tant qu'administrateur.");
+		%><br><br><button onClick="history.back()">Retour</button><%
+		
+	} else { %>
+	<h3>Formulaire</h3>
 	
 	<div><center>
 		<form action="createUserAdmin" method="post">
 			Login : <input type="text" name="login" /><br>
 			Password : <input type="password" name="password" /><br>
+			Nom : <input type="text" name="nom" /><br>
+			Prenom : <input type="text" name="prenom" /><br>
+			Email : <input type="text" name="email" /><br>
 			Groupe : <SELECT name="group" size="1">
 					<% 
 					
@@ -44,5 +55,7 @@
 		</center>
 		
 	</div>
+	<% } %>
+	</center>
 </body>
 </html>

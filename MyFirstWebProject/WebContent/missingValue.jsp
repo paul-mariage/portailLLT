@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux & Lotz - Mauvais mot de passe</title>
+<title>Outil de reporting Leroux & Lotz - Valeur manquante</title>
 </head>
 
 <%@page import="com.llt.beans.User" %>
@@ -12,15 +12,11 @@
 <body>
 	<img src="image/logo-llt.png" align="left" height="200" />
 	<br><br><br><br>
-	<h1 style="FONT-SIZE: xx-large" align=center ><b>Mot de passe erroné</b></h1>
+	<h1 style="FONT-SIZE: xx-large" align=center ><b>Valeur manquante</b></h1>
 	<br><br>
 	<br><br><center>
-		<% if(request.getSession().getAttribute("user") == null){
-		out.print("Vous n'êtes pas connecté. Cliquez <a href=\"home.jsp\">ici</a> pour vous authentifier");
-		
-	} else { %>
-	Mauvais mot de passe, veuillez réessayer.<br>
-	<a href="home.jsp"><button>Retour</button> </a>
-	<% } %>
+	Un des champs n'est pas complété. Veuillez compléter entièrement le formulaire.<br><br>
+	<button onClick="history.back()">Retour</button> 
+	
 
 	</center>

@@ -67,7 +67,7 @@ public class RecuperationUsersGroup extends HttpServlet {
 		System.out.println("nomGroup = "+nomGroup);
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 

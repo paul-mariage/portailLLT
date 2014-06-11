@@ -7,16 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +68,7 @@ public class createUser extends HttpServlet {
 
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 
@@ -174,7 +164,7 @@ public class createUser extends HttpServlet {
 public static boolean envoyerMailSMTP(boolean debug) {
 		boolean result = false;
 		
-			Session session = null;
+		/*Session session = null;
 			try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -184,7 +174,7 @@ public static boolean envoyerMailSMTP(boolean debug) {
 			System.out.println( ex.getMessage());
 			}
 			
-		Message message = new MimeMessage(session);
+		Message message = new MimeMessage(session);*/
 		System.out.println("Envoi d'un mail ici");
 		
 		//Problème avec librairie

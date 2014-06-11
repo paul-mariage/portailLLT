@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -81,7 +80,7 @@ public class createUserAdmin extends HttpServlet {
 
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.llt.beans.Group;
-import com.llt.beans.User;
 import com.mysql.jdbc.Driver;
 
 /**
@@ -67,7 +66,7 @@ public class RecuperationGroup extends HttpServlet {
 
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 

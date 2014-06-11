@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux & Lotz - Liste des groupes</title>
+<title>Outil de reporting Leroux et Lotz - Liste des groupes</title>
 <script language="JavaScript">
 	function onClicBouton() {
 		request.setParameter("nomGroup", "invité");

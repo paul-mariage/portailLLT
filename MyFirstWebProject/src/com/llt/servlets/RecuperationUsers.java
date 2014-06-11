@@ -66,7 +66,7 @@ public class RecuperationUsers extends HttpServlet {
 
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 

@@ -10,11 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +73,7 @@ public class changeStateUser extends HttpServlet {
 
 		try {
 
-			Class driver_class = Class.forName("com.mysql.jdbc.Driver");
+			Class<?> driver_class = Class.forName("com.mysql.jdbc.Driver");
 			Driver driver = (Driver) driver_class.newInstance();
 			DriverManager.registerDriver(driver);
 
@@ -183,7 +178,7 @@ public class changeStateUser extends HttpServlet {
 	public static boolean envoyerMailSMTP(boolean debug) {
 		boolean result = false;
 		
-			Session session = null;
+	/*		Session session = null;
 			try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -193,7 +188,7 @@ public class changeStateUser extends HttpServlet {
 			System.out.println( ex.getMessage());
 			}
 			
-		Message message = new MimeMessage(session);
+		Message message = new MimeMessage(session);*/
 		System.out.println("Compte activé, Envoi d'un mail ici");
 		
 		//Problème avec librairie

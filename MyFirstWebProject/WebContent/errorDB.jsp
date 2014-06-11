@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux & Lotz - Erreur DB</title>
+<title>Outil de reporting Leroux et Lotz - Erreur DB</title>
 </head>
 <body>
 ERREUR DANS LA BASE DE DONNEE<br>

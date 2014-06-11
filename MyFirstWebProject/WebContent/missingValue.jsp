@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux & Lotz - Valeur manquante</title>
+<title>Outil de reporting Leroux et Lotz - Valeur manquante</title>
 </head>
 
 <%@page import="com.llt.beans.User" %>

@@ -54,6 +54,7 @@ public class changeGroupUser extends HttpServlet {
 				.println("-----------------changeGroupUser------------------");
 		System.out.println("Début doPost changeGroupUser");
 
+		//On récupère le login de l'utilisateur a changer et son nouveau groupe
 		String login = request.getParameter("login");
 		String newGroup = request.getParameter("group");
 

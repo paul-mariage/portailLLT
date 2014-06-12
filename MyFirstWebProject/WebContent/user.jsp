@@ -32,7 +32,9 @@
 	%>
 	<br><br>
 	<br><br>
-	<form action="RapportGeneral" method="post">
+	<form action="WebReport" method="get">
+		<input type="hidden" name="ReportName" value="testRapport.rptdesign">
+		<input type="hidden" name="FormatSortie" value="PP">
 		<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
 		<input type="submit" value="Rapport Général <%=currentUser.getGroupe()%>"/>
 	</form>

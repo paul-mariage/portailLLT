@@ -55,14 +55,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("-----------------LoginServlet------------------");
-		// on récupère les valeurs des deux champs du formulaire de la page de
-		// login
+		
 		boolean autorisationDB = false;
 		String groupeDB = "";
 		String nom = "";
 		String prenom = "";
 		String email = "";
 		String link="";
+		
+		// on récupère les valeurs des deux champs du formulaire de la page de
+		// login
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		System.out.println("Sauvegarde du login et du password");
@@ -113,7 +115,7 @@ public class LoginServlet extends HttpServlet {
 						.executeQuery("SELECT * FROM user WHERE login='"
 								+ currentUser.getLogin()+"';");
 				
-				
+				//Si la requête n'est pas vide, on récupère les données
 				if (getInfosUser.next())
 				{
 				String loginDB = getInfosUser.getString("login");
@@ -131,6 +133,7 @@ public class LoginServlet extends HttpServlet {
 				groupeDB = getInfosUser.getString("nomGroup");
 				System.out.println("groupe : "+groupeDB);
 				
+				//On test si le mot de passe saisie est correct
 				System.out.println("Test de mot de passe");				
 				if (passwordDB.compareTo(password)!=0)
 				{
@@ -141,6 +144,7 @@ public class LoginServlet extends HttpServlet {
 				
 				getInfosUser.close();				
 				
+				//On récupère le groupe de l'utilisateur
 				getInfosGroups = stmt2
 						.executeQuery("SELECT * FROM groups WHERE nomGroup='"+groupeDB+"';");
 				
@@ -153,7 +157,7 @@ public class LoginServlet extends HttpServlet {
 
 				}
 				else {
-					System.out.println("getInfosUser est vide");
+					System.out.println("getInfosGroup est vide");
 					vide = true;
 				}
 
@@ -211,16 +215,24 @@ public class LoginServlet extends HttpServlet {
 						System.out.println("Erreur SQLExeption 4");
 					}
 			}
-
+			
+			//traitement si l'utilisateur n'existe pas
 			if (vide) request.getRequestDispatcher("userInexistant.jsp").forward(request, response);
 			
+			//traitement si le mot de passe est erroné
 			if (!vide & badPassword) 
 				{
 				System.out.println("        Redirection car mauvais mot de passe");
 				request.getRequestDispatcher("badPassword.jsp").forward(request, response);
 				}
 
-
+			//traitement si le compte de l'utilisateur n'a pas été activé
+			if(!vide & !badPassword & !autorisationDB)  {
+				System.out.println("        Redirection car utilisateur non autorisé");
+				request.getRequestDispatcher("/nonAutorise.jsp").forward(request, response);
+			}
+			
+			//traitement si tout est ok
 			if (!vide & !badPassword & autorisationDB) {
 				// Si il est activé,on le redirige vers son lien
 				//On stocke l'utilisateur dans la session
@@ -236,15 +248,12 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/"+link).forward(request, response);
 				//request.getRequestDispatcher("content.jsp").forward(request, response);
 			}
-			if(!vide & !badPassword & !autorisationDB)  {
-				System.out.println("        Redirection car utilisateur non autorisé");
-				request.getRequestDispatcher("/nonAutorise.jsp").forward(request, response);
-			}
+			
 
 
 		} else {
 			// Si l'utilisateur n'a pas rempli les deux champs du formulaire, il
-			// est renvoyé sur home.jsp
+			// est renvoyé sur vers une page d'erreur
 			System.out.println("Donnée manquante");
 			response.sendRedirect("missingValue.jsp");
 		}

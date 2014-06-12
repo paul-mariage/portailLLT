@@ -54,6 +54,7 @@ public class changeStateUser extends HttpServlet {
 				.println("-----------------changeStateUser------------------");
 		System.out.println("Début doPost changeStateUser");
 
+		//On récupère le login, le groupe et l'autorisation de l'utilisateur
 		String login = request.getParameter("login");
 		String groupe = request.getParameter("groupe");
 		String allowed = request.getParameter("allowed");
@@ -86,15 +87,16 @@ public class changeStateUser extends HttpServlet {
 
 			System.out.println("Requete : UPDATE user SET allowed='" + allowed
 					+ "' WHERE login='" + login + "';");
-			// Création du nouvel utilisateur
+			// Mise a jour du groupe
 			stmt.executeUpdate("UPDATE user SET allowed='" + allowed
 					+ "' WHERE login='" + login + "';");
 			
+			//Envoi du mail disant que le compte est activé
 			envoyerMailSMTP(true);
 
 			
 			System.out.println("Requete : SELECT * FROM user where nomGroup='"+groupe+"';");
-			// récupération de la nouvelle liste d'utilisateur
+			// récupération de la nouvelle liste d'utilisateur du groupe de l'utilisateur
 			getUsers = stmt.executeQuery("SELECT * FROM user where nomGroup='"+groupe+"';");
 
 			// Boucle de parcours getUsers
@@ -113,7 +115,7 @@ public class changeStateUser extends HttpServlet {
 			getGroups = stmt.executeQuery("SELECT * FROM groups;");
 
 
-			//Boucle de parcours getUsers
+			//Boucle de parcours getGroups
 
 			while (getGroups.next()) {
 
@@ -124,7 +126,7 @@ public class changeStateUser extends HttpServlet {
 
 			request.setAttribute("listeGroup", listeGroup);
 
-			//Affichage sur la console des utilisateurs pour test
+			//Affichage sur la console des groupes pour test
 			Iterator<Group> it2 = listeGroup.iterator();
 			while (it2.hasNext()) {
 				System.out.println(it2.next().toString());

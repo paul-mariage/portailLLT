@@ -161,8 +161,9 @@ public class WebReport extends HttpServlet {
 		IHTMLRenderOption options = new HTMLRenderOption();
 		options.setOutputFormat(HTMLRenderOption.OUTPUT_FORMAT_HTML);
 		options.setEmbeddable(true);
-		options.setBaseImageURL(cheminApp + "images");
-		options.setImageDirectory(cheminApp + "images");
+		//Définition de l'endroit ou se trouve les images à afficher
+		options.setBaseImageURL(cheminApp + "image");
+		options.setImageDirectory(cheminApp + "image");
 		options.setImageHandler(new HTMLServerImageHandler());
 		options.setMasterPageContent(false);
 		options.setOutputStream(servletOutputStream);

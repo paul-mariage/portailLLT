@@ -38,7 +38,7 @@
 	-->
 	<context-param>
 		<param-name>BIRT_VIEWER_DOCUMENT_FOLDER</param-name>
-		<param-value>${birt.viewer.working.path}/documents</param-value>
+		<param-value></param-value>
 	</context-param>
 
 	<!--
@@ -71,13 +71,13 @@
 	-->
 	<context-param>
 		<param-name>BIRT_VIEWER_IMAGE_DIR</param-name>
-		<param-value>${birt.viewer.working.path}/report/images</param-value>
+		<param-value></param-value>
 	</context-param>
 
 	<!-- Engine log directory. Defaults to ${birt home}/logs -->
 	<context-param>
 		<param-name>BIRT_VIEWER_LOG_DIR</param-name>
-		<param-value>${birt.viewer.working.path}/logs</param-value>
+		<param-value></param-value>
 	</context-param>
 
 	<!-- Report engine log level -->
@@ -195,8 +195,6 @@
 		<servlet-class>org.eclipse.birt.report.servlet.BirtEngineServlet</servlet-class>
 	</servlet>
 
-	@generated@
-	
 	<servlet-mapping>
 		<servlet-name>ViewerServlet</servlet-name>
 		<url-pattern>/frameset</url-pattern>
@@ -231,12 +229,12 @@
 		<servlet-name>EngineServlet</servlet-name>
 		<url-pattern>/output</url-pattern>
 	</servlet-mapping>	
-
+	
 	<servlet-mapping>
 		<servlet-name>EngineServlet</servlet-name>
 		<url-pattern>/extract</url-pattern>
 	</servlet-mapping>
-		
+
 	<jsp-config>
 		<taglib>
 			<taglib-uri>/birt.tld</taglib-uri>

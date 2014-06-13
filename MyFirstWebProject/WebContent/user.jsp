@@ -32,12 +32,7 @@
 	%>
 	<br><br>
 	<br><br>
-	<form action="WebReport" method="get">
-		<input type="hidden" name="ReportName" value="testRapport.rptdesign">
-		<input type="hidden" name="FormatSortie" value="PS">
-		<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
-		<input type="submit" value="Rapport Général <%=currentUser.getGroupe()%>"/>
-	</form>
+	<p><button><a href="<%= request.getContextPath( ) + "/frameset?__report=testRapport.rptdesign&sample=my+parameter" %>">Rapport Général <%=currentUser.getGroupe()%></a></button>
 	<br>
 	<form action="CustomReport" method="post">
 		<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">

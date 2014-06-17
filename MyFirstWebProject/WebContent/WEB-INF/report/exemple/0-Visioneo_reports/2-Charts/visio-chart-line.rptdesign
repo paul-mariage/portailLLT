@@ -1,0 +1,3233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">www.visioneo.org</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title">Line chart</text-property>
+    <html-property name="description">This chart is mainly  designed to highlight the SVG format, and some visual effects you can set up in the Eclipse Birt designer. For example, you can hide/display a chart serie by clicking on the legend items., and the line series are highlighted on mouseOver. A reportlet preference allows to enable or disable (default value) the SVG format. When it is disabled, SVG is replaced by the PNG format.</html-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">DataCube.Sales.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Sales.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Sales.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Sales.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.salesYTD.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.salesYTD.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.salesYTD.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.salesYTD.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Year.NewTabularHierarchy4.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Year.NewTabularHierarchy4.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Year.NewTabularHierarchy4.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.Year.NewTabularHierarchy4.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.AggType.NewTabularHierarchy3.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.MonthView.NewTabularHierarchy3.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.MonthView.NewTabularHierarchy3.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.MonthView.NewTabularHierarchy3.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.MonthView.NewTabularHierarchy3.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.SalesAgg.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.SalesAgg.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.SalesAgg.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCube.SalesAgg.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.SalesAgg.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.SalesAgg.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.Axis.NewTabularHierarchy.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.Axis.NewTabularHierarchy.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.Axis.NewTabularHierarchy.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">DataCubeDyn.Axis.NewTabularHierarchy.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.SalesAgg.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.SalesAgg.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group1.NewTabularHierarchy1.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group1.NewTabularHierarchy1.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group1.NewTabularHierarchy1.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group1.NewTabularHierarchy1.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.SalesAgg.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.SalesAgg.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group.NewTabularHierarchy.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group.NewTabularHierarchy.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group.NewTabularHierarchy.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Group.NewTabularHierarchy.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Month.NewTabularHierarchy1.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Month.NewTabularHierarchy1.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Year.NewTabularHierarchy2.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Year.NewTabularHierarchy2.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Year.NewTabularHierarchy2.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Year.NewTabularHierarchy2.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Month.NewTabularHierarchy1.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Month.NewTabularHierarchy1.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.View.NewTabularHierarchy3.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.View.NewTabularHierarchy3.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.View.NewTabularHierarchy3.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.View.NewTabularHierarchy3.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Entity.NewTabularHierarchy.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Entity.NewTabularHierarchy.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Entity.NewTabularHierarchy.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.Entity.NewTabularHierarchy.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="DataCube.Sales.x">694</property>
+    <property name="DataCube.Sales.y">83</property>
+    <property name="DataCube.Sales.width">150</property>
+    <property name="DataCube.Sales.height">200</property>
+    <property name="DataCube.salesYTD.x">441</property>
+    <property name="DataCube.salesYTD.y">14</property>
+    <property name="DataCube.salesYTD.width">150</property>
+    <property name="DataCube.salesYTD.height">355</property>
+    <property name="DataCube.Year.NewTabularHierarchy4.x">61</property>
+    <property name="DataCube.Year.NewTabularHierarchy4.y">352</property>
+    <property name="DataCube.Year.NewTabularHierarchy4.width">150</property>
+    <property name="DataCube.Year.NewTabularHierarchy4.height">54</property>
+    <property name="DataCube.AggType.NewTabularHierarchy3.x">43</property>
+    <property name="DataCube.MonthView.NewTabularHierarchy3.x">765</property>
+    <property name="DataCube.MonthView.NewTabularHierarchy3.y">70</property>
+    <property name="DataCube.MonthView.NewTabularHierarchy3.width">150</property>
+    <property name="DataCube.MonthView.NewTabularHierarchy3.height">56</property>
+    <property name="DataCube.SalesAgg.x">411</property>
+    <property name="DataCube.SalesAgg.y">109</property>
+    <property name="DataCube.SalesAgg.width">150</property>
+    <property name="DataCube.SalesAgg.height">236</property>
+    <property name="DataCubeDyn.SalesAgg.x">135</property>
+    <property name="DataCubeDyn.SalesAgg.y">80</property>
+    <property name="DataCubeDyn.Axis.NewTabularHierarchy.x">400</property>
+    <property name="DataCubeDyn.Axis.NewTabularHierarchy.y">30</property>
+    <property name="DataCubeDyn.Axis.NewTabularHierarchy.width">150</property>
+    <property name="DataCubeDyn.Axis.NewTabularHierarchy.height">200</property>
+    <property name="Data Cube.SalesAgg.x">327</property>
+    <property name="Data Cube.SalesAgg.y">107</property>
+    <property name="Data Cube.Group1.NewTabularHierarchy1.x">747</property>
+    <property name="Data Cube.Group1.NewTabularHierarchy1.y">70</property>
+    <property name="Data Cube.Group1.NewTabularHierarchy1.width">150</property>
+    <property name="Data Cube.Group1.NewTabularHierarchy1.height">200</property>
+    <property name="Data Cube.SalesAgg.width">150</property>
+    <property name="Data Cube.SalesAgg.height">252</property>
+    <property name="Data Cube.Group.NewTabularHierarchy.x">44</property>
+    <property name="Data Cube.Group.NewTabularHierarchy.y">18</property>
+    <property name="Data Cube.Group.NewTabularHierarchy.width">150</property>
+    <property name="Data Cube.Group.NewTabularHierarchy.height">200</property>
+    <property name="Data Cube.Month.NewTabularHierarchy1.x">38</property>
+    <property name="Data Cube.Month.NewTabularHierarchy1.y">325</property>
+    <property name="Data Cube.Year.NewTabularHierarchy2.x">626</property>
+    <property name="Data Cube.Year.NewTabularHierarchy2.y">343</property>
+    <property name="Data Cube.Year.NewTabularHierarchy2.width">150</property>
+    <property name="Data Cube.Year.NewTabularHierarchy2.height">92</property>
+    <property name="Data Cube.Month.NewTabularHierarchy1.width">150</property>
+    <property name="Data Cube.Month.NewTabularHierarchy1.height">58</property>
+    <property name="Data Cube.View.NewTabularHierarchy3.x">38</property>
+    <property name="Data Cube.View.NewTabularHierarchy3.y">54</property>
+    <property name="Data Cube.View.NewTabularHierarchy3.width">150</property>
+    <property name="Data Cube.View.NewTabularHierarchy3.height">62</property>
+    <property name="Data Cube.Entity.NewTabularHierarchy.x">635</property>
+    <property name="Data Cube.Entity.NewTabularHierarchy.y">29</property>
+    <property name="Data Cube.Entity.NewTabularHierarchy.width">150</property>
+    <property name="Data Cube.Entity.NewTabularHierarchy.height">108</property>
+    <simple-property-list name="includeResource">
+        <value>demo/localization/birtLanguage-ext</value>
+    </simple-property-list>
+    <list-property name="includeScripts">
+        <property>commons/javascript/debugWindow.js</property>
+        <property>commons/javascript/functionsBirt.js</property>
+    </list-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">4628</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">4628</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">4628</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[
+if (params["Product"].value!=null){
+	strproducts = params["Product"].value.join("");
+} else {
+	strproducts = "";
+}
+
+]]></method>
+    <method name="beforeFactory"><![CDATA[
+if (reportContext.getParameterValue("__debugg")==true){
+		CustomFunctions.DisplayParameters(reportContext);	
+}
+]]></method>
+    <property name="theme">visioneo-commons.VisioOcean</property>
+    <text-property name="displayName">Line chart</text-property>
+    <property name="iconFile">C:\Users\dpardon\Pictures\visioneo\thumbnail-birt\line-chart.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">commons/libraries/visioneo-commons.rptlibrary</property>
+            <property name="namespace">visioneo-commons</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="Year" id="139">
+            <text-property name="helpText" key="param.year.help">Select sales year</text-property>
+            <text-property name="promptText" key="param.year.prompt">Year</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Year</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["YEAR_ORDER"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["YEAR_ORDER"]</expression>
+            <expression name="sortByColumn">dataSetRow["YEAR_ORDER"]</expression>
+            <property name="sortDirection">desc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2012</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="View" id="3366">
+            <property name="hidden">true</property>
+            <text-property name="helpText" key="param.view.help">Select month view</text-property>
+            <text-property name="promptText" key="param.view.prompt">View</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">0</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">0</property>
+                    <property name="labelID">param.view.monthly</property>
+                </structure>
+                <structure>
+                    <property name="value">1</property>
+                    <property name="labelID">param.view.ytd</property>
+                </structure>
+                <structure>
+                    <property name="value">2</property>
+                    <property name="labelID">param.view.12m</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">radio-button</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Measure" id="3686">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__RENDERING</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__RENDERING">true</property>
+            <property name="hidden">true</property>
+            <text-property name="helpText" key="param.measure.help">Select your measure</text-property>
+            <text-property name="promptText" key="param.measure.prompt">Measure</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">UNIT</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">UNIT</property>
+                    <property name="label">Quantité vendue</property>
+                    <property name="labelID">param.measure.unit</property>
+                </structure>
+                <structure>
+                    <property name="value">AMOUNT</property>
+                    <property name="label">Chiffre d'affaires €</property>
+                    <property name="labelID">param.measure.revenue</property>
+                </structure>
+                <structure>
+                    <property name="value">AMOUNT_K</property>
+                    <property name="labelID">param.measure.revenuek</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Office" id="3683">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Select an office</text-property>
+            <text-property name="promptText">Business office</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Axis</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["OFFICECODE"]+":"+dataSetRow["CITY"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["CITY"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">ALL</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Product" id="3684">
+            <property name="hidden">false</property>
+            <text-property name="helpText" key="param.product.help">Select your product(s) or "All values"</text-property>
+            <text-property name="promptText" key="param.product.prompt">Product</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Products</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+            <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">multi-value</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="__debugg" id="7613" extends="visioneo-commons.__debugg">
+            <property name="hidden">true</property>
+            <text-property name="helpText">With this parameter you can enable/disable a table at the top of your report, wich reviews all parameter map</text-property>
+            <text-property name="promptText">Debugging mode</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">False</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="__width" id="3257">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__RENDERING</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__RENDERING">true</property>
+            <property name="hidden">true</property>
+            <text-property name="helpText">Portlet width preferences set up by user in portal interface. You can use it to adjust chart size, table content, ...</text-property>
+            <text-property name="promptText">report width</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">600</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="__height" id="3258">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__RENDERING</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__RENDERING">true</property>
+            <property name="hidden">true</property>
+            <text-property name="helpText">Portlet width preference, set up by user in portal interface. You can use it to adjust chart size, table content, ...</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">400</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="rptEndDate" id="7639">
+            <text-property name="helpText">rptEndDate</text-property>
+            <text-property name="promptText">rptEndDate</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2014-01-01</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Scripted" id="7"/>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Eclipse" id="4627">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.eclipse.birt.report.data.oda.sampledb.Driver</property>
+            <property name="odaURL">jdbc:classicmodels:sampledb</property>
+            <property name="odaUser">ClassicModels</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Axis" id="3682">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">OFFICECODE</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">OFFICECODE</text-property>
+                    <text-property name="heading">OFFICECODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CITY</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">CITY</text-property>
+                    <text-property name="heading">CITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EMPLOYEENUMBER</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">EMPLOYEENUMBER</text-property>
+                    <text-property name="heading">EMPLOYEENUMBER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LASTNAME</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">LASTNAME</text-property>
+                    <text-property name="heading">LASTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FIRSTNAME</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">FIRSTNAME</text-property>
+                    <text-property name="heading">FIRSTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CUSTOMERNUMBER</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CUSTOMERNUMBER</text-property>
+                    <text-property name="heading">CUSTOMERNUMBER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CUSTOMERNAME</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">CUSTOMERNAME</text-property>
+                    <text-property name="heading">CUSTOMERNAME</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">OFFICECODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CITY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">EMPLOYEENUMBER</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">LASTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">FIRSTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">CUSTOMERNUMBER</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">CUSTOMERNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">OFFICECODE</property>
+                    <property name="nativeName">OFFICECODE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CITY</property>
+                    <property name="nativeName">CITY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">EMPLOYEENUMBER</property>
+                    <property name="nativeName">EMPLOYEENUMBER</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">LASTNAME</property>
+                    <property name="nativeName">LASTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">FIRSTNAME</property>
+                    <property name="nativeName">FIRSTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CUSTOMERNUMBER</property>
+                    <property name="nativeName">CUSTOMERNUMBER</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">CUSTOMERNAME</property>
+                    <property name="nativeName">CUSTOMERNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 	CLASSICMODELS.OFFICES.OFFICECODE,
+		CLASSICMODELS.OFFICES.CITY,
+		CLASSICMODELS.EMPLOYEES.EMPLOYEENUMBER,
+	   CLASSICMODELS.EMPLOYEES.LASTNAME,
+	   CLASSICMODELS.EMPLOYEES.FIRSTNAME,
+	   CLASSICMODELS.CUSTOMERS.CUSTOMERNUMBER, 
+	   CLASSICMODELS.CUSTOMERS.CUSTOMERNAME
+from CLASSICMODELS.CUSTOMERS, CLASSICMODELS.EMPLOYEES, CLASSICMODELS.OFFICES
+where CLASSICMODELS.EMPLOYEES.EMPLOYEENUMBER=CLASSICMODELS.CUSTOMERS.SALESREPEMPLOYEENUMBER
+and CLASSICMODELS.OFFICES.OFFICECODE=CLASSICMODELS.EMPLOYEES.OFFICECODE]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>COUNTRY</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>COUNTRY</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>COUNTRY</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Products" id="49">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PRODUCTCODE</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTCODE</text-property>
+                    <text-property name="heading">PRODUCTCODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRODUCTNAME</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTNAME</text-property>
+                    <text-property name="heading">PRODUCTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRODUCTVENDOR</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTVENDOR</text-property>
+                    <text-property name="heading">PRODUCTVENDOR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BUYPRICE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">BUYPRICE</text-property>
+                    <text-property name="heading">BUYPRICE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PRODUCTCODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PRODUCTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">PRODUCTVENDOR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">BUYPRICE</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PRODUCTCODE</property>
+                    <property name="nativeName">PRODUCTCODE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PRODUCTNAME</property>
+                    <property name="nativeName">PRODUCTNAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">PRODUCTVENDOR</property>
+                    <property name="nativeName">PRODUCTVENDOR</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">BUYPRICE</property>
+                    <property name="nativeName">BUYPRICE</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select CLASSICMODELS.PRODUCTS.PRODUCTCODE,
+	   CLASSICMODELS.PRODUCTS.PRODUCTNAME,
+	   CLASSICMODELS.PRODUCTS.PRODUCTVENDOR,
+	   CLASSICMODELS.PRODUCTS.BUYPRICE
+from   CLASSICMODELS.PRODUCTS
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Sales" id="4628">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">monthYear</property>
+                    <expression name="expression">row["YEAR_SALE"]*100+row["MONTH_SALE"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CODEAXIS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CODEAXIS</text-property>
+                    <text-property name="heading">CODEAXIS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">YEAR_SALE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">YEAR_SALE</text-property>
+                    <text-property name="heading">YEAR_SALE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MONTH_SALE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MONTH_SALE</text-property>
+                    <text-property name="heading">MONTH_SALE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">QUANTITY</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">QUANTITY</text-property>
+                    <text-property name="heading">QUANTITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">AMOUNT</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">AMOUNT</text-property>
+                    <text-property name="heading">AMOUNT</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CODEAXIS</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">YEAR_SALE</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">MONTH_SALE</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">QUANTITY</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">AMOUNT</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">monthYear</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[if (strproducts.length!=0 &amp;&amp; params["Product"].value.join(":")!='ALL') {
+	this.queryText  = this.queryText.replace("<>'IN_VALUES'", " in("+IN_string(params["Product"].value)+")");
+}]]></method>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CODEAXIS</property>
+                    <property name="nativeName">CODEAXIS</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">YEAR_SALE</property>
+                    <property name="nativeName">YEAR_SALE</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">MONTH_SALE</property>
+                    <property name="nativeName">MONTH_SALE</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">QUANTITY</property>
+                    <property name="nativeName">QUANTITY</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">AMOUNT</property>
+                    <property name="nativeName">AMOUNT</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select  CUSTOMERNUMBER as CodeAxis,
+		YEAR(CLASSICMODELS.ORDERS.ORDERDATE) YEAR_SALE,
+		MONTH(CLASSICMODELS.ORDERS.ORDERDATE) MONTH_SALE,
+		sum(CLASSICMODELS.ORDERDETAILS.QUANTITYORDERED) QUANTITY, 
+		sum(CLASSICMODELS.ORDERDETAILS.QUANTITYORDERED*CLASSICMODELS.ORDERDETAILS.PRICEEACH) AMOUNT
+from CLASSICMODELS.ORDERDETAILS, 
+     CLASSICMODELS.ORDERS
+where CLASSICMODELS.ORDERDETAILS.ORDERNUMBER=CLASSICMODELS.ORDERS.ORDERNUMBER
+and   YEAR(CLASSICMODELS.ORDERS.ORDERDATE)>=2011
+and CLASSICMODELS.ORDERDETAILS.PRODUCTCODE<>'IN_VALUES'
+group by CUSTOMERNUMBER,
+		YEAR(CLASSICMODELS.ORDERS.ORDERDATE),		
+		MONTH(CLASSICMODELS.ORDERS.ORDERDATE)
+ORDER BY YEAR_SALE, MONTH_SALE]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Year" id="138">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">YEAR_ORDER</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">YEAR_ORDER</text-property>
+                    <text-property name="heading">YEAR_ORDER</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">YEAR_ORDER</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">YEAR_ORDER</property>
+                    <property name="nativeName">YEAR_ORDER</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select distinct YEAR(CLASSICMODELS.ORDERS.ORDERDATE) YEAR_ORDER
+from CLASSICMODELS.ORDERS
+order by YEAR_ORDER desc]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>YEAR_ORDER</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>YEAR_ORDER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>YEAR_ORDER</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <script-data-set name="MonthViews" id="6554" extends="visioneo-commons.MonthViews">
+            <method name="open"><![CDATA[importPackage(Packages.org.visioneo.utils);
+
+
+
+aggViews = new VisioAggMonth();
+aggViews.setLocale(reportContext.getLocale());
+//aggViews.setLocale(java.util.Locale.ENGLISH);
+
+currentrowView=0;
+sourceviews=aggViews.getViews();
+]]></method>
+        </script-data-set>
+        <script-data-set name="Months" id="6555" extends="visioneo-commons.Months">
+            <method name="open"><![CDATA[importPackage(Packages.org.visioneo.utils);
+
+
+aggMonths = new VisioAggMonth();
+aggMonths.setLocale(reportContext.getLocale());
+currentrow=0;
+sourcedata=aggMonths.getMonths();]]></method>
+        </script-data-set>
+        <script-data-set name="MonthsAgg" id="6615" extends="visioneo-commons.MonthsAgg">
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["type"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["View"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">le</property>
+                    <expression name="expr" type="javascript">row["id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>201305</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <method name="open"><![CDATA[importPackage(Packages.org.visioneo.utils);
+var year = params["Year"].value;
+
+aggMonths = new VisioAggMonth(year-1,year);
+
+currentrow=0;
+sourcedata=aggMonths.getAggRows();
+
+
+
+]]></method>
+        </script-data-set>
+        <joint-data-set name="SalesAgg" id="7107">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">MonthsAgg::id</property>
+                    <property name="alias">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MonthsAgg::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MonthsAgg::id_trf</property>
+                    <property name="alias">id_trf</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MonthsAgg::id_trf</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::monthYear</property>
+                    <property name="alias">monthYear</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::monthYear</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::CODEAXIS</property>
+                    <property name="alias">CODEAXIS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::CODEAXIS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::MONTH_SALE</property>
+                    <property name="alias">MONTH_SALE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::MONTH_SALE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MonthsAgg::year</property>
+                    <property name="alias">year</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MonthsAgg::year</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MonthsAgg::number</property>
+                    <property name="alias">number</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MonthsAgg::number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MonthsAgg::shortid</property>
+                    <property name="alias">shortid</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MonthsAgg::shortid</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MonthsAgg::type</property>
+                    <property name="alias">type</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">MonthsAgg::type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::AMOUNT</property>
+                    <property name="alias">AMOUNT</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::AMOUNT</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::QUANTITY</property>
+                    <property name="alias">QUANTITY</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::QUANTITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Sales::YEAR_SALE</property>
+                    <property name="alias">YEAR_SALE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Sales::YEAR_SALE</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Sales::CODEAXIS</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Sales::YEAR_SALE</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Sales::MONTH_SALE</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Sales::QUANTITY</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Sales::AMOUNT</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Sales::monthYear</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">MonthsAgg::id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">MonthsAgg::id_trf</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">MonthsAgg::shortid</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">MonthsAgg::type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">MonthsAgg::number</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">MonthsAgg::year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>Sales</value>
+                <value>MonthsAgg</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">inner</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">Sales</property>
+                    <property name="rightDataSet">MonthsAgg</property>
+                    <expression name="leftExpression">dataSetRow["monthYear"]</expression>
+                    <expression name="rightExpression">dataSetRow["id_trf"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Data Cube" id="7391">
+            <property name="dimensions">
+                <tabular-dimension name="Month" id="7407">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="7408">
+                            <property name="levels">
+                                <tabular-level name="id" id="7409">
+                                    <property name="dataType">integer</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">id</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["shortdesc"]</expression>
+                                </tabular-level>
+                            </property>
+                            <property name="dataSet">Months</property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Year" id="7489">
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="7490">
+                            <property name="levels">
+                                <tabular-level name="YEAR_ORDER" id="7491">
+                                    <property name="dataType">integer</property>
+                                    <property name="columnName">YEAR_ORDER</property>
+                                </tabular-level>
+                            </property>
+                            <property name="dataSet">Year</property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="View" id="7496">
+                    <property name="defaultHierarchy">NewTabularHierarchy3</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy3" id="7497">
+                            <property name="levels">
+                                <tabular-level name="viewId" id="7498">
+                                    <property name="dataType">integer</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">viewId</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["viewDesc"]</expression>
+                                </tabular-level>
+                            </property>
+                            <property name="dataSet">MonthViews</property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Entity" id="7503">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="7504">
+                            <property name="levels">
+                                <tabular-level name="OFFICECODE" id="7507">
+                                    <property name="dataType">string</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">OFFICECODE</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["CITY"]</expression>
+                                </tabular-level>
+                                <tabular-level name="EMPLOYEENUMBER" id="7506">
+                                    <property name="dataType">integer</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">EMPLOYEENUMBER</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["FIRSTNAME"]+" "+dataSetRow["LASTNAME"]</expression>
+                                </tabular-level>
+                                <tabular-level name="CUSTOMERNUMBER" id="7505">
+                                    <property name="dataType">integer</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">CUSTOMERNUMBER</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["CUSTOMERNAME"]</expression>
+                                </tabular-level>
+                            </property>
+                            <property name="dataSet">Axis</property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Measure" id="7392">
+                    <property name="measures">
+                        <tabular-measure name="Sales::QUANTITY" id="7393">
+                            <expression name="measureExpression" type="javascript">dataSetRow["Sales::QUANTITY"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">SalesAgg</property>
+            <property name="autoKey">false</property>
+            <list-property name="dimensionConditions">
+                <structure>
+                    <list-property name="joinConditions">
+                        <structure>
+                            <property name="cubeKey">MonthsAgg::number</property>
+                            <property name="hierarchyKey">id</property>
+                        </structure>
+                    </list-property>
+                    <property name="hierarchy">NewTabularHierarchy1</property>
+                </structure>
+                <structure>
+                    <list-property name="joinConditions">
+                        <structure>
+                            <property name="cubeKey">MonthsAgg::year</property>
+                            <property name="hierarchyKey">YEAR_ORDER</property>
+                        </structure>
+                    </list-property>
+                    <property name="hierarchy">NewTabularHierarchy2</property>
+                </structure>
+                <structure>
+                    <list-property name="joinConditions">
+                        <structure>
+                            <property name="cubeKey">MonthsAgg::type</property>
+                            <property name="hierarchyKey">viewId</property>
+                        </structure>
+                    </list-property>
+                    <property name="hierarchy">NewTabularHierarchy3</property>
+                </structure>
+                <structure>
+                    <list-property name="joinConditions">
+                        <structure>
+                            <property name="cubeKey">Sales::CODEAXIS</property>
+                            <property name="hierarchyKey">CUSTOMERNUMBER</property>
+                        </structure>
+                    </list-property>
+                    <property name="hierarchy">NewTabularHierarchy</property>
+                </structure>
+            </list-property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="general-header" id="7633">
+            <property name="color">#FFFFFF</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">auto</property>
+            <property name="topMargin">0in</property>
+            <property name="leftMargin">0in</property>
+            <property name="bottomMargin">0in</property>
+            <property name="rightMargin">0in</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7635">
+            <property name="width">100%</property>
+            <column id="7636"/>
+            <row id="7637">
+                <cell id="7638">
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                    <property name="textAlign">center</property>
+                    <extended-item extensionName="Chart" id="7634">
+                        <property name="cube">Data Cube</property>
+                        <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.3</Version>
+  <Type>Line Chart</Type>
+  <SubType>Overlay</SubType>
+  <Description>
+    <Value></Value>
+    <Font>
+      <Alignment/>
+    </Font>
+  </Description>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <Label>
+        <Caption>
+          <Value>Chart Title</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Triggers>
+        <Condition>onclick</Condition>
+        <Action>
+          <Type>Toggle_Visibility</Type>
+          <Value xsi:type="attribute:SeriesValue">
+            <Name></Name>
+          </Value>
+        </Action>
+      </Triggers>
+      <Triggers>
+        <Condition>onmouseover</Condition>
+        <Action>
+          <Type>Highlight</Type>
+          <Value xsi:type="attribute:SeriesValue">
+            <Name></Name>
+          </Value>
+        </Action>
+      </Triggers>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Series</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+      <ShowValue>false</ShowValue>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:Gradient">
+      <StartColor>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </StartColor>
+      <EndColor>
+        <Transparency>255</Transparency>
+        <Red>102</Red>
+        <Green>102</Green>
+        <Blue>153</Blue>
+      </EndColor>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Script>
+/**
+ * Called before generation of chart model to GeneratedChartState.
+ * 
+ * @param chart
+ *            Chart
+ * @param icsc
+ *            IChartScriptContext
+ */
+
+function beforeGeneration( chart, icsc )
+{&#xD;
+  adjustSize( chart, icsc );
+}
+
+/********************************************************************************/
+function adjustSize( chart, icsc )
+{//Dynamic chart size. Use windowstate, width and height report parameters to adapt your chart to portlet context
+	Width=getParameterValue(&quot;__width&quot;)/1.335;   Height=getParameterValue(&quot;__height&quot;)/1.34;
+	icsc.getChartInstance().getBlock().getBounds().setWidth(Width);
+	icsc.getChartInstance().getBlock().getBounds().setHeight(Height);
+}
+
+</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity>
+    <LegendBehavior>None</LegendBehavior>
+  </Interactivity>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <Axes>
+    <Type>Text</Type>
+    <Title>
+      <Caption>
+        <Value>X-Axis Title</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>Unit sales</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition>data[&quot;Year/YEAR_ORDER&quot;]</Definition>
+          <Grouping>
+            <GroupType>Numeric</GroupType>
+          </Grouping>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>153</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>102</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:LineSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Name>Ebrima</Name>
+                <Size>7.0</Size>
+                <Bold>true</Bold>
+                <Alignment/>
+                <Rotation>0.0</Rotation>
+              </Font>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>128</Blue>
+              </Color>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>121</Transparency>
+              <Red>204</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <ShadowColor>
+              <Transparency>255</Transparency>
+              <Red>51</Red>
+              <Green>51</Green>
+              <Blue>51</Blue>
+            </ShadowColor>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>1.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>1.0</Right>
+            </Insets>
+            <Visible>true</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>data[&quot;Measure/Sales::QUANTITY&quot;]</Definition>
+            <Grouping>
+              <GroupType>Text</GroupType>
+              <AggregateExpression>Sum</AggregateExpression>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Series 1</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Above</LabelPosition>
+          <Stacked>false</Stacked>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Highlight</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onclick</Condition>
+            <Action>
+              <Type>Show_Tooltip</Type>
+              <Value xsi:type="attribute:TooltipValue">
+                <Text>valueData</Text>
+                <Delay>200</Delay>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Highlight</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onclick</Condition>
+            <Action>
+              <Type>Show_Tooltip</Type>
+              <Value xsi:type="attribute:TooltipValue">
+                <Text>valueData</Text>
+                <Delay>200</Delay>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Highlight</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onclick</Condition>
+            <Action>
+              <Type>Show_Tooltip</Type>
+              <Value xsi:type="attribute:TooltipValue">
+                <Text>valueData</Text>
+                <Delay>200</Delay>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Highlight</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onclick</Condition>
+            <Action>
+              <Type>Toggle_Visibility</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Translucent>true</Translucent>
+          <Markers>
+            <Type>Box</Type>
+            <Size>4</Size>
+            <Visible>true</Visible>
+            <Outline>
+              <Visible>true</Visible>
+            </Outline>
+          </Markers>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>4</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <PaletteLineColor>true</PaletteLineColor>
+          <Curve>false</Curve>
+          <ShadowColor>
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </ShadowColor>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>145</Red>
+          <Green>145</Green>
+          <Blue>145</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Size>7.0</Size>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Dashed</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>145</Red>
+            <Green>145</Green>
+            <Blue>145</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+        <AutoExpand>true</AutoExpand>
+        <MajorGridsStepNumber>3</MajorGridsStepNumber>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AssociatedAxes>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>153</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series>
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>data[&quot;Month/id&quot;]</Definition>
+        </DataDefinition>
+        <SeriesIdentifier></SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+      </Series>
+      <Grouping>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+    </SeriesDefinitions>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>145</Red>
+        <Green>145</Green>
+        <Blue>145</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <Interval>1</Interval>
+    <Triggers>
+      <Condition>onmouseover</Condition>
+      <Action>
+        <Type>Highlight</Type>
+        <Value xsi:type="attribute:SeriesValue">
+          <Name></Name>
+        </Value>
+      </Action>
+    </Triggers>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      <ShowOutside>false</ShowOutside>
+    </Scale>
+    <Origin>
+      <Type>Min</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <UnitSpacing>50.0</UnitSpacing>
+  <Rotation>
+    <Angles>
+      <XAngle>-20.0</XAngle>
+      <YAngle>45.0</YAngle>
+      <ZAngle>0.0</ZAngle>
+      <Type>None</Type>
+    </Angles>
+  </Rotation>
+</model:ChartWithAxes>
+]]></xml-property>
+                        <property name="outputFormat">SVG</property>
+                        <property name="inheritColumns">false</property>
+                        <property name="height">130pt</property>
+                        <property name="width">212pt</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Month/id</property>
+                                <expression name="expression" type="javascript">dimension["Month"]["id"]["DisplayName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Year/YEAR_ORDER</property>
+                                <expression name="expression" type="javascript">dimension["Year"]["YEAR_ORDER"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">View/viewId</property>
+                                <expression name="expression" type="javascript">dimension["View"]["viewId"]["DisplayName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Entity/OFFICECODE</property>
+                                <expression name="expression" type="javascript">dimension["Entity"]["OFFICECODE"]["DisplayName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Entity/EMPLOYEENUMBER</property>
+                                <expression name="expression" type="javascript">dimension["Entity"]["EMPLOYEENUMBER"]["DisplayName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Entity/CUSTOMERNUMBER</property>
+                                <expression name="expression" type="javascript">dimension["Entity"]["CUSTOMERNUMBER"]["DisplayName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Measure/Sales::QUANTITY</property>
+                                <expression name="expression" type="javascript">measure["Sales::QUANTITY"]</expression>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                        </list-property>
+                    </extended-item>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="currentMonth">
+            <expression name="value" type="javascript">201105</expression>
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="startExecutionTime">
+            <expression name="value" type="javascript">0</expression>
+            <property name="type">report</property>
+        </variable-element>
+    </property>
+    <property name="thumbnail">
+        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
+</property>
+</report>

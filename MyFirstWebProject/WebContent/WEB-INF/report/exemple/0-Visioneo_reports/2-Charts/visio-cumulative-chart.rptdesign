@@ -1,0 +1,2976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">www.visioneo.org</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title">Cumulative chart</text-property>
+    <html-property name="description">This chart makes use of a "Relative time periods" measure to compute cumulative sales across months of the selected year. We can see in the cross-table above periodic values used to compute this measure. It demonstrates how to take advantage of poweful relative time period functions such Year-to-date and 12-rolling-months  with BIRT datacubes.</html-property>
+    <property name="units">in</property>
+    <text-property name="displayName">Cumulative chart</text-property>
+    <property name="iconFile">C:\Users\Dominique\Pictures\visioneo\thumbnail-birt\cumulative-chart.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="Year" id="187">
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">desc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2012</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="showTable" id="5029">
+            <text-property name="helpText">Show crosstable</text-property>
+            <text-property name="promptText">Show crosstable</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">True</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="__width" id="5027">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__rendering</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__rendering">true</property>
+            <property name="hidden">true</property>
+            <text-property name="helpText">Width</text-property>
+            <text-property name="promptText">Width</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">850</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="__height" id="5028">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__rendering</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__rendering">true</property>
+            <property name="hidden">true</property>
+            <text-property name="helpText">Height</text-property>
+            <text-property name="promptText">Height</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">500</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.eclipse.birt.report.data.oda.sampledb.Driver</property>
+            <property name="odaURL">jdbc:classicmodels:sampledb</property>
+            <property name="odaUser">ClassicModels</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Sales" id="41">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PRODUCTLINE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PRODUCTLINE</text-property>
+                    <text-property name="heading">PRODUCTLINE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">QUANTITYORDERED</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">QUANTITYORDERED</text-property>
+                    <text-property name="heading">QUANTITYORDERED</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORDERDATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ORDERDATE</text-property>
+                    <text-property name="heading">ORDERDATE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PRODUCTLINE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">QUANTITYORDERED</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ORDERDATE</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="rowFetchLimit">0</property>
+            <method name="beforeOpen"><![CDATA[for (var i=1;i<=12;i++){
+	var firstDayOfMonth=params["Year"].value+"-"+i+"-01";
+	this.queryText+=" UNION ALL select PRODUCTS.PRODUCTLINE,0 as QUANTITYORDERED,'"+firstDayOfMonth+"' as ORDERDATE from PRODUCTS"
+}]]></method>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PRODUCTLINE</property>
+                    <property name="nativeName">PRODUCTLINE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">QUANTITYORDERED</property>
+                    <property name="nativeName">QUANTITYORDERED</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ORDERDATE</property>
+                    <property name="nativeName">ORDERDATE</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select PRODUCTS.PRODUCTLINE,
+ORDERDETAILS.QUANTITYORDERED,
+ORDERS.ORDERDATE
+from ORDERDETAILS, ORDERS, PRODUCTS
+where ORDERDETAILS.ORDERNUMBER=CLASSICMODELS.ORDERS.ORDERNUMBER
+and PRODUCTS.PRODUCTCODE=CLASSICMODELS.ORDERDETAILS.PRODUCTCODE
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORDERNUMBER</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORDERNUMBER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORDERNUMBER</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRODUCTCODE</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>15</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PRODUCTCODE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PRODUCTCODE</design:label>
+            <design:formattingHints>
+              <design:displaySize>15</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>QUANTITYORDERED</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>QUANTITYORDERED</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>QUANTITYORDERED</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRICEEACH</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>15</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PRICEEACH</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PRICEEACH</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORDERLINENUMBER</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>5</design:nativeDataTypeCode>
+            <design:precision>5</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORDERLINENUMBER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORDERLINENUMBER</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Sales" id="157">
+            <property name="dimensions">
+                <tabular-dimension name="Category" id="158">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="159">
+                            <property name="levels">
+                                <tabular-level name="PRODUCTLINE" id="160">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">PRODUCTLINE</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group" id="161">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="162">
+                            <property name="levels">
+                                <tabular-level name="Year" id="163">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">year</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">ORDERDATE</property>
+                                </tabular-level>
+                                <tabular-level name="Month" id="164">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">month</property>
+                                    <property name="dateTimeFormat">MMM</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">ORDERDATE</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="165">
+                    <property name="measures">
+                        <tabular-measure name="QUANTITYORDERED" id="166">
+                            <property name="function">sum</property>
+                            <property name="isCalculated">false</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["QUANTITYORDERED"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="isVisible">true</property>
+                        </tabular-measure>
+                        <tabular-measure name="quantityWithMissing" id="5040">
+                            <property name="isCalculated">true</property>
+                            <expression name="measureExpression" type="javascript">measure["QUANTITYORDERED"]!=null?measure["QUANTITYORDERED"]:0</expression>
+                            <property name="dataType">integer</property>
+                            <property name="isVisible">false</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Sales</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="crosstab-column-header" id="5008">
+            <property name="backgroundColor">#000000</property>
+            <property name="color">#FFFFFF</property>
+        </style>
+        <style name="crosstab-row-header" id="5009">
+            <property name="backgroundColor">#000000</property>
+            <property name="color">#FFFFFF</property>
+        </style>
+        <style name="crosstab-cell" id="5010">
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="crosstab-row-grand-total" id="5023">
+            <property name="backgroundColor">#5D5D5D</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FFFFFF</property>
+        </style>
+        <style name="crosstab-header" id="5024">
+            <property name="backgroundColor">#676767</property>
+            <property name="fontSize">medium</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FFFFFF</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="crosstab" id="5026">
+            <property name="fontFamily">sans-serif</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">auto</property>
+            <page-footer>
+                <label name="lblCopyright" id="3417">
+                    <property name="fontSize">8pt</property>
+                    <property name="textAlign">right</property>
+                    <text-property name="text">www.visioneo.org </text-property>
+                </label>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="4961">
+            <property name="cube">Sales</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="4976">
+                    <property name="measure">QUANTITYORDERED</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="4977">
+                            <property name="aggregationOnRow">Category/PRODUCTLINE</property>
+                            <property name="aggregationOnColumn">Group/Month</property>
+                            <property name="content">
+                                <data id="4981">
+                                    <property name="resultSetColumn">YearToDate</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="5036">
+                            <property name="aggregationOnColumn">Group/Month</property>
+                            <property name="content">
+                                <data id="5039">
+                                    <property name="resultSetColumn">Period</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="4979">
+                            <property name="content">
+                                <label id="4980">
+                                    <text-property name="text">QUANTITYORDERED</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="4963">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="5035">
+                            <property name="content">
+                                <label id="5038">
+                                    <text-property name="text">Grand Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="4964">
+                            <property name="dimension">Category</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View3" id="4965">
+                                    <property name="level">Category/PRODUCTLINE</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4966">
+                                            <property name="content">
+                                                <data name="PRODUCTLINE1" id="4967">
+                                                    <property name="resultSetColumn">PRODUCTLINE</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="4968">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="4969">
+                            <property name="dimension">Group</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View4" id="4970">
+                                    <property name="level">Group/Year</property>
+                                    <property name="filter">
+                                        <filter-condition-element>
+                                            <expression name="expr" type="javascript">data["Year"]</expression>
+                                            <property name="operator">eq</property>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">params["Year"].value</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </filter-condition-element>
+                                    </property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4971">
+                                            <property name="content">
+                                                <data name="Year1" id="4972">
+                                                    <property name="resultSetColumn">Year</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View5" id="4973">
+                                    <property name="level">Group/Month</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4974">
+                                            <property name="content">
+                                                <data name="Month1" id="4975">
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">MMM</property>
+                                                    </structure>
+                                                    <property name="resultSetColumn">Month</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="mirrorStartingLevel">Group/Month</property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="4962"/>
+            </property>
+            <property name="emptyCellValue">--</property>
+            <property name="hideMeasureHeader">true</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">PRODUCTLINE</property>
+                    <expression name="expression">dimension["Category"]["PRODUCTLINE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <expression name="expression">dimension["Group"]["Year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <expression name="expression">dimension["Group"]["Month"]["DateTime"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Category/PRODUCTLINE_Group/Month</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Category/PRODUCTLINE</value>
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">YearToDate</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Category/PRODUCTLINE</value>
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">measure["QUANTITYORDERED"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="calculationType">YEAR TO DATE</property>
+                    <property name="refDateType">today</property>
+                    <property name="timeDimension">Group</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Group/Month</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">Period</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">measure["QUANTITYORDERED"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="calculationType">YEAR TO DATE</property>
+                    <property name="refDateType">today</property>
+                    <property name="timeDimension">Group</property>
+                </structure>
+            </list-property>
+            <property name="multiViews">
+                <multi-views id="4982">
+                    <property name="index">0</property>
+                    <property name="views">
+                        <extended-item extensionName="Chart" id="4983">
+                            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.6</Version>
+  <Type>Bar Chart</Type>
+  <SubType>Stacked</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Background xsi:type="attribute:Gradient">
+        <StartColor>
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>153</Green>
+          <Blue>0</Blue>
+        </StartColor>
+        <EndColor>
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>228</Green>
+          <Blue>149</Blue>
+        </EndColor>
+      </Background>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>Cumulative sales</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>102</Red>
+            <Green>40</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Anchor>North_West</Anchor>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Triggers>
+        <Condition>onmouseover</Condition>
+        <Action>
+          <Type>Highlight</Type>
+          <Value xsi:type="attribute:SeriesValue">
+            <Name></Name>
+          </Value>
+        </Action>
+      </Triggers>
+      <Cursor>
+        <Type>Auto</Type>
+      </Cursor>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Bold>true</Bold>
+          <Alignment/>
+        </Font>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>51</Red>
+          <Green>153</Green>
+          <Blue>102</Blue>
+        </Color>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Inside</Position>
+      <ItemType>Series</ItemType>
+      <Title>
+        <Caption>
+          <Value>Category</Value>
+          <Font>
+            <Alignment/>
+          </Font>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+      <ShowValue>false</ShowValue>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:Gradient">
+      <StartColor>
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </StartColor>
+      <EndColor>
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </EndColor>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional_With_Depth</Dimension>
+  <Script>/**
+ * Called before generation of chart model to GeneratedChartState.
+ * 
+ * @param chart
+ *            Chart
+ * @param icsc
+ *            IChartScriptContext
+ */
+
+function beforeGeneration( chart, icsc )
+{
+	var width=getParameterValue(&quot;__width&quot;)/1.35, 
+		height=getParameterValue(&quot;__height&quot;)/1.38,
+		showTable=getParameterValue(&quot;showTable&quot;);
+	icsc.getChartInstance().getBlock().getBounds().setWidth(width);
+	if (showTable==false){//fit height to portlet window if crosstable is hidden
+			icsc.getChartInstance().getBlock().getBounds().setHeight(height);
+	}	
+	chart.getTitle().getLabel().getCaption().setValue(&quot;Cumulative sales &quot;+getParameterValue(&quot;Year&quot;));
+}
+</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+    <AncillarySampleData>
+      <DataSetRepresentation>Series 1</DataSetRepresentation>
+    </AncillarySampleData>
+  </SampleData>
+  <Interactivity>
+    <LegendBehavior>ToggleSerieVisibility</LegendBehavior>
+  </Interactivity>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <Axes>
+    <Type>DateTime</Type>
+    <Title>
+      <Caption>
+        <Value>X-Axis Title</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>Y-Axis Title</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition>data[&quot;PRODUCTLINE&quot;]</Definition>
+          <Grouping>
+            <GroupType>Text</GroupType>
+          </Grouping>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>51</Red>
+              <Green>51</Green>
+              <Blue>153</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>153</Red>
+              <Green>204</Green>
+              <Blue>255</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>255</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>255</Red>
+              <Green>204</Green>
+              <Blue>153</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>232</Red>
+              <Green>172</Green>
+              <Blue>57</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>153</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>98</Red>
+              <Green>196</Green>
+              <Blue>117</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>204</Red>
+              <Green>255</Green>
+              <Blue>204</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>128</Red>
+              <Green>0</Green>
+              <Blue>128</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>204</Red>
+              <Green>153</Green>
+              <Blue>255</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>154</Red>
+              <Green>50</Green>
+              <Blue>0</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>240</Red>
+              <Green>194</Green>
+              <Blue>89</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>128</Blue>
+            </EndColor>
+            <Direction>-65.0</Direction>
+          </Entries>
+          <Entries xsi:type="attribute:Gradient">
+            <StartColor>
+              <Transparency>255</Transparency>
+              <Red>128</Red>
+              <Green>128</Green>
+              <Blue>0</Blue>
+            </StartColor>
+            <EndColor>
+              <Transparency>255</Transparency>
+              <Red>166</Red>
+              <Green>202</Green>
+              <Blue>13</Blue>
+            </EndColor>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:BarSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>false</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>data[&quot;YearToDate&quot;]</Definition>
+            <Grouping>
+              <Enabled>false</Enabled>
+              <GroupType>Text</GroupType>
+              <AggregateExpression xsi:nil="true"/>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Series 1</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Inside</LabelPosition>
+          <Stacked>true</Stacked>
+          <Triggers>
+            <Condition>onmouseover</Condition>
+            <Action>
+              <Type>Show_Tooltip</Type>
+              <Value xsi:type="attribute:TooltipValue">
+                <Text>valueData</Text>
+                <Delay>200</Delay>
+              </Value>
+            </Action>
+          </Triggers>
+          <Triggers>
+            <Condition>onclick</Condition>
+            <Action>
+              <Type>Highlight</Type>
+              <Value xsi:type="attribute:SeriesValue">
+                <Name></Name>
+              </Value>
+            </Action>
+          </Triggers>
+          <Translucent>false</Translucent>
+          <Riser>Rectangle</Riser>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+      <Aligned>false</Aligned>
+      <SideBySide>false</SideBySide>
+    </AssociatedAxes>
+    <AncillaryAxes>
+      <Type>Text</Type>
+      <Title>
+        <Caption>
+          <Value>Z-Axis Title</Value>
+          <Font>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Below</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition></Definition>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>166</Green>
+            <Blue>218</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>242</Red>
+            <Green>88</Green>
+            <Blue>106</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>232</Red>
+            <Green>172</Green>
+            <Blue>57</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>64</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>170</Red>
+            <Green>85</Green>
+            <Blue>85</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>192</Red>
+            <Green>192</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>192</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>7</Red>
+            <Green>146</Green>
+            <Blue>94</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>192</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>64</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>80</Red>
+            <Green>240</Green>
+            <Blue>120</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>0</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>64</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>128</Red>
+            <Green>128</Green>
+            <Blue>128</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>64</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series>
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>false</Visible>
+          </Label>
+          <SeriesIdentifier></SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Outside</LabelPosition>
+          <Stacked>false</Stacked>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+      </SeriesDefinitions>
+      <Orientation>Horizontal</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <LabelPosition>Below</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AncillaryAxes>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>166</Green>
+          <Blue>218</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series>
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>data[&quot;Month&quot;]</Definition>
+        </DataDefinition>
+        <SeriesIdentifier></SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+      </Series>
+      <Grouping>
+        <GroupingUnit>Years</GroupingUnit>
+        <GroupType>DateTime</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+    </SeriesDefinitions>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value></Value>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Bold>true</Bold>
+          <Alignment/>
+        </Font>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <Staggered>false</Staggered>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+    </Scale>
+    <Origin>
+      <Type>Min</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <UnitSpacing>50.0</UnitSpacing>
+  <Rotation>
+    <Angles>
+      <XAngle>-20.0</XAngle>
+      <YAngle>45.0</YAngle>
+      <ZAngle>0.0</ZAngle>
+      <Type>None</Type>
+    </Angles>
+  </Rotation>
+</model:ChartWithAxes>
+]]></xml-property>
+                            <property name="outputFormat">SVG</property>
+                            <property name="inheritColumns">false</property>
+                            <property name="height">5.645833333333333in</property>
+                            <property name="width">9.322916666666666in</property>
+                        </extended-item>
+                    </property>
+                </multi-views>
+            </property>
+        </extended-item>
+        <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="4984">
+            <property name="cube">Sales</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="5000">
+                    <property name="measure">QUANTITYORDERED</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="5001">
+                            <property name="aggregationOnRow">Category/PRODUCTLINE</property>
+                            <property name="aggregationOnColumn">Group/Month</property>
+                            <property name="content">
+                                <data id="5002">
+                                    <property name="fontSize">9pt</property>
+                                    <property name="resultSetColumn">QUANTITYORDERED_Category/PRODUCTLINE_Group/Month</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="5012">
+                            <property name="aggregationOnColumn">Group/Month</property>
+                            <property name="content">
+                                <data id="5013">
+                                    <property name="resultSetColumn">QUANTITYORDERED_Group/Month</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="5016">
+                            <property name="aggregationOnRow">Category/PRODUCTLINE</property>
+                            <property name="aggregationOnColumn">Group/Year</property>
+                            <property name="content">
+                                <data id="5017">
+                                    <property name="resultSetColumn">QUANTITYORDERED_Category/PRODUCTLINE_Group/Year</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="5018">
+                            <property name="aggregationOnColumn">Group/Year</property>
+                            <property name="content">
+                                <data id="5019">
+                                    <property name="resultSetColumn">QUANTITYORDERED_Group/Year</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="5003">
+                            <property name="content">
+                                <label id="5004">
+                                    <text-property name="text">QUANTITYORDERED</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="CrosstabCell" id="5020">
+                            <property name="content">
+                                <label id="5021">
+                                    <text-property name="text">QUANTITYORDERED</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="4986">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="5011">
+                            <property name="content">
+                                <label id="5014">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Grand Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="4987">
+                            <property name="dimension">Category</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="4988">
+                                    <property name="level">Category/PRODUCTLINE</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4989">
+                                            <property name="content">
+                                                <data name="PRODUCTLINE" id="4990">
+                                                    <property name="fontSize">small</property>
+                                                    <property name="resultSetColumn">PRODUCTLINE</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">150px</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="4991">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="4992">
+                            <property name="dimension">Group</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="4993">
+                                    <property name="level">Group/Year</property>
+                                    <property name="filter">
+                                        <filter-condition-element>
+                                            <expression name="expr" type="javascript">data["Year"]</expression>
+                                            <property name="operator">eq</property>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">params["Year"].value</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </filter-condition-element>
+                                    </property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4994">
+                                            <property name="content">
+                                                <data name="Year" id="4995">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">Year</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                    <property name="aggregationHeader">
+                                        <extended-item extensionName="CrosstabCell" id="5015">
+                                            <property name="content">
+                                                <data name="Year_TOTAL" id="5022">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">Year_TOTAL</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="4996">
+                                    <property name="level">Group/Month</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="4997">
+                                            <property name="content">
+                                                <data name="Month" id="4999">
+                                                    <property name="fontSize">small</property>
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">MMM</property>
+                                                    </structure>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">Month</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="4998">
+                    <property name="content">
+                        <label id="5025">
+                            <property name="fontSize">small</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">PERIODIC SALES</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="CrosstabCell" id="4985"/>
+            </property>
+            <property name="hideMeasureHeader">true</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">!params["showTable"].value</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">PRODUCTLINE</property>
+                    <expression name="expression">dimension["Category"]["PRODUCTLINE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <expression name="expression">dimension["Group"]["Year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <expression name="expression">dimension["Group"]["Month"]["DateTime"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Category/PRODUCTLINE_Group/Month</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Category/PRODUCTLINE</value>
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Group/Month</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Category/PRODUCTLINE_Group/Year</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Category/PRODUCTLINE</value>
+                        <value>Group/Year</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">QUANTITYORDERED_Group/Year</property>
+                    <expression name="expression">measure["QUANTITYORDERED"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group/Year</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">Year_TOTAL</property>
+                    <expression name="expression" type="javascript">"Year"</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+    <property name="thumbnail">
+        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
+</property>
+</report>

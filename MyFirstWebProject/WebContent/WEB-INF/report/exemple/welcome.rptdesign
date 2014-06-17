@@ -1,0 +1,1703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">www.visioneo.org</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title" key="report.welcome.title">Welcome report - parameters show case</text-property>
+    <html-property name="description" key="report.welcome.description">A  showroom report which highlights the different kind of parameters you'll encounter by using visioneo. An elegant grouping parameters feature is used to improve ergonomy, when lots of parameters are used in a single report.</html-property>
+    <simple-property-list name="includeResource">
+        <value>demo/localization/birtLanguage-ext</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[
+
+]]></method>
+    <method name="beforeFactory"><![CDATA[reportContext.getDesignHandle().setThemeName(params["ComboboxR"].value);]]></method>
+    <property name="theme">visioneo-commons.VisioOcean</property>
+    <text-property name="displayName" key="report.welcome.displayname">Welcome</text-property>
+    <property name="iconFile">C:\Users\dpardon\Pictures\visioneo\thumbnail-birt\welcome.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">commons/libraries/visioneo-commons.rptlibrary</property>
+            <property name="namespace">visioneo-commons</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <parameter-group name="displayType" id="4631">
+            <text-property name="displayName">Display types</text-property>
+            <text-property name="promptText" key="group.display.prompt"></text-property>
+            <parameters>
+                <scalar-parameter name="ComboboxR" id="4903">
+                    <text-property name="helpText" key="displaytype.comboboxr.help">Select a theme to apply different styles on your report</text-property>
+                    <text-property name="promptText" key="displaytype.comboboxr.prompt">Combobox required</text-property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">visioneo-commons.VisioOcean</value>
+                    </simple-property-list>
+                    <list-property name="selectionList">
+                        <structure>
+                            <property name="value">visioneo-commons.Visioneo</property>
+                            <property name="label">Dark</property>
+                        </structure>
+                        <structure>
+                            <property name="value">visioneo-commons.VisioLightness</property>
+                            <property name="label">Lightness</property>
+                        </structure>
+                        <structure>
+                            <property name="value">visioneo-commons.VisioOcean</property>
+                            <property name="label">Ocean</property>
+                        </structure>
+                        <structure>
+                            <property name="value">visioneo-commons.VisioCountry</property>
+                            <property name="label">Country</property>
+                        </structure>
+                    </list-property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">false</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Combobox" id="3683">
+                    <property name="hidden">false</property>
+                    <text-property name="helpText" key="displaytype.combobox.help">Select an office</text-property>
+                    <text-property name="promptText" key="displaytype.combobox">Combobox</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Office</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["OFFICECODE"]+":"+dataSetRow["CITY"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["CITY"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">ALL</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">false</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="ComboboxRich" id="4934">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">jqueryui-filter</property>
+                    <property name="hidden">false</property>
+                    <text-property name="helpText" key="displaytype.comborboxrich.help">Select your product(s)</text-property>
+                    <text-property name="promptText" key="displaytype.comborboxrich.prompt">Autosuggest</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Products</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+                    <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">S12_1108</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="AutosuggestMulti" id="4923">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">autosuggest</property>
+                    <text-property name="helpText" key="displaytype.autosuggest.multi.help">Select your product(s)</text-property>
+                    <text-property name="promptText" key="displaytype.autosuggest">Autosuggest multi-select</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Products</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+                    <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">multi-value</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="ComboboxNative" id="4961">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">native</property>
+                    <property name="hidden">false</property>
+                    <text-property name="helpText">Select product, through a web-browser native combobox</text-property>
+                    <text-property name="promptText">Native Combobox</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Products</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+                    <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">S12_1108</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="displayType2" id="4932">
+            <text-property name="promptText" key="group.displaytype2.prompt"></text-property>
+            <parameters>
+                <scalar-parameter name="ListboxNative" id="4960">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">native</property>
+                    <text-property name="helpText">Select your product(s) using a native HTML listbox input, or leave it blank to select all values. Use ctrl key to deselect an element</text-property>
+                    <text-property name="promptText">Native Listbox</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Products</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+                    <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">S10_1949</value>
+                        <value type="constant">S10_1678</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">multi-value</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Listbox" id="4922">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">jqueryui</property>
+                    <property name="hidden">false</property>
+                    <text-property name="helpText" key="displaytype.listbox.help">Select your product(s) or leave it blank to select all values</text-property>
+                    <text-property name="promptText" key="displaytype.listbox.prompt">Listbox</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Products</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["PRODUCTCODE"]</expression>
+                    <expression name="labelExpr" type="javascript">dataSetRow["PRODUCTNAME"]</expression>
+                    <expression name="sortByColumn">dataSetRow["PRODUCTCODE"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">S10_1949</value>
+                        <value type="constant">S10_1678</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">multi-value</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Radiobutton" id="3366">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">__RENDERING</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="__RENDERING">true</property>
+                    <text-property name="helpText" key="displaytype.radiobuttons.help">Select month view</text-property>
+                    <text-property name="promptText" key="displaytype.radiobuttons">Radiobutton</text-property>
+                    <property name="valueType">static</property>
+                    <property name="sortBy">value</property>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">1</value>
+                    </simple-property-list>
+                    <list-property name="selectionList">
+                        <structure>
+                            <property name="value">1</property>
+                            <property name="label">Mois cumulés</property>
+                            <property name="labelID">param.view.ytd</property>
+                        </structure>
+                        <structure>
+                            <property name="value">2</property>
+                            <property name="label">12 mois glissants</property>
+                            <property name="labelID">param.view.12m</property>
+                        </structure>
+                        <structure>
+                            <property name="value">3</property>
+                            <property name="labelID">param.view.monthly</property>
+                        </structure>
+                    </list-property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">radio-button</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Boolean" id="13">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">__RENDERING</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="__RENDERING">true</property>
+                    <text-property name="helpText" key="datatype.boolean.help">Boolean</text-property>
+                    <text-property name="promptText" key="datatype.boolean">Boolean</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">boolean</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">True</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">check-box</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="dataTypeDatetime" id="4633">
+            <text-property name="displayName">Date &amp; time data types</text-property>
+            <text-property name="promptText" key="group.datetime.prompt"></text-property>
+            <parameters>
+                <scalar-parameter name="Date" id="16">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">__RENDERING</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="__RENDERING">true</property>
+                    <text-property name="helpText" key="datatype.date.help">Date</text-property>
+                    <text-property name="promptText">Date</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">date</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2012-01-01</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Time" id="8">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">__RENDERING</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="__RENDERING">true</property>
+                    <text-property name="helpText" key="datatype.time.help">Select a time value</text-property>
+                    <text-property name="promptText" key="datatype.time">Time</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">time</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">14:30:30</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Datetime" id="7">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">__RENDERING</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="__RENDERING">true</property>
+                    <text-property name="helpText" key="datatype.datetime.help">Select a Datetime value</text-property>
+                    <text-property name="promptText" key="datatype.datetime">Datetime</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">dateTime</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="javascript">BirtDateTime.year(BirtDateTime.today())+"-01-01 00:00:00"</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="String" id="4636">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_sqlinjectioncontrol</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="_sqlinjectioncontrol">false</property>
+                    <text-property name="helpText" key="datatype.string">String</text-property>
+                    <text-property name="promptText" key="datatype.string">String</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">Text</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Password" id="4948">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_sqlinjectioncontrol</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                    </list-property>
+                    <property name="_sqlinjectioncontrol">true</property>
+                    <text-property name="helpText">Password (input is concealed)</text-property>
+                    <text-property name="promptText">Password</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">MyPassword</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="concealValue">true</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="dataTypeNumeric" id="4632">
+            <text-property name="displayName">Numeric data types</text-property>
+            <text-property name="promptText" key="group.numeric.prompt"></text-property>
+            <parameters>
+                <scalar-parameter name="Integer" id="18">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">spinner</property>
+                    <text-property name="helpText" key="datatype.integer.help">Integer</text-property>
+                    <text-property name="promptText" key="datatype.integer">Integer</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">150</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Decimal" id="17">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_step</property>
+                            <property name="type">float</property>
+                        </structure>
+                    </list-property>
+                    <property name="_step">0.01</property>
+                    <text-property name="helpText" key="datatype.decimal">Decimal</text-property>
+                    <text-property name="promptText" key="datatype.decimal">Decimal</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">decimal</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">100.65</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Float" id="19">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_step</property>
+                            <property name="type">float</property>
+                        </structure>
+                    </list-property>
+                    <property name="_step">0.01</property>
+                    <property name="hidden">true</property>
+                    <text-property name="helpText" key="datatype.float">Float</text-property>
+                    <text-property name="promptText" key="datatype.float">Float</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">float</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">122.74</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Currency</property>
+                        <property name="pattern">#,##0.00 ${RoundingMode=HALF_UP}</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Nativenumber" id="4947">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">number</property>
+                    <text-property name="helpText">Use the default html5 implementation of your web browser.  See it with Chrome/Safari/Opera/Android</text-property>
+                    <text-property name="promptText">Native integer</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">150</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Simplenumber" id="4940">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">simple</property>
+                    <text-property name="helpText">Display a number parameter without a spinner widget</text-property>
+                    <text-property name="promptText">Simple integer</text-property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">50</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="integerPassword" id="4954">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">_display</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="_display">simple</property>
+                    <text-property name="helpText">Password integer</text-property>
+                    <text-property name="promptText">Password integer</text-property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">1234</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="concealValue">true</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Eclipse" id="4627">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.eclipse.birt.report.data.oda.sampledb.Driver</property>
+            <property name="odaURL">jdbc:classicmodels:sampledb</property>
+            <property name="odaUser">ClassicModels</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Products" id="4628">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PRODUCTCODE</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTCODE</text-property>
+                    <text-property name="heading">PRODUCTCODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRODUCTNAME</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTNAME</text-property>
+                    <text-property name="heading">PRODUCTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRODUCTVENDOR</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">PRODUCTVENDOR</text-property>
+                    <text-property name="heading">PRODUCTVENDOR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BUYPRICE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">BUYPRICE</text-property>
+                    <text-property name="heading">BUYPRICE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PRODUCTCODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PRODUCTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">PRODUCTVENDOR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">BUYPRICE</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="onFetch"><![CDATA[
+//if (typeof(productList) != 'undefined' &amp;&amp; productList.indexOf(row["PRODUCTCODE"].toString()) != null){
+//	productList = productList.replace(row["PRODUCTCODE"].toString(),row["PRODUCTNAME"]);
+//}]]></method>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PRODUCTCODE</property>
+                    <property name="nativeName">PRODUCTCODE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PRODUCTNAME</property>
+                    <property name="nativeName">PRODUCTNAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">PRODUCTVENDOR</property>
+                    <property name="nativeName">PRODUCTVENDOR</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">BUYPRICE</property>
+                    <property name="nativeName">BUYPRICE</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select CLASSICMODELS.PRODUCTS.PRODUCTCODE,
+	   CLASSICMODELS.PRODUCTS.PRODUCTNAME,
+	   CLASSICMODELS.PRODUCTS.PRODUCTVENDOR,
+	   CLASSICMODELS.PRODUCTS.BUYPRICE
+from   CLASSICMODELS.PRODUCTS
+]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Office" id="3682">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">OFFICECODE</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">OFFICECODE</text-property>
+                    <text-property name="heading">OFFICECODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CITY</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">CITY</text-property>
+                    <text-property name="heading">CITY</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">OFFICECODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CITY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Eclipse</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">OFFICECODE</property>
+                    <property name="nativeName">OFFICECODE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CITY</property>
+                    <property name="nativeName">CITY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select CLASSICMODELS.OFFICES.OFFICECODE, CLASSICMODELS.OFFICES.CITY
+from CLASSICMODELS.OFFICES
+order by  CLASSICMODELS.OFFICES.CITY]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>COUNTRY</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>COUNTRY</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>COUNTRY</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="backgroundColor">#FFFFFF</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="4652">
+            <property name="style">ui-widget-header</property>
+            <property name="fontSize">6pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[ 
+  ]]></text-property>
+        </text>
+        <grid id="86">
+            <property name="marginBottom">5pt</property>
+            <column id="87">
+                <property name="width">50%</property>
+            </column>
+            <column id="88">
+                <property name="width">50%</property>
+            </column>
+            <row id="89">
+                <cell id="90">
+                    <property name="style">ui-state-hover</property>
+                    <label id="9">
+                        <property name="fontFamily">"BrowalliaUPC"</property>
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">WELCOME! </text-property>
+                    </label>
+                </cell>
+                <cell id="91">
+                    <property name="style">ui-state-error</property>
+                    <label id="92">
+                        <property name="fontFamily">"BrowalliaUPC"</property>
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text" key="welcome.lexicon">VISIONEO PARAMETERS TYPE LEXICON</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <grid id="79">
+            <column id="80">
+                <property name="width">50%</property>
+            </column>
+            <column id="81">
+                <property name="textAlign">right</property>
+                <property name="width">50%</property>
+            </column>
+            <row id="82">
+                <cell id="83">
+                    <property name="paddingTop">3pt</property>
+                    <property name="paddingLeft">3pt</property>
+                    <property name="paddingBottom">3pt</property>
+                    <property name="paddingRight">3pt</property>
+                    <property name="verticalAlign">middle</property>
+                    <text id="85">
+                        <property name="style">ui-widget-content</property>
+                        <property name="paddingTop">5pt</property>
+                        <property name="paddingLeft">10pt</property>
+                        <property name="paddingBottom">5pt</property>
+                        <property name="paddingRight">10pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content" key="report.welcome.description"><![CDATA[Congratulations! Visioneo portlet is correctly installed on your portal. This welcome report lists the parameter types you will find by using Visioneo reporting tool and BIRT. Select "report parameters" option to see these parameters in action. We hope you will enjoy the demo! ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="84">
+                    <property name="textAlign">center</property>
+                    <image id="78">
+                        <property name="height">166px</property>
+                        <property name="width">202px</property>
+                        <property name="source">file</property>
+                        <expression name="uri" type="constant">WebContent/image/logo-llt.png</expression>
+                    </image>
+                </cell>
+            </row>
+        </grid>
+        <label id="48">
+            <property name="style">ui-widget-header</property>
+            <text-property name="text">Data types</text-property>
+        </label>
+        <grid id="24">
+            <column id="25">
+                <property name="width">30%</property>
+            </column>
+            <column id="26">
+                <property name="width">70%</property>
+            </column>
+            <row id="27">
+                <cell id="28">
+                    <label id="67">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">Date</text-property>
+                    </label>
+                </cell>
+                <cell id="29">
+                    <data id="4927">
+                        <property name="style">ui-widget-content</property>
+                        <structure name="dateTimeFormat">
+                            <property name="category">Long Date</property>
+                            <property name="pattern">Long Date</property>
+                        </structure>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Date</property>
+                                <expression name="expression" type="javascript">params["Date"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                        </list-property>
+                        <method name="onRender"><![CDATA[this.setDisplayValue(params["Date"].value);]]></method>
+                        <property name="resultSetColumn">Date</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="30">
+                <cell id="31">
+                    <label id="68">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.time">Time</text-property>
+                    </label>
+                </cell>
+                <cell id="32">
+                    <data id="4928">
+                        <property name="style">ui-widget-content</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Time</property>
+                                <expression name="expression" type="javascript">params["Time"]</expression>
+                                <property name="dataType">time</property>
+                            </structure>
+                        </list-property>
+                        <method name="onRender"><![CDATA[this.setDisplayValue(params["Time"].value);]]></method>
+                        <property name="resultSetColumn">Time</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="33">
+                <cell id="34">
+                    <label id="69">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.datetime">Datetime</text-property>
+                    </label>
+                </cell>
+                <cell id="35">
+                    <data id="4929">
+                        <property name="style">ui-widget-content</property>
+                        <structure name="dateTimeFormat">
+                            <property name="category">General Date</property>
+                            <property name="pattern">General Date</property>
+                        </structure>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Datetime</property>
+                                <expression name="expression" type="javascript">params["Datetime"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                        </list-property>
+                        <method name="onRender"><![CDATA[this.setDisplayValue(params["Datetime"].value);]]></method>
+                        <property name="resultSetColumn">Datetime</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="36">
+                <cell id="37">
+                    <label id="70">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.boolean">Boolean</text-property>
+                    </label>
+                </cell>
+                <cell id="38">
+                    <text-data id="14">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["Boolean"].value]]></method>
+                        <expression name="valueExpr">params["Boolean"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="39">
+                <cell id="40">
+                    <label id="71">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.decimal">Decimal</text-property>
+                    </label>
+                </cell>
+                <cell id="41">
+                    <text-data id="21">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["Decimal"].value]]></method>
+                        <expression name="valueExpr">params["Decimal"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="42">
+                <cell id="43">
+                    <label id="72">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">Password integer</text-property>
+                    </label>
+                </cell>
+                <cell id="44">
+                    <text-data id="22">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["integerPassword"].value]]></method>
+                        <expression name="valueExpr">params["integerPassword"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="45">
+                <cell id="46">
+                    <label id="73">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.integer">Integer</text-property>
+                    </label>
+                </cell>
+                <cell id="47">
+                    <text-data id="23">
+                        <property name="style">ui-widget-content</property>
+                        <list-property name="highlightRules">
+                            <structure>
+                                <property name="operator">lt</property>
+                                <expression name="testExpr" type="javascript">params["Integer"].value</expression>
+                                <simple-property-list name="value1">
+                                    <value type="javascript">1000000000</value>
+                                </simple-property-list>
+                                <property name="style">styleKo</property>
+                            </structure>
+                        </list-property>
+                        <method name="onRender"><![CDATA[this.text=params["Integer"].value
+]]></method>
+                        <expression name="valueExpr">params["Integer"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4941">
+                <cell id="4942">
+                    <label id="4944">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">Simple number</text-property>
+                    </label>
+                </cell>
+                <cell id="4943">
+                    <data id="4946">
+                        <property name="style">ui-widget-content</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Simplenumber</property>
+                                <expression name="expression" type="javascript">params["Simplenumber"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Simplenumber</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="4644">
+                <cell id="4645">
+                    <label id="4647">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="datatype.string">String</text-property>
+                    </label>
+                </cell>
+                <cell id="4646">
+                    <text-data id="4648">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["String"].value]]></method>
+                        <expression name="valueExpr">params["String"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4949">
+                <cell id="4950">
+                    <label id="4952">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">Integer password</text-property>
+                    </label>
+                </cell>
+                <cell id="4951">
+                    <text-data id="4953">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["integerPassword"].value]]></method>
+                        <expression name="valueExpr">params["integerPassword"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4955">
+                <cell id="4956">
+                    <label id="4958">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">Password</text-property>
+                    </label>
+                </cell>
+                <cell id="4957">
+                    <text-data id="4959">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["Password"].value]]></method>
+                        <expression name="valueExpr">params["Password"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+        </grid>
+        <label id="49">
+            <property name="style">ui-widget-header</property>
+            <text-property name="text">Display types</text-property>
+        </label>
+        <grid id="52">
+            <column id="53">
+                <property name="width">30%</property>
+            </column>
+            <column id="54">
+                <property name="width">70%</property>
+            </column>
+            <row id="4904">
+                <cell id="4905">
+                    <property name="style">ui-state-active</property>
+                    <label id="4907">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.comboboxr.prompt">Combobox</text-property>
+                    </label>
+                </cell>
+                <cell id="4906">
+                    <text-data id="4908">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["ComboboxR"].displayText]]></method>
+                        <expression name="valueExpr">params["ComboboxR"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="55">
+                <cell id="56">
+                    <property name="style">ui-state-active</property>
+                    <label id="74">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.combobox">Combobox</text-property>
+                    </label>
+                </cell>
+                <cell id="57">
+                    <text-data id="64">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["Combobox"].displayText]]></method>
+                        <expression name="valueExpr">params["Combobox"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="58">
+                <list-property name="visibility">
+                    <structure>
+                        <property name="format">all</property>
+                        <expression name="valueExpr" type="javascript">true</expression>
+                    </structure>
+                </list-property>
+                <cell id="59">
+                    <property name="style">ui-state-active</property>
+                    <label id="4938">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.comborboxrich.prompt">Combobox</text-property>
+                    </label>
+                </cell>
+                <cell id="60">
+                    <text-data id="4939">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["ComboboxRich"].displayText;]]></method>
+                        <expression name="valueExpr">params["ComboboxRich"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4935">
+                <cell id="4936">
+                    <property name="style">ui-state-active</property>
+                    <label id="75">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.radiobuttons">Radiobutton</text-property>
+                    </label>
+                </cell>
+                <cell id="4937">
+                    <text-data id="65">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["Radiobutton"].displayText]]></method>
+                        <expression name="valueExpr">params["Radiobutton"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4912">
+                <cell id="4913">
+                    <property name="style">ui-state-active</property>
+                    <label id="4915">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.listbox.prompt">Multi-select autosuggest</text-property>
+                    </label>
+                </cell>
+                <cell id="4914">
+                    <text-data id="4916">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text =params["Listbox"].displayText;]]></method>
+                        <expression name="valueExpr">params["Listbox"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="4917">
+                <cell id="4918">
+                    <property name="style">ui-state-active</property>
+                    <label id="4920">
+                        <property name="style">ui-state-active</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text" key="displaytype.autosuggest.multi.prompt">Multi-select autosuggest</text-property>
+                    </label>
+                </cell>
+                <cell id="4919">
+                    <text-data id="4921">
+                        <property name="style">ui-widget-content</property>
+                        <method name="onRender"><![CDATA[this.text=params["AutosuggestMulti"].displayText]]></method>
+                        <expression name="valueExpr">params["AutosuggestMulti"].displayText;</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="thumbnail">
+        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
+        AABJRU5ErkJggg==
+</property>
+</report>

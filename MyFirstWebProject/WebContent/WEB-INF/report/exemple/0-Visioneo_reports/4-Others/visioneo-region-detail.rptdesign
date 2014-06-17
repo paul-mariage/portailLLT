@@ -1,0 +1,4136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">www.visioneo.org</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.1.v201209101448 Build &lt;4.2.1.v20120912-1721></property>
+    <text-property name="title">report.dashregions.displayname</text-property>
+    <html-property name="description" key="report.dashregions.description"></html-property>
+    <simple-property-list name="includeResource">
+        <value>demo/localization/birtLanguage-ext</value>
+    </simple-property-list>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">6052</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <property name="theme">visioneo-commons.Visioneo</property>
+    <text-property name="displayName" key="report.dashregions.displayname">Region dashboard</text-property>
+    <property name="iconFile">C:\Users\dpardon\Pictures\visioneo\thumbnail-birt\dashregions.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">commons/libraries/visioneo-commons.rptlibrary</property>
+            <property name="namespace">visioneo-commons</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="areaID" id="6290">
+            <text-property name="helpText">Enter a geographical area ID</text-property>
+            <text-property name="promptText">Geographical area</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">BASSIN PARISIEN</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="areaType" id="6291">
+            <text-property name="helpText">Enter an area type</text-property>
+            <text-property name="promptText">Area type</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">zone</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="areaName" id="6367">
+            <text-property name="helpText">Name</text-property>
+            <text-property name="promptText">Name</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="ClassicModelSampledb" id="7"
+ extends="visioneo-commons.ClassicModelSampledb">
+            <property name="odaDriverClass">org.eclipse.birt.report.data.oda.sampledb.Driver</property>
+            <property name="odaURL">jdbc:classicmodels:sampledb</property>
+            <property name="odaUser">ClassicModels</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.datatools.connectivity.oda.flatfile" name="departments-csv" id="6051">
+            <property name="URI">demo/csv/departments.ssv</property>
+            <property name="DELIMTYPE">SEMICOLON</property>
+            <property name="CHARSET">windows-1252</property>
+            <property name="INCLCOLUMNNAME">YES</property>
+            <property name="INCLTYPELINE">NO</property>
+            <property name="TRAILNULLCOLS">NO</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.datatools.connectivity.oda.flatfile" name="csv" id="8">
+            <property name="URI">demo/csv/STMNA_C_.ssv</property>
+            <property name="DELIMTYPE">SEMICOLON</property>
+            <property name="CHARSET">windows-1252</property>
+            <property name="INCLCOLUMNNAME">YES</property>
+            <property name="INCLTYPELINE">NO</property>
+            <property name="TRAILNULLCOLS">NO</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.datatools.connectivity.oda.flatfile.dataSet" name="insee" id="6050">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Department_id</property>
+                    <expression name="expression">BirtStr.left(row["commune_id"],2)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">urbanUnitID</property>
+                    <expression name="expression">row["PARENT"]+row["unite_urbaine_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">region_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">region_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unite_urbaine_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">unite_urbaine_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">commune_id</property>
+                    <property name="alias">ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">commune_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">commune_name</property>
+                    <property name="alias">NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">commune_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_dispo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_dispo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etablissements</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_etablissements</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_depend_persphys</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_depend_persphys</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_depend_persmor</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_depend_persmor</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etabl_salaries</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_etabl_salaries</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etable_plus50sal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">q_etable_plus50sal</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Department_id</property>
+                    <property name="alias">PARENT</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-true</property>
+                    <expression name="expr" type="javascript">var selected =true;&#13;
+if (params["areaType"].value=="city"){&#13;
+	selected=(params["areaID"].value==row["ID"]);&#13;
+}else if(params["areaType"].value=="urban"){&#13;
+	selected=(params["areaID"].value==row["urbanUnitID"]);&#13;
+}&#13;
+selected;</expression>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">region_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">unite_urbaine_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">q_dispo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">q_etablissements</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">q_depend_persphys</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">q_depend_persmor</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">q_etabl_salaries</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">q_etable_plus50sal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">PARENT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">urbanUnitID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">csv</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">region_id</property>
+                    <property name="nativeName">region_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">unite_urbaine_id</property>
+                    <property name="nativeName">unite_urbaine_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">commune_id</property>
+                    <property name="nativeName">commune_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">commune_name</property>
+                    <property name="nativeName">commune_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">q_dispo</property>
+                    <property name="nativeName">q_dispo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">q_etablissements</property>
+                    <property name="nativeName">q_etablissements</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">q_depend_persphys</property>
+                    <property name="nativeName">q_depend_persphys</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">q_depend_persmor</property>
+                    <property name="nativeName">q_depend_persmor</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">q_etabl_salaries</property>
+                    <property name="nativeName">q_etabl_salaries</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">q_etable_plus50sal</property>
+                    <property name="nativeName">q_etable_plus50sal</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select "region_id", "unite_urbaine_id", "commune_id", "commune_name", "q_dispo", "q_etablissements", "q_depend_persphys", "q_depend_persmor", "q_etabl_salaries", "q_etable_plus50sal" from "demo/csv/STMNA_C_.ssv" : {"region_id","region_id",STRING;"unite_urbaine_id","unite_urbaine_id",STRING;"commune_id","commune_id",STRING;"commune_name","commune_name",STRING;"q_dispo","q_dispo",STRING;"q_etablissements","q_etablissements",STRING;"q_depend_persphys","q_depend_persphys",STRING;"q_depend_persmor","q_depend_persmor",STRING;"q_etabl_salaries","q_etabl_salaries",STRING;"q_etable_plus50sal","q_etable_plus50sal",STRING}]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>region_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unite_urbaine_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>unite_urbaine_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>commune_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>commune_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>commune_name</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>commune_name</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_dispo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_dispo</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etablissements</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etablissements</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_depend_persphys</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_depend_persphys</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_depend_persmor</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_depend_persmor</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etabl_salaries</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etabl_salaries</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etable_plus50sal</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etable_plus50sal</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.datatools.connectivity.oda.flatfile.dataSet" name="departments" id="6052">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">DEPARTMENT_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">DEPARTMENT_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DEPARTMENT_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">DEPARTMENT_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">REGION_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">REGION_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">REGION_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">REGION_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ZONE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">ZONE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-true</property>
+                    <expression name="expr" type="javascript">//polymorph filter&#13;
+var selected=true;&#13;
+	//logToDebugWindow("paramType="+params["areaType"].value+" row[ID]="+ row["REGION_ID"] + " paramID="+params["areaID"].value);&#13;
+&#13;
+if (params["areaType"].value=="zone"){&#13;
+	selected=(params["areaID"].value==row["ZONE"]);&#13;
+}else if (params["areaType"].value=="region"){&#13;
+	selected=(params["areaID"].value==row["REGION_ID"]);&#13;
+	//logToDebugWindow(selected);&#13;
+}else if (params["areaType"].value=="department"){&#13;
+	selected=(params["areaID"].value==row["DEPARTMENT_ID"]);&#13;
+} &#13;
+selected;</expression>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">DEPARTMENT_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">DEPARTMENT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">REGION_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">REGION_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">ZONE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">departments-csv</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DEPARTMENT_ID</property>
+                    <property name="nativeName">DEPARTMENT_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">DEPARTMENT_NAME</property>
+                    <property name="nativeName">DEPARTMENT_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">REGION_ID</property>
+                    <property name="nativeName">REGION_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">REGION_NAME</property>
+                    <property name="nativeName">REGION_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">ZONE</property>
+                    <property name="nativeName">ZONE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select "DEPARTMENT_ID", "DEPARTMENT_NAME", "REGION_ID", "REGION_NAME", "ZONE" from "demo/csv/departments.ssv" : {"DEPARTMENT_ID","DEPARTMENT_ID",STRING;"DEPARTMENT_NAME","DEPARTMENT_NAME",STRING;"REGION_ID","REGION_ID",STRING;"REGION_NAME","REGION_NAME",STRING;"ZONE","ZONE",STRING}]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ID;Label;Region</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ID;Label;Region</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <joint-data-set name="performances" id="6173">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">insee::unite_urbaine_id</property>
+                    <property name="alias">unite_urbaine_id</property>
+                    <text-property name="displayName">insee::unite_urbaine_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_depend_persphys</property>
+                    <property name="alias">q_depend_persphys</property>
+                    <text-property name="displayName">insee::q_depend_persphys</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_dispo</property>
+                    <property name="alias">q_dispo</property>
+                    <text-property name="displayName">insee::q_dispo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::Department_id</property>
+                    <property name="alias">PARENT</property>
+                    <text-property name="displayName">insee::Department_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departments::DEPARTMENT_ID</property>
+                    <property name="alias">DEPARTMENT_ID</property>
+                    <text-property name="displayName">departments::DEPARTMENT_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::commune_name</property>
+                    <property name="alias">NAME</property>
+                    <text-property name="displayName">insee::commune_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departments::DEPARTMENT_NAME</property>
+                    <property name="alias">DEPARTMENT_NAME</property>
+                    <text-property name="displayName">departments::DEPARTMENT_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::region_id</property>
+                    <property name="alias">region_id</property>
+                    <text-property name="displayName">insee::region_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departments::ZONE</property>
+                    <property name="alias">ZONE</property>
+                    <text-property name="displayName">departments::ZONE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etablissements</property>
+                    <property name="alias">q_etablissements</property>
+                    <text-property name="displayName">insee::q_etablissements</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etable_plus50sal</property>
+                    <property name="alias">q_etable_plus50sal</property>
+                    <text-property name="displayName">insee::q_etable_plus50sal</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departments::REGION_ID</property>
+                    <property name="alias">REGION_ID</property>
+                    <text-property name="displayName">departments::REGION_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::urbanUnitID</property>
+                    <property name="alias">urbanUnitID</property>
+                    <text-property name="displayName">insee::urbanUnitID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departments::REGION_NAME</property>
+                    <property name="alias">REGION_NAME</property>
+                    <text-property name="displayName">departments::REGION_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etabl_salaries</property>
+                    <property name="alias">q_etabl_salaries</property>
+                    <text-property name="displayName">insee::q_etabl_salaries</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_depend_persmor</property>
+                    <property name="alias">q_depend_persmor</property>
+                    <text-property name="displayName">insee::q_depend_persmor</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::commune_id</property>
+                    <property name="alias">ID</property>
+                    <text-property name="displayName">insee::commune_id</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">departments::DEPARTMENT_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">departments::DEPARTMENT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">departments::REGION_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">departments::REGION_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">departments::ZONE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">insee::region_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">insee::unite_urbaine_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">insee::commune_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">insee::commune_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">insee::q_dispo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">insee::q_etablissements</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">insee::q_depend_persphys</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">insee::q_depend_persmor</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">insee::q_etabl_salaries</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">insee::q_etable_plus50sal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">insee::Department_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">insee::urbanUnitID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>departments</value>
+                <value>insee</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">inner</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">departments</property>
+                    <property name="rightDataSet">insee</property>
+                    <expression name="leftExpression">dataSetRow["DEPARTMENT_ID"]</expression>
+                    <expression name="rightExpression">dataSetRow["PARENT"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="quantity" id="5558">
+            <property name="fontSize">medium</property>
+            <property name="color">#FF8000</property>
+            <property name="marginRight">5pt</property>
+            <property name="paddingLeft">1pt</property>
+            <structure name="numberFormat">
+                <property name="category">Fixed</property>
+                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+            </structure>
+            <property name="textAlign">center</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-legal</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">0.15in</property>
+            <property name="leftMargin">0.15in</property>
+            <property name="bottomMargin">0.25in</property>
+            <property name="backgroundColor">#F0F0F0</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">true</property>
+            <property name="headerHeight">0.1in</property>
+            <property name="footerHeight">0.3in</property>
+            <page-footer>
+                <grid id="6284">
+                    <property name="style">ui-widget-content</property>
+                    <property name="height">100%</property>
+                    <column id="6285"/>
+                    <column id="6286"/>
+                    <row id="6287">
+                        <cell id="6288"/>
+                        <cell id="6289">
+                            <property name="textAlign">right</property>
+                            <label id="6283">
+                                <property name="fontSize">7pt</property>
+                                <property name="paddingRight">4pt</property>
+                                <property name="textAlign">right</property>
+                                <text-property name="text">Source insee - Entreprises et établissements (2010)</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="5326">
+            <property name="marginBottom">15pt</property>
+            <column id="5327"/>
+            <row id="6354">
+                <cell id="6355">
+                    <property name="textAlign">center</property>
+                    <text-data id="6356">
+                        <property name="style">ui-widget-content</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="marginTop">5pt</property>
+                        <property name="marginLeft">10pt</property>
+                        <property name="marginBottom">15pt</property>
+                        <property name="marginRight">10pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <expression name="valueExpr">params["areaName"].value==null?params["areaID"].value:params["areaName"].value</expression>
+                        <property name="contentType">html</property>
+                    </text-data>
+                </cell>
+            </row>
+            <row id="5328">
+                <cell id="5329">
+                    <property name="paddingLeft">10pt</property>
+                    <property name="paddingRight">10pt</property>
+                    <property name="textAlign">center</property>
+                    <table name="tableIndicateur" id="6292">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="marginBottom">15pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="dataSet">performances</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">departments::ZONE</property>
+                                <text-property name="displayName">departments::ZONE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["departments::ZONE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etablissements</property>
+                                <text-property name="displayName">insee::q_etablissements</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etablissements"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_depend_persphys</property>
+                                <text-property name="displayName">insee::q_depend_persphys</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persphys"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_depend_persmor</property>
+                                <text-property name="displayName">insee::q_depend_persmor</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persmor"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etabl_salaries</property>
+                                <text-property name="displayName">insee::q_etabl_salaries</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etabl_salaries"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etable_plus50sal</property>
+                                <text-property name="displayName">insee::q_etable_plus50sal</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etable_plus50sal"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AggEtablissement</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etablissements"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AggPersPhys</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_depend_persphys"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AggPersMor</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_depend_persmor"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AggSalar</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etabl_salaries"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Agg50Salr</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etable_plus50sal"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <property name="isSummaryTable">true</property>
+                        <column id="6307"/>
+                        <column id="6308"/>
+                        <column id="6309"/>
+                        <column id="6310"/>
+                        <column id="6311"/>
+                        <column id="6312"/>
+                        <header>
+                            <row id="6293">
+                                <property name="style">ui-widget-header</property>
+                                <cell id="6294"/>
+                                <cell id="6295">
+                                    <label id="6342">
+                                        <text-property name="text" key="param.insee.etablissements">Etablissements</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6296">
+                                    <label id="6343">
+                                        <text-property name="text" key="param.insee.persphys">Personnes phys</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6297">
+                                    <label id="6344">
+                                        <text-property name="text" key="param.insee.persmoral">Personnes mor</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6298">
+                                    <label id="6345">
+                                        <text-property name="text" key="param.insee.employees">Avec salar</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6299">
+                                    <label id="6346">
+                                        <text-property name="text" key="param.insee.50employees">+ de 50 salar</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <footer>
+                            <row id="6300">
+                                <cell id="6301"/>
+                                <cell id="6302">
+                                    <data id="6347">
+                                        <property name="style">quantity</property>
+                                        <method name="onCreate"><![CDATA[vars["etablissements"]=this.getValue()]]></method>
+                                        <property name="resultSetColumn">AggEtablissement</property>
+                                    </data>
+                                </cell>
+                                <cell id="6303">
+                                    <data id="6348">
+                                        <property name="style">quantity</property>
+                                        <property name="resultSetColumn">AggPersPhys</property>
+                                    </data>
+                                </cell>
+                                <cell id="6304">
+                                    <data id="6349">
+                                        <property name="style">quantity</property>
+                                        <property name="resultSetColumn">AggPersMor</property>
+                                    </data>
+                                </cell>
+                                <cell id="6305">
+                                    <data id="6350">
+                                        <property name="style">quantity</property>
+                                        <method name="onCreate"><![CDATA[vars["salaries"]=this.getValue()]]></method>
+                                        <property name="resultSetColumn">AggSalar</property>
+                                    </data>
+                                </cell>
+                                <cell id="6306">
+                                    <data id="6351">
+                                        <property name="style">quantity</property>
+                                        <method name="onCreate"><![CDATA[vars["50salaries"]=this.getValue()]]></method>
+                                        <property name="resultSetColumn">Agg50Salr</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="6335">
+                                <cell id="6336"/>
+                                <cell id="6337">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                </cell>
+                                <cell id="6339"/>
+                                <cell id="6340"/>
+                                <cell id="6341"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+            <row id="6352">
+                <property name="height">2.46875in</property>
+                <cell id="6353">
+                    <property name="textAlign">center</property>
+                    <grid id="6357">
+                        <property name="textAlign">center</property>
+                        <column id="6358">
+                            <property name="textAlign">center</property>
+                        </column>
+                        <column id="6359">
+                            <property name="textAlign">center</property>
+                        </column>
+                        <row id="6360">
+                            <cell id="6361">
+                                <extended-item extensionName="Chart" id="6364">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<model:DialChart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.3</Version>
+  <Type>Meter Chart</Type>
+  <SubType>Standard Meter Chart</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Anchor>South</Anchor>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Outline>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>102</Red>
+        <Green>102</Green>
+        <Blue>153</Blue>
+      </Background>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>param.insee.percentemp=% Employees</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <Triggers>
+        <Condition>onmouseover</Condition>
+        <Action>
+          <Type>Highlight</Type>
+          <Value xsi:type="attribute:SeriesValue">
+            <Name></Name>
+          </Value>
+        </Action>
+      </Triggers>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Categories</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:Gradient">
+      <StartColor>
+        <Transparency>255</Transparency>
+        <Red>145</Red>
+        <Green>145</Green>
+        <Blue>145</Blue>
+      </StartColor>
+      <EndColor>
+        <Transparency>255</Transparency>
+        <Red>206</Red>
+        <Green>220</Green>
+        <Blue>197</Blue>
+      </EndColor>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Script>function beforeDrawSeries( series, isr, icsc )&#xD;
+{&#xD;
+	importPackage(Packages.org.eclipse.birt.chart.model.type.impl);&#xD;
+	if( series.getClass() == DialSeriesImpl){&#xD;
+		series.getDial().getLineAttributes().setVisible(false);&#xD;
+	}&#xD;
+}</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <GridColumnCount>0</GridColumnCount>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity>
+    <LegendBehavior>HighlightSerie</LegendBehavior>
+  </Interactivity>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <SeriesDefinitions>
+    <Query>
+      <Definition></Definition>
+    </Query>
+    <SeriesPalette>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>102</Red>
+        <Green>102</Green>
+        <Blue>153</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>242</Red>
+        <Green>88</Green>
+        <Blue>106</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>232</Red>
+        <Green>172</Green>
+        <Blue>57</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>64</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>170</Red>
+        <Green>85</Green>
+        <Blue>85</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>192</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>7</Red>
+        <Green>146</Green>
+        <Blue>94</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>64</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>80</Red>
+        <Green>240</Green>
+        <Blue>120</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>0</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+    </SeriesPalette>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>102</Red>
+          <Green>102</Green>
+          <Blue>153</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series xsi:type="type:DialSeries">
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>(vars[&quot;salaries&quot;]==0||vars[&quot;salaries&quot;]==null)?0:(vars[&quot;salaries&quot;]*100/vars[&quot;etablissements&quot;])</Definition>
+          <Grouping>
+            <Enabled>true</Enabled>
+            <GroupType>Text</GroupType>
+            <AggregateExpression>First</AggregateExpression>
+            <AggregateParameters>1</AggregateParameters>
+          </Grouping>
+        </DataDefinition>
+        <SeriesIdentifier>Series 1</SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+        <Triggers>
+          <Condition>onmouseover</Condition>
+          <Action>
+            <Type>Highlight</Type>
+            <Value xsi:type="attribute:SeriesValue">
+              <Name></Name>
+            </Value>
+          </Action>
+        </Triggers>
+        <Triggers>
+          <Condition>onclick</Condition>
+          <Action>
+            <Type>Show_Tooltip</Type>
+            <Value xsi:type="attribute:TooltipValue">
+              <Text>(new Number(valueData)).toPrecision(2)+&quot; %&quot;</Text>
+              <Delay>200</Delay>
+            </Value>
+          </Action>
+        </Triggers>
+        <Dial>
+          <StartAngle>-20.0</StartAngle>
+          <StopAngle>200.0</StopAngle>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <Fill xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Fill>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </EndColor>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>0.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>10.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>221</Blue>
+              </EndColor>
+              <Direction>90.0</Direction>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>25.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>50.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>191</Red>
+                <Green>255</Green>
+                <Blue>191</Blue>
+              </EndColor>
+              <Direction>0.0</Direction>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>50.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>75.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>204</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>128</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </EndColor>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>10.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>25.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <MajorGrid>
+            <LineAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>196</Red>
+                <Green>196</Green>
+                <Blue>196</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </LineAttributes>
+            <TickStyle>Below</TickStyle>
+            <TickAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>196</Red>
+                <Green>196</Green>
+                <Blue>196</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </TickAttributes>
+          </MajorGrid>
+          <MinorGrid>
+            <LineAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>225</Red>
+                <Green>225</Green>
+                <Blue>225</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </LineAttributes>
+            <TickStyle>Below</TickStyle>
+            <TickAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>225</Red>
+                <Green>225</Green>
+                <Blue>225</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </TickAttributes>
+          </MinorGrid>
+          <Scale>
+            <Min xsi:type="data:NumberDataElement">
+              <Value>0.0</Value>
+            </Min>
+            <Max xsi:type="data:NumberDataElement">
+              <Value>70.0</Value>
+            </Max>
+            <Step>10.0</Step>
+            <MinorGridsPerUnit>5</MinorGridsPerUnit>
+          </Scale>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Size>8.0</Size>
+                <Alignment/>
+              </Font>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Color>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>255</Transparency>
+              <Red>102</Red>
+              <Green>102</Green>
+              <Blue>153</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </Outline>
+            <Insets>
+              <Top>1.0</Top>
+              <Left>3.0</Left>
+              <Bottom>1.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>true</Visible>
+          </Label>
+          <FormatSpecifier xsi:type="attribute:NumberFormatSpecifier">
+            <Prefix></Prefix>
+            <Suffix></Suffix>
+            <FractionDigits>0</FractionDigits>
+          </FormatSpecifier>
+        </Dial>
+        <Needle>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>3</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <Decorator>Arrow</Decorator>
+        </Needle>
+      </Series>
+    </SeriesDefinitions>
+    <Series>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Label>
+      <DataDefinition>
+        <Definition>params[&quot;areaID&quot;].value</Definition>
+      </DataDefinition>
+      <SeriesIdentifier></SeriesIdentifier>
+      <DataPoint>
+        <Components>
+          <Type>Orthogonal_Value</Type>
+        </Components>
+        <Separator>, </Separator>
+      </DataPoint>
+      <LabelPosition>Outside</LabelPosition>
+      <Stacked>false</Stacked>
+    </Series>
+    <Grouping>
+      <Enabled>true</Enabled>
+      <GroupType>Text</GroupType>
+      <AggregateExpression>Sum</AggregateExpression>
+    </Grouping>
+  </SeriesDefinitions>
+  <Coverage>1.0</Coverage>
+  <DialSuperimposition>false</DialSuperimposition>
+</model:DialChart>
+]]></xml-property>
+                                    <property name="outputFormat">SVG</property>
+                                    <property name="inheritColumns">false</property>
+                                    <property name="dataSet">performances</property>
+                                    <property name="height">3.9270833333333335in</property>
+                                    <property name="width">3.875in</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">departments::DEPARTMENT_ID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::DEPARTMENT_ID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::DEPARTMENT_NAME</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::DEPARTMENT_NAME"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::REGION_ID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::REGION_ID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::REGION_NAME</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::REGION_NAME"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::ZONE</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::ZONE"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::region_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::region_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::unite_urbaine_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::unite_urbaine_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::commune_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::commune_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::commune_name</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::commune_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_dispo</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_dispo"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etablissements</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etablissements"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_depend_persphys</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persphys"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_depend_persmor</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persmor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etabl_salaries</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etabl_salaries"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etable_plus50sal</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etable_plus50sal"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::Department_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::Department_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::urbanUnitID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::urbanUnitID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                </extended-item>
+                            </cell>
+                            <cell id="6362">
+                                <extended-item extensionName="Chart" id="6366">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<model:DialChart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.3</Version>
+  <Type>Meter Chart</Type>
+  <SubType>Standard Meter Chart</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Anchor>South</Anchor>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Outline>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>102</Red>
+        <Green>102</Green>
+        <Blue>153</Blue>
+      </Background>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>param.insee.percent50emp=% 50 Employees</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <Triggers>
+        <Condition>onmouseover</Condition>
+        <Action>
+          <Type>Highlight</Type>
+          <Value xsi:type="attribute:SeriesValue">
+            <Name></Name>
+          </Value>
+        </Action>
+      </Triggers>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Categories</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Background xsi:type="attribute:Gradient">
+      <StartColor>
+        <Transparency>255</Transparency>
+        <Red>145</Red>
+        <Green>145</Green>
+        <Blue>145</Blue>
+      </StartColor>
+      <EndColor>
+        <Transparency>255</Transparency>
+        <Red>206</Red>
+        <Green>220</Green>
+        <Blue>197</Blue>
+      </EndColor>
+    </Background>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Script>function beforeDrawSeries( series, isr, icsc )&#xD;
+{&#xD;
+	importPackage(Packages.org.eclipse.birt.chart.model.type.impl);&#xD;
+	if( series.getClass() == DialSeriesImpl){&#xD;
+		series.getDial().getLineAttributes().setVisible(false);&#xD;
+	}&#xD;
+}</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <GridColumnCount>0</GridColumnCount>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity>
+    <LegendBehavior>HighlightSerie</LegendBehavior>
+  </Interactivity>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <SeriesDefinitions>
+    <Query>
+      <Definition></Definition>
+    </Query>
+    <SeriesPalette>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>102</Red>
+        <Green>102</Green>
+        <Blue>153</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>242</Red>
+        <Green>88</Green>
+        <Blue>106</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>232</Red>
+        <Green>172</Green>
+        <Blue>57</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>64</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>170</Red>
+        <Green>85</Green>
+        <Blue>85</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>192</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>7</Red>
+        <Green>146</Green>
+        <Blue>94</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>64</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>80</Red>
+        <Green>240</Green>
+        <Blue>120</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>0</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+    </SeriesPalette>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>102</Red>
+          <Green>102</Green>
+          <Blue>153</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series xsi:type="type:DialSeries">
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>(vars[&quot;50salaries&quot;]==0||vars[&quot;salaries&quot;]==null)?0:(vars[&quot;50salaries&quot;]*100/vars[&quot;etablissements&quot;])</Definition>
+          <Grouping>
+            <Enabled>true</Enabled>
+            <GroupType>Text</GroupType>
+            <AggregateExpression>First</AggregateExpression>
+            <AggregateParameters>1</AggregateParameters>
+          </Grouping>
+        </DataDefinition>
+        <SeriesIdentifier>Series 1</SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+        <Triggers>
+          <Condition>onmouseover</Condition>
+          <Action>
+            <Type>Highlight</Type>
+            <Value xsi:type="attribute:SeriesValue">
+              <Name></Name>
+            </Value>
+          </Action>
+        </Triggers>
+        <Triggers>
+          <Condition>onclick</Condition>
+          <Action>
+            <Type>Show_Tooltip</Type>
+            <Value xsi:type="attribute:TooltipValue">
+              <Text>(new Number(valueData)).toPrecision(2)+&quot; %&quot;</Text>
+              <Delay>200</Delay>
+            </Value>
+          </Action>
+        </Triggers>
+        <Dial>
+          <StartAngle>-20.0</StartAngle>
+          <StopAngle>200.0</StopAngle>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <Fill xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Fill>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>221</Blue>
+              </EndColor>
+              <Direction>90.0</Direction>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>1.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>2.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>191</Red>
+                <Green>255</Green>
+                <Blue>191</Blue>
+              </EndColor>
+              <Direction>0.0</Direction>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>2.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>8.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <DialRegions>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Fill xsi:type="attribute:Gradient">
+              <StartColor>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>204</Green>
+                <Blue>0</Blue>
+              </StartColor>
+              <EndColor>
+                <Transparency>255</Transparency>
+                <Red>128</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </EndColor>
+            </Fill>
+            <StartValue xsi:type="data:NumberDataElement">
+              <Value>0.0</Value>
+            </StartValue>
+            <EndValue xsi:type="data:NumberDataElement">
+              <Value>1.0</Value>
+            </EndValue>
+            <Label>
+              <Caption>
+                <Value></Value>
+                <Font>
+                  <Alignment/>
+                </Font>
+              </Caption>
+              <Background xsi:type="attribute:ColorDefinition">
+                <Transparency>0</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Background>
+              <Outline>
+                <Style>Solid</Style>
+                <Thickness>1</Thickness>
+                <Color>
+                  <Transparency>255</Transparency>
+                  <Red>0</Red>
+                  <Green>0</Green>
+                  <Blue>0</Blue>
+                </Color>
+              </Outline>
+              <Insets>
+                <Top>0.0</Top>
+                <Left>2.0</Left>
+                <Bottom>0.0</Bottom>
+                <Right>3.0</Right>
+              </Insets>
+              <Visible>true</Visible>
+            </Label>
+            <LabelAnchor>North</LabelAnchor>
+          </DialRegions>
+          <MajorGrid>
+            <LineAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>196</Red>
+                <Green>196</Green>
+                <Blue>196</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </LineAttributes>
+            <TickStyle>Below</TickStyle>
+            <TickAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>196</Red>
+                <Green>196</Green>
+                <Blue>196</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </TickAttributes>
+          </MajorGrid>
+          <MinorGrid>
+            <LineAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>225</Red>
+                <Green>225</Green>
+                <Blue>225</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </LineAttributes>
+            <TickStyle>Below</TickStyle>
+            <TickAttributes>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>225</Red>
+                <Green>225</Green>
+                <Blue>225</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </TickAttributes>
+          </MinorGrid>
+          <Scale>
+            <Min xsi:type="data:NumberDataElement">
+              <Value>0.0</Value>
+            </Min>
+            <Max xsi:type="data:NumberDataElement">
+              <Value>8.0</Value>
+            </Max>
+            <Step>2.0</Step>
+            <MinorGridsPerUnit>5</MinorGridsPerUnit>
+            <AutoExpand>true</AutoExpand>
+          </Scale>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Size>8.0</Size>
+                <Alignment/>
+              </Font>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Color>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>255</Transparency>
+              <Red>102</Red>
+              <Green>102</Green>
+              <Blue>153</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>255</Red>
+                <Green>255</Green>
+                <Blue>255</Blue>
+              </Color>
+              <Visible>true</Visible>
+            </Outline>
+            <Insets>
+              <Top>1.0</Top>
+              <Left>3.0</Left>
+              <Bottom>1.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>true</Visible>
+          </Label>
+        </Dial>
+        <Needle>
+          <LineAttributes>
+            <Style>Solid</Style>
+            <Thickness>3</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>true</Visible>
+          </LineAttributes>
+          <Decorator>Arrow</Decorator>
+        </Needle>
+      </Series>
+    </SeriesDefinitions>
+    <Series>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Label>
+      <DataDefinition>
+        <Definition>params[&quot;areaID&quot;].value</Definition>
+      </DataDefinition>
+      <SeriesIdentifier></SeriesIdentifier>
+      <DataPoint>
+        <Components>
+          <Type>Orthogonal_Value</Type>
+        </Components>
+        <Separator>, </Separator>
+      </DataPoint>
+      <LabelPosition>Outside</LabelPosition>
+      <Stacked>false</Stacked>
+    </Series>
+    <Grouping>
+      <Enabled>true</Enabled>
+      <GroupType>Text</GroupType>
+      <AggregateExpression>Sum</AggregateExpression>
+    </Grouping>
+  </SeriesDefinitions>
+  <Coverage>1.0</Coverage>
+  <DialSuperimposition>false</DialSuperimposition>
+</model:DialChart>
+]]></xml-property>
+                                    <property name="outputFormat">SVG</property>
+                                    <property name="inheritColumns">false</property>
+                                    <property name="dataSet">performances</property>
+                                    <property name="height">3.9270833333333335in</property>
+                                    <property name="width">3.875in</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">departments::DEPARTMENT_ID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::DEPARTMENT_ID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::DEPARTMENT_NAME</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::DEPARTMENT_NAME"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::REGION_ID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::REGION_ID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::REGION_NAME</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::REGION_NAME"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">departments::ZONE</property>
+                                            <expression name="expression" type="javascript">dataSetRow["departments::ZONE"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::region_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::region_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::unite_urbaine_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::unite_urbaine_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::commune_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::commune_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::commune_name</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::commune_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_dispo</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_dispo"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etablissements</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etablissements"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_depend_persphys</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persphys"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_depend_persmor</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persmor"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etabl_salaries</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etabl_salaries"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::q_etable_plus50sal</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::q_etable_plus50sal"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::Department_id</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::Department_id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">insee::urbanUnitID</property>
+                                            <expression name="expression" type="javascript">dataSetRow["insee::urbanUnitID"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="etablissements">
+            <expression name="value" type="javascript">0</expression>
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="salaries">
+            <expression name="value" type="javascript">0</expression>
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="50salaries">
+            <expression name="value" type="javascript">0</expression>
+            <property name="type">report</property>
+        </variable-element>
+    </property>
+    <property name="thumbnail">
+        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
+    </property>
+</report>

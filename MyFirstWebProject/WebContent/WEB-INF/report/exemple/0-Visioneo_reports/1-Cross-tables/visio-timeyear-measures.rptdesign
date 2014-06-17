@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">www.visioneo.org</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title">Sales crosstable with timeunit measures</text-property>
+    <html-property name="description">A nice cross-table displaying a time comparison between years, and a percentage of change for Y and Y-1. It takes advantage of the BIRT relative time periods and derived measures: this report is designed with a very simple dataset, without using any script.</html-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">41</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">41</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">41</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <text-property name="displayName">Cross-table &amp; derived measure</text-property>
+    <property name="iconFile">C:\Users\dpardon\Pictures\visioneo\thumbnail-birt\interactive-crosstab.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="cssStyleSheets">
+        <structure>
+            <property name="useExternalCss">true</property>
+            <property name="externalCssURI">http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="Year" id="187">
+            <text-property name="helpText">Sélectionner l'année de référence</text-property>
+            <text-property name="promptText">Reference year</text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">desc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2013</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2011</property>
+                </structure>
+                <structure>
+                    <property name="value">2012</property>
+                </structure>
+                <structure>
+                    <property name="value">2013</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.eclipse.birt.report.data.oda.sampledb.Driver</property>
+            <property name="odaURL">jdbc:classicmodels:sampledb</property>
+            <property name="odaUser">ClassicModels</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Sales" id="41">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PRODUCTLINE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PRODUCTLINE</text-property>
+                    <text-property name="heading">PRODUCTLINE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRODUCTVENDOR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PRODUCTVENDOR</text-property>
+                    <text-property name="heading">PRODUCTVENDOR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">QUANTITYORDERED</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">QUANTITYORDERED</text-property>
+                    <text-property name="heading">QUANTITYORDERED</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORDERDATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ORDERDATE</text-property>
+                    <text-property name="heading">ORDERDATE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PRODUCTLINE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PRODUCTVENDOR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">QUANTITYORDERED</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ORDERDATE</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PRODUCTLINE</property>
+                    <property name="nativeName">PRODUCTLINE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PRODUCTVENDOR</property>
+                    <property name="nativeName">PRODUCTVENDOR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">QUANTITYORDERED</property>
+                    <property name="nativeName">QUANTITYORDERED</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ORDERDATE</property>
+                    <property name="nativeName">ORDERDATE</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select CLASSICMODELS.PRODUCTS.PRODUCTLINE,
+CLASSICMODELS.PRODUCTS.PRODUCTVENDOR,
+CLASSICMODELS.ORDERDETAILS.QUANTITYORDERED,
+CLASSICMODELS.ORDERS.ORDERDATE
+from CLASSICMODELS.ORDERDETAILS, 
+CLASSICMODELS.ORDERS,
+CLASSICMODELS.PRODUCTS
+where CLASSICMODELS.ORDERDETAILS.ORDERNUMBER=CLASSICMODELS.ORDERS.ORDERNUMBER
+and CLASSICMODELS.PRODUCTS.PRODUCTCODE=CLASSICMODELS.ORDERDETAILS.PRODUCTCODE]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORDERNUMBER</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORDERNUMBER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORDERNUMBER</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRODUCTCODE</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>15</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PRODUCTCODE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PRODUCTCODE</design:label>
+            <design:formattingHints>
+              <design:displaySize>15</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>QUANTITYORDERED</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>QUANTITYORDERED</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>QUANTITYORDERED</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRICEEACH</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>15</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PRICEEACH</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PRICEEACH</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORDERLINENUMBER</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>5</design:nativeDataTypeCode>
+            <design:precision>5</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORDERLINENUMBER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORDERLINENUMBER</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Sales" id="157">
+            <property name="dimensions">
+                <tabular-dimension name="Category" id="158">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="159">
+                            <property name="levels">
+                                <tabular-level name="PRODUCTLINE" id="160">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">PRODUCTLINE</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group" id="161">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="162">
+                            <property name="levels">
+                                <tabular-level name="Year" id="163">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">year</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">ORDERDATE</property>
+                                </tabular-level>
+                                <tabular-level name="Month" id="164">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">month</property>
+                                    <property name="dateTimeFormat">MMM</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">ORDERDATE</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Vendor" id="4958">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="4959">
+                            <property name="levels">
+                                <tabular-level name="PRODUCTVENDOR" id="4960">
+                                    <property name="dataType">string</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">PRODUCTVENDOR</property>
+                                    <expression name="displayColumnName" type="javascript">"&lt;div style=\"color:red\">"+dataSetRow["PRODUCTVENDOR"]+"&lt;/div>"</expression>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="A1" id="165">
+                    <property name="measures">
+                        <tabular-measure name="QTE_A1" id="166">
+                            <property name="function">sum</property>
+                            <property name="isCalculated">false</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["QUANTITYORDERED"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="isVisible">true</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Sales</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="datacell" id="5136">
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="Mesure" id="5137">
+            <property name="backgroundColor">#2C5858</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FFFFFF</property>
+            <property name="paddingTop">4pt</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="subTotal" id="5154">
+            <property name="backgroundColor">#E9E9E9</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">11pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="paddingTop">4pt</property>
+            <property name="paddingBottom">4pt</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+        </style>
+        <style name="Axe" id="5186">
+            <property name="backgroundColor">#E5E5E5</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontWeight">bold</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">auto</property>
+            <property name="backgroundColor">#FFFFFF</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="7556">
+            <property name="fontSize">14pt</property>
+            <property name="paddingTop">5pt</property>
+            <property name="paddingBottom">5pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<div class="ui-widget-header">
+  THIS IS MY HTML TEXT, FORMATTED WITH A CSS FILE INCLUDED AT VIEW TIME!
+</div>]]></text-property>
+        </text>
+        <grid id="5211">
+            <column id="5212"/>
+            <row id="5213">
+                <cell id="5214">
+                    <property name="textAlign">center</property>
+                    <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="5102">
+                        <property name="cube">Sales</property>
+                        <property name="measures">
+                            <extended-item extensionName="MeasureView" id="5121">
+                                <property name="measure">QTE_A1</property>
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="5122">
+                                        <property name="aggregationOnRow">Vendor/PRODUCTVENDOR</property>
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="width">80px</property>
+                                        <property name="content">
+                                            <data id="5123">
+                                                <property name="resultSetColumn">QTE_A1_Vendor/PRODUCTVENDOR_Group/Year</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">datacell</property>
+                                    </extended-item>
+                                </property>
+                                <property name="aggregations">
+                                    <extended-item extensionName="AggregationCell" id="5147">
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="content">
+                                            <data id="5148">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Fixed</property>
+                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">QTE_A1_Group/Year</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="5124">
+                                        <property name="content">
+                                            <text-data id="5171">
+                                                <property name="textAlign">center</property>
+                                                <expression name="valueExpr">params["Year"].value</expression>
+                                                <property name="contentType">html</property>
+                                            </text-data>
+                                        </property>
+                                        <property name="style">Mesure</property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                            <extended-item extensionName="ComputedMeasureView" name="A-1" id="5173">
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="5174">
+                                        <property name="aggregationOnRow">Vendor/PRODUCTVENDOR</property>
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="width">80px</property>
+                                        <property name="content">
+                                            <data id="5179">
+                                                <property name="resultSetColumn">Y1</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">datacell</property>
+                                    </extended-item>
+                                </property>
+                                <property name="aggregations">
+                                    <extended-item extensionName="AggregationCell" id="5175">
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="content">
+                                            <data id="5182">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Fixed</property>
+                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">TotalA2</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="5176">
+                                        <property name="content">
+                                            <text-data id="5172">
+                                                <property name="textAlign">center</property>
+                                                <expression name="valueExpr">params["Year"].value-1</expression>
+                                                <property name="contentType">html</property>
+                                            </text-data>
+                                        </property>
+                                        <property name="style">Mesure</property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                            <extended-item extensionName="ComputedMeasureView" name="A1%A2" id="5163">
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="5164">
+                                        <property name="aggregationOnRow">Vendor/PRODUCTVENDOR</property>
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="backgroundColor">#F5F5F5</property>
+                                        <property name="width">80px</property>
+                                        <property name="content">
+                                            <data name="A1%A21" id="5169">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Percent</property>
+                                                    <property name="pattern">###0%{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">A1%A2</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">datacell</property>
+                                    </extended-item>
+                                </property>
+                                <property name="aggregations">
+                                    <extended-item extensionName="AggregationCell" id="5166">
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="content">
+                                            <data id="5184">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Percent</property>
+                                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">total%</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="5167">
+                                        <property name="content">
+                                            <text-data id="5209">
+                                                <property name="textAlign">center</property>
+                                                <expression name="valueExpr">"% Evolution "+params["Year"].value</expression>
+                                                <property name="contentType">html</property>
+                                            </text-data>
+                                        </property>
+                                        <property name="style">Mesure</property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                            <extended-item extensionName="ComputedMeasureView" name="A3" id="5188">
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="5189">
+                                        <property name="aggregationOnRow">Vendor/PRODUCTVENDOR</property>
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="width">80px</property>
+                                        <property name="content">
+                                            <data id="5195">
+                                                <property name="resultSetColumn">Y3</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">datacell</property>
+                                    </extended-item>
+                                </property>
+                                <property name="aggregations">
+                                    <extended-item extensionName="AggregationCell" id="5190">
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="content">
+                                            <data id="5207">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Fixed</property>
+                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">totalY3</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="5191">
+                                        <property name="content">
+                                            <text-data id="5196">
+                                                <property name="textAlign">center</property>
+                                                <expression name="valueExpr">params["Year"].value-2</expression>
+                                                <property name="contentType">html</property>
+                                            </text-data>
+                                        </property>
+                                        <property name="style">Mesure</property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                            <extended-item extensionName="ComputedMeasureView" name="A2%A3" id="5197">
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="5198">
+                                        <property name="aggregationOnRow">Vendor/PRODUCTVENDOR</property>
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="backgroundColor">#F5F5F5</property>
+                                        <property name="width">80px</property>
+                                        <property name="content">
+                                            <data id="5205">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Percent</property>
+                                                    <property name="pattern">###0%{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">%Y3</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">datacell</property>
+                                    </extended-item>
+                                </property>
+                                <property name="aggregations">
+                                    <extended-item extensionName="AggregationCell" id="5199">
+                                        <property name="aggregationOnColumn">Group/Year</property>
+                                        <property name="content">
+                                            <data id="5208">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Percent</property>
+                                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                                </structure>
+                                                <property name="resultSetColumn">%totalY3</property>
+                                            </data>
+                                        </property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="5200">
+                                        <property name="content">
+                                            <text-data id="5210">
+                                                <property name="textAlign">center</property>
+                                                <expression name="valueExpr">"% Evolution "+(params["Year"].value-1)</expression>
+                                                <property name="contentType">html</property>
+                                            </text-data>
+                                        </property>
+                                        <property name="style">Mesure</property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                        </property>
+                        <property name="rows">
+                            <extended-item extensionName="CrosstabView" id="5104">
+                                <property name="grandTotal">
+                                    <extended-item extensionName="CrosstabCell" id="5146">
+                                        <property name="content">
+                                            <label id="5153">
+                                                <property name="marginTop">3pt</property>
+                                                <property name="marginBottom">3pt</property>
+                                                <property name="textAlign">center</property>
+                                                <text-property name="text">Grand Total</text-property>
+                                            </label>
+                                        </property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightColor">#3C3C3C</property>
+                                        <property name="style">subTotal</property>
+                                    </extended-item>
+                                </property>
+                                <property name="views">
+                                    <extended-item extensionName="DimensionView" id="5117">
+                                        <property name="dimension">Vendor</property>
+                                        <property name="levels">
+                                            <extended-item extensionName="LevelView" name="NewLevel View3" id="5118">
+                                                <property name="level">Vendor/PRODUCTVENDOR</property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="5119">
+                                                        <property name="content">
+                                                            <data name="PRODUCTVENDOR" id="5120">
+                                                                <property name="marginLeft">3pt</property>
+                                                                <property name="textAlign">left</property>
+                                                                <property name="resultSetColumn">PRODUCTVENDOR</property>
+                                                            </data>
+                                                        </property>
+                                                        <property name="textAlign">left</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightColor">#3C3C3C</property>
+                                                        <property name="paddingLeft">1pt</property>
+                                                        <property name="width">200px</property>
+                                                        <property name="style">Axe</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
+                                        </property>
+                                    </extended-item>
+                                </property>
+                                <property name="grandTotalLocation">after</property>
+                            </extended-item>
+                        </property>
+                        <property name="columns">
+                            <extended-item extensionName="CrosstabView" id="5109">
+                                <property name="views">
+                                    <extended-item extensionName="DimensionView" id="5110">
+                                        <property name="dimension">Group</property>
+                                        <property name="levels">
+                                            <extended-item extensionName="LevelView" name="NewLevel View1" id="5111">
+                                                <property name="level">Group/Year</property>
+                                                <property name="filter">
+                                                    <filter-condition-element>
+                                                        <expression name="expr" type="javascript">data["Year"]</expression>
+                                                        <property name="operator">eq</property>
+                                                        <simple-property-list name="value1">
+                                                            <value type="javascript">params["Year"].value</value>
+                                                        </simple-property-list>
+                                                        <property name="updateAggregation">false</property>
+                                                    </filter-condition-element>
+                                                </property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="5112">
+                                                        <property name="content">
+                                                            <text-data id="5185">
+                                                                <property name="fontSize">14pt</property>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="valueExpr">"Year to year comparisons"</expression>
+                                                                <property name="contentType">html</property>
+                                                            </text-data>
+                                                        </property>
+                                                        <property name="textAlign">center</property>
+                                                        <property name="paddingTop">3pt</property>
+                                                        <property name="paddingBottom">4pt</property>
+                                                        <property name="style">Axe</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
+                                        </property>
+                                    </extended-item>
+                                </property>
+                                <property name="grandTotalLocation">after</property>
+                            </extended-item>
+                        </property>
+                        <property name="header">
+                            <extended-item extensionName="CrosstabCell" id="5103">
+                                <property name="content">
+                                    <grid id="7550">
+                                        <column id="7551">
+                                            <property name="textAlign">left</property>
+                                            <property name="width">0.7916666666666666in</property>
+                                        </column>
+                                        <column id="7552">
+                                            <property name="width">1.2083333333333333in</property>
+                                        </column>
+                                        <row id="7553">
+                                            <property name="verticalAlign">middle</property>
+                                            <cell id="7554">
+                                                <property name="paddingTop">3pt</property>
+                                                <property name="paddingLeft">3pt</property>
+                                                <property name="paddingBottom">3pt</property>
+                                                <image id="4685">
+                                                    <property name="height">48px</property>
+                                                    <property name="width">48px</property>
+                                                    <property name="source">file</property>
+                                                    <expression name="uri" type="constant">demo/img/pie.png</expression>
+                                                </image>
+                                            </cell>
+                                            <cell id="7555">
+                                                <property name="paddingTop">3pt</property>
+                                                <property name="paddingBottom">3pt</property>
+                                                <property name="paddingRight">5pt</property>
+                                                <property name="textAlign">center</property>
+                                                <label id="5187">
+                                                    <property name="fontSize">10pt</property>
+                                                    <text-property name="text">Sales unit by product vendor</text-property>
+                                                </label>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopColor">#C0C0C0</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftColor">#C0C0C0</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomColor">#C0C0C0</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightColor">#C0C0C0</property>
+                                <property name="style">Mesure</property>
+                            </extended-item>
+                        </property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopColor">#333333</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftColor">#333333</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomColor">#333333</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightColor">#333333</property>
+                        <property name="marginTop">5pt</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Year</property>
+                                <expression name="expression" type="javascript">dimension["Group"]["Year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PRODUCTVENDOR</property>
+                                <expression name="expression">dimension["Vendor"]["PRODUCTVENDOR"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">QTE_A1_Vendor/PRODUCTVENDOR_Group/Year</property>
+                                <expression name="expression">measure["QTE_A1"]</expression>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Vendor/PRODUCTVENDOR</value>
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                            <structure>
+                                <property name="name">QTE_A1_Group/Year</property>
+                                <expression name="expression">measure["QTE_A1"]</expression>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                            <structure>
+                                <property name="name">A1%A2</property>
+                                <expression name="expression" type="javascript">data["QTE_A1_Vendor/PRODUCTVENDOR_Group/Year"]/data["Y1"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">RA2</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Vendor/PRODUCTVENDOR</value>
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">measure["QTE_A1"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="calculationType">PREVIOUS YEAR</property>
+                                <list-property name="calculationArguments">
+                                    <structure>
+                                        <property name="name">N for Period1</property>
+                                        <expression name="value" type="javascript">1</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="refDateType">today</property>
+                                <property name="timeDimension">Group</property>
+                            </structure>
+                            <structure>
+                                <property name="name">A-1</property>
+                                <expression name="expression" type="javascript">data["QTE_A1_Vendor/PRODUCTVENDOR_Group/Year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Y1</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Vendor/PRODUCTVENDOR</value>
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">measure["QTE_A1"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="calculationType">PREVIOUS YEAR</property>
+                                <list-property name="calculationArguments">
+                                    <structure>
+                                        <property name="name">N for Period1</property>
+                                        <expression name="value" type="javascript">1</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="refDateType">today</property>
+                                <property name="timeDimension">Group</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TEST</property>
+                                <expression name="expression" type="javascript">data["Y1"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">A</property>
+                                <expression name="expression" type="javascript">data["QTE_A1_Vendor/PRODUCTVENDOR_Group/Year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalA2</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">measure["QTE_A1"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="calculationType">PREVIOUS YEAR</property>
+                                <list-property name="calculationArguments">
+                                    <structure>
+                                        <property name="name">N for Period1</property>
+                                        <expression name="value" type="javascript">1</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="refDateType">today</property>
+                                <property name="timeDimension">Group</property>
+                            </structure>
+                            <structure>
+                                <property name="name">total%</property>
+                                <expression name="expression" type="javascript">(data["QTE_A1_Group/Year"]/data["TotalA2"])</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">A3</property>
+                                <expression name="expression" type="javascript">data["QTE_A1_Vendor/PRODUCTVENDOR_Group/Year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Y3</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Vendor/PRODUCTVENDOR</value>
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">measure["QTE_A1"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="calculationType">PREVIOUS YEAR</property>
+                                <list-property name="calculationArguments">
+                                    <structure>
+                                        <property name="name">N for Period1</property>
+                                        <expression name="value" type="javascript">2</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="refDateType">today</property>
+                                <property name="timeDimension">Group</property>
+                            </structure>
+                            <structure>
+                                <property name="name">A2%A3</property>
+                                <expression name="expression" type="javascript">(data["Y1"]-data["Y3"])/data["Y3"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">%Y3</property>
+                                <expression name="expression" type="javascript">(data["Y1"]/data["Y3"])</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">totalY3</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Group/Year</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">measure["QTE_A1"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="calculationType">PREVIOUS YEAR</property>
+                                <list-property name="calculationArguments">
+                                    <structure>
+                                        <property name="name">N for Period1</property>
+                                        <expression name="value" type="javascript">2</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="refDateType">today</property>
+                                <property name="timeDimension">Group</property>
+                            </structure>
+                            <structure>
+                                <property name="name">%totalY3</property>
+                                <expression name="expression" type="javascript">(data["TotalA2"]/data["totalY3"])</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                    </extended-item>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="thumbnail">
+        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
+</property>
+</report>

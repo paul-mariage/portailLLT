@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Written by Eclipse BIRT 2.0 -->
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.6" id="1">
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">Bertie the Platypus</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 1.0.0 Build &lt;20050405-1230></property>
-    <property name="units">in</property>
     <property name="comments">Not a very interesting report, just a "Hello World" with a param.</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
     <html-property name="description">Sample report used to test the BIRT viewer.</html-property>
-    <list-property name="configVars">
-        <structure>
-            <property name="name">sample</property>
-            <property name="value">aaa</property>
-        </structure>
-    </list-property>
+    <property name="units">in</property>
+    <property name="layoutPreference">auto layout</property>
     <parameters>
         <scalar-parameter name="sample" id="2">
             <text-property name="displayName">Sample Parameter</text-property>
             <property name="hidden">false</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
             <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
             <property name="concealValue">false</property>
-            <property name="allowBlank">true</property>
-            <property name="allowNull">false</property>
             <property name="controlType">text-box</property>
-            <property name="mustMatch">false</property>
-            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
         </scalar-parameter>
     </parameters>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="3">
+            <property name="topMargin">1in</property>
+            <property name="leftMargin">1.25in</property>
+            <property name="bottomMargin">1in</property>
+            <property name="rightMargin">1.25in</property>
             <page-header>
                 <grid id="4">
                     <property name="width">100%</property>

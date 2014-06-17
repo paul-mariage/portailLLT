@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">Visioneo</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <text-property name="title">City performance</text-property>
+    <html-property name="description">This report makes use of a multiselect autocomplete parameter to select a subset of geographical areas, among a pretty large lookup dataset. Run it to discover this fast and ergonomic way to select items. Note another important feature, the selection order is kept the same in the report, a scripted dataset takes advantage of this to create a sort key in the birt table!</html-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">HOME</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">URI</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">DELIMTYPE</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">CHARSET</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">INCLCOLUMNNAME</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">INCLTYPELINE</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">TRAILNULLCOLS</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">8</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">8</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <method name="beforeFactory"><![CDATA[reportContext.getDesignHandle().setThemeName(params["Theme"].value);
+if( params["City"].value==null || params["City"].value.length<= 0 || params["City"].value.join("")==""){
+
+	importPackage(Packages.org.eclipse.birt.report.model.api);
+	importPackage(Packages.org.eclipse.birt.report.model.api.elements);
+
+	dataHandle = reportContext.getReportRunnable().designHandle.findDataSet( "SelectedList" );//
+	dataHandle.getPropertyHandle( "filter" ).removeItem( 0 );
+
+}]]></method>
+    <property name="theme">visioneo-commons.VisioOcean</property>
+    <text-property name="displayName">Performance by city</text-property>
+    <property name="iconFile">C:\Users\dpardon\Pictures\visioneo\thumbnail-birt\communes-performance.png</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">commons/libraries/visioneo-commons.rptlibrary</property>
+            <property name="namespace">visioneo-commons</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="City" id="12">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">_max</property>
+                    <property name="type">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">_display</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="_max">20</property>
+            <property name="_display">autosuggest</property>
+            <text-property name="helpText">Select a city by name or postal code, among 3500 available</text-property>
+            <text-property name="promptText">Select a city</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">insee</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["commune_id"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["commune_name"]+" "+dataSetRow["commune_id"]</expression>
+            <expression name="sortByColumn">dataSetRow["commune_name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">multi-value</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Theme" id="4903">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__RENDERING</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__RENDERING">false</property>
+            <text-property name="helpText">Select a theme to apply different styles on your report</text-property>
+            <text-property name="promptText">Theme</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">visioneo-commons.VisioOcean</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">visioneo-commons.VisioLightness</property>
+                    <property name="label">Lightness</property>
+                </structure>
+                <structure>
+                    <property name="value">visioneo-commons.VisioOcean</property>
+                    <property name="label">Ocean</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Highlight" id="4904">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Highlight cities with highest economic activity</text-property>
+            <text-property name="promptText">Highlight companies count</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">1000</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.datatools.connectivity.oda.flatfile" name="csv" id="8">
+            <property name="URI">demo/csv/STMNA_C_.ssv</property>
+            <property name="DELIMTYPE">SEMICOLON</property>
+            <property name="CHARSET">windows-1252</property>
+            <property name="INCLCOLUMNNAME">YES</property>
+            <property name="INCLTYPELINE">NO</property>
+            <property name="TRAILNULLCOLS">NO</property>
+        </oda-data-source>
+        <script-data-source name="Scripted" id="77"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.datatools.connectivity.oda.flatfile.dataSet" name="insee" id="10">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">region_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">region_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unite_urbaine_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">unite_urbaine_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">commune_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">commune_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">commune_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="heading">commune_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_dispo</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_dispo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etablissements</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_etablissements</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_depend_persphys</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_depend_persphys</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_depend_persmor</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_depend_persmor</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etabl_salaries</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_etabl_salaries</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">q_etable_plus50sal</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="heading">q_etable_plus50sal</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">region_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">unite_urbaine_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">commune_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">commune_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">q_dispo</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">q_etablissements</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">q_depend_persphys</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">q_depend_persmor</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">q_etabl_salaries</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">q_etable_plus50sal</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">csv</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">region_id</property>
+                    <property name="nativeName">region_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">unite_urbaine_id</property>
+                    <property name="nativeName">unite_urbaine_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">commune_id</property>
+                    <property name="nativeName">commune_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">commune_name</property>
+                    <property name="nativeName">commune_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">q_dispo</property>
+                    <property name="nativeName">q_dispo</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">q_etablissements</property>
+                    <property name="nativeName">q_etablissements</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">q_depend_persphys</property>
+                    <property name="nativeName">q_depend_persphys</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">q_depend_persmor</property>
+                    <property name="nativeName">q_depend_persmor</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">q_etabl_salaries</property>
+                    <property name="nativeName">q_etabl_salaries</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">q_etable_plus50sal</property>
+                    <property name="nativeName">q_etable_plus50sal</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select "region_id", "unite_urbaine_id", "commune_id", "commune_name", "q_dispo", "q_etablissements", "q_depend_persphys", "q_depend_persmor", "q_etabl_salaries", "q_etable_plus50sal" from "STMNA_C_.ssv" : {"region_id","region_id",STRING;"unite_urbaine_id","unite_urbaine_id",STRING;"commune_id","commune_id",STRING;"commune_name","commune_name",STRING;"q_dispo","q_dispo",INT;"q_etablissements","q_etablissements",INT;"q_depend_persphys","q_depend_persphys",INT;"q_depend_persmor","q_depend_persmor",INT;"q_etabl_salaries","q_etabl_salaries",INT;"q_etable_plus50sal","q_etable_plus50sal",INT}]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>region_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unite_urbaine_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>unite_urbaine_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>commune_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>commune_id</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>commune_name</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>commune_name</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_dispo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_dispo</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etablissements</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etablissements</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_depend_persphys</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_depend_persphys</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_depend_persmor</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_depend_persmor</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etabl_salaries</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etabl_salaries</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>q_etable_plus50sal</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>q_etable_plus50sal</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <script-data-set name="Selection" id="78">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">sortKey</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">sortKey</property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">sortKey</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Scripted</property>
+            <method name="open"><![CDATA[i=0;]]></method>
+            <method name="fetch"><![CDATA[if (params["City"].value!=null &amp;&amp; i<params["City"].value.length){
+	row["sortKey"]=i;
+	row["id"]=params["City"].value[i];
+	i++;
+	return true;
+}
+return false;
+]]></method>
+        </script-data-set>
+        <joint-data-set name="SelectedList" id="112">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Selection::id</property>
+                    <property name="alias">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Selection::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etable_plus50sal</property>
+                    <property name="alias">q_etable_plus50sal</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_etable_plus50sal</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_depend_persphys</property>
+                    <property name="alias">q_depend_persphys</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_depend_persphys</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::unite_urbaine_id</property>
+                    <property name="alias">unite_urbaine_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">insee::unite_urbaine_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_dispo</property>
+                    <property name="alias">q_dispo</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_dispo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::commune_id</property>
+                    <property name="alias">commune_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">insee::commune_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etabl_salaries</property>
+                    <property name="alias">q_etabl_salaries</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_etabl_salaries</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_depend_persmor</property>
+                    <property name="alias">q_depend_persmor</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_depend_persmor</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::commune_name</property>
+                    <property name="alias">commune_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">insee::commune_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::region_id</property>
+                    <property name="alias">region_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">insee::region_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Selection::sortKey</property>
+                    <property name="alias">sortKey</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Selection::sortKey</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">insee::q_etablissements</property>
+                    <property name="alias">q_etablissements</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">insee::q_etablissements</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">in</property>
+                    <expression name="expr" type="javascript">row["insee::commune_id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["City"].value</value>
+                    </simple-property-list>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">insee::region_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">insee::unite_urbaine_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">insee::commune_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">insee::commune_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">insee::q_dispo</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">insee::q_etablissements</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">insee::q_depend_persphys</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">insee::q_depend_persmor</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">insee::q_etabl_salaries</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">insee::q_etable_plus50sal</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Selection::sortKey</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Selection::id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>insee</value>
+                <value>Selection</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">left-out</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">insee</property>
+                    <property name="rightDataSet">Selection</property>
+                    <expression name="leftExpression">dataSetRow["commune_id"]</expression>
+                    <expression name="rightExpression">dataSetRow["id"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="backgroundColor">#C0C0C0</property>
+            <property name="showFooterOnLast">true</property>
+            <page-footer>
+                <label id="4915">
+                    <property name="fontSize">7pt</property>
+                    <property name="paddingRight">4pt</property>
+                    <property name="textAlign">center</property>
+                    <method name="onRender"><![CDATA[if (BirtComp.lessThan(pageNumber,totalPage))
+{
+	this.getStyle().display = "none";
+}]]></method>
+                    <text-property name="text">Source insee - Entreprises et établissements (2010)</text-property>
+                </label>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="4911">
+            <property name="textAlign">center</property>
+            <column id="4912"/>
+            <row id="4913">
+                <property name="textAlign">center</property>
+                <cell id="4914">
+                    <table name="tableCommunesOrdered" id="113">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="width">7.020833333333333in</property>
+                        <property name="dataSet">SelectedList</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">insee::region_id</property>
+                                <text-property name="displayName">insee::region_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::region_id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::unite_urbaine_id</property>
+                                <text-property name="displayName">insee::unite_urbaine_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::unite_urbaine_id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::commune_id</property>
+                                <text-property name="displayName">insee::commune_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::commune_id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::commune_name</property>
+                                <text-property name="displayName">insee::commune_name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::commune_name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_dispo</property>
+                                <text-property name="displayName">insee::q_dispo</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_dispo"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etablissements</property>
+                                <text-property name="displayName">insee::q_etablissements</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etablissements"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_depend_persphys</property>
+                                <text-property name="displayName">insee::q_depend_persphys</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persphys"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_depend_persmor</property>
+                                <text-property name="displayName">insee::q_depend_persmor</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_depend_persmor"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etabl_salaries</property>
+                                <text-property name="displayName">insee::q_etabl_salaries</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etabl_salaries"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">insee::q_etable_plus50sal</property>
+                                <text-property name="displayName">insee::q_etable_plus50sal</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["insee::q_etable_plus50sal"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Selection::sortKey</property>
+                                <text-property name="displayName">Selection::sortKey</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Selection::sortKey"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Selection::id</property>
+                                <text-property name="displayName">Selection::id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Selection::id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etable_plus50sal"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_1</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etabl_salaries"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_2</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_depend_persmor"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_3</property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_depend_persphys"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_4</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["insee::q_etablissements"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <expression name="bookmark" type="javascript">"__cityperformance"</expression>
+                        <property name="pageBreakInterval">40</property>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["Selection::sortKey"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                        </list-property>
+                        <column id="179">
+                            <property name="width">0.6666666666666666in</property>
+                        </column>
+                        <column id="180">
+                            <property name="width">2.0416666666666665in</property>
+                        </column>
+                        <column id="182">
+                            <property name="width">0.8333333333333334in</property>
+                        </column>
+                        <column id="183">
+                            <property name="width">0.75in</property>
+                        </column>
+                        <column id="184">
+                            <property name="width">0.78125in</property>
+                        </column>
+                        <column id="185">
+                            <property name="width">0.7604166666666666in</property>
+                        </column>
+                        <column id="186">
+                            <property name="width">0.6875in</property>
+                        </column>
+                        <column id="187">
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">true</expression>
+                                </structure>
+                            </list-property>
+                            <property name="width">0.5in</property>
+                        </column>
+                        <header>
+                            <row id="114">
+                                <property name="style">ui-widget-header</property>
+                                <property name="height">40px</property>
+                                <cell id="119">
+                                    <property name="textAlign">center</property>
+                                    <label id="120">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">City</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="121">
+                                    <property name="textAlign">center</property>
+                                    <label id="122">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Name</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="125">
+                                    <property name="textAlign">center</property>
+                                    <label id="126">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Etabl.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="127">
+                                    <label id="128">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Personne phys.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="129">
+                                    <property name="textAlign">center</property>
+                                    <label id="130">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Personne mor.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="131">
+                                    <property name="textAlign">center</property>
+                                    <label id="132">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Avec sal.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="133">
+                                    <property name="textAlign">center</property>
+                                    <label id="134">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">+ de 50 sal.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="135">
+                                    <label id="136">
+                                        <text-property name="text">Sort key</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="139">
+                                <cell id="144">
+                                    <property name="style">ui-state-default</property>
+                                    <data id="145">
+                                        <property name="resultSetColumn">insee::commune_id</property>
+                                    </data>
+                                </cell>
+                                <cell id="146">
+                                    <property name="style">ui-state-default</property>
+                                    <data id="147">
+                                        <property name="resultSetColumn">insee::commune_name</property>
+                                    </data>
+                                </cell>
+                                <cell id="150">
+                                    <property name="style">ui-widget-content</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">gt</property>
+                                            <expression name="testExpr" type="javascript">row["insee::q_etablissements"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">params["Highlight"].value</value>
+                                            </simple-property-list>
+                                            <property name="style">ui-state-highlight</property>
+                                        </structure>
+                                    </list-property>
+                                    <data id="151">
+                                        <property name="resultSetColumn">insee::q_etablissements</property>
+                                    </data>
+                                </cell>
+                                <cell id="152">
+                                    <property name="style">ui-widget-content</property>
+                                    <data id="153">
+                                        <property name="resultSetColumn">insee::q_depend_persphys</property>
+                                    </data>
+                                </cell>
+                                <cell id="154">
+                                    <property name="style">ui-widget-content</property>
+                                    <data id="155">
+                                        <property name="resultSetColumn">insee::q_depend_persmor</property>
+                                    </data>
+                                </cell>
+                                <cell id="156">
+                                    <property name="style">ui-widget-content</property>
+                                    <data id="157">
+                                        <property name="resultSetColumn">insee::q_etabl_salaries</property>
+                                    </data>
+                                </cell>
+                                <cell id="158">
+                                    <property name="style">ui-widget-content</property>
+                                    <data id="159">
+                                        <property name="resultSetColumn">insee::q_etable_plus50sal</property>
+                                    </data>
+                                </cell>
+                                <cell id="160">
+                                    <property name="style">ui-widget-content</property>
+                                    <data id="161">
+                                        <property name="resultSetColumn">Selection::sortKey</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="164">
+                                <property name="style">ui-widget-header</property>
+                                <property name="textAlign">center</property>
+                                <cell id="167"/>
+                                <cell id="168">
+                                    <label id="4910">
+                                        <text-property name="text">TOTALS</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="170">
+                                    <data id="4909">
+                                        <property name="resultSetColumn">Aggregation_4</property>
+                                    </data>
+                                </cell>
+                                <cell id="171">
+                                    <data id="4908">
+                                        <property name="resultSetColumn">Aggregation_3</property>
+                                    </data>
+                                </cell>
+                                <cell id="172">
+                                    <data id="4907">
+                                        <property name="resultSetColumn">Aggregation_2</property>
+                                    </data>
+                                </cell>
+                                <cell id="173">
+                                    <data id="4906">
+                                        <property name="resultSetColumn">Aggregation_1</property>
+                                    </data>
+                                </cell>
+                                <cell id="174">
+                                    <data id="4905">
+                                        <property name="resultSetColumn">Aggregation</property>
+                                    </data>
+                                </cell>
+                                <cell id="175"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="thumbnail">
+        iVBORw0KGgoAAAANSUhEUgAAAMgAAABqCAYAAAD5jB57AABIQElEQVR4nO19B1hjx9X2uqW453McJ3Ga
+        4zh2/CV2HJf8jpM4iVtc4hZ7Hdtx4rUd1/X29fYKu2xnYYFl2aX3JkAghADRJYREEUVICFEl0XsRnfef
+        uZJ2Ad0rCXCM9nk+nuflXs099+icqzl3zsycObPqxb+vxkN/X4PfvPyODR54+Z+4/6V/Msdfs1y/3EB1
+        +TXBg6+svCxfBh6co9NvqE4E1vP7X+TW80EL3a9fWr4MVj5fxjN9gMru7G/54ttOy8em969Zvotep8/z
+        Qcvntz76HKve+vhz7MhrxJZMNbYSXDyKahFW1Y6Iimb4lRrAVxmwL7cOe3K1zLUtFlor/VaOz3PL2bCQ
+        diG9vfsXfofd+4nM+S3dEOvacCC/HjuyNThcWA83cr4rSwMPcv5Fhq1eXPIuVi9HOnDpw3Y0oxYbi5oQ
+        Xa2HsLELx/Lq4ZGvRWxjL05lqSHqGcXGOfrMvXejUIWk+i7E1Biwm9y3lzyLfXla7CfPYq9YjSOFOuwi
+        v7NHQT325GjhTq5tE9fBLa/O5pmKyHdnqI3YnUPqBqFxJ/fso0ciC+WziXm2Ouy28KN83Ek9WliHKGIb
+        euBGru8mMuwn/A4S+i+ILkeLdMxvQz/vJbIcJseUHhOh09j8FpsJ30PSRmyi/AlitV1ElzrmuzcRvQXq
+        TnjKGsBv6EaATMvcS+sB/f13kGeaUWdkeFBe2/zCzAbyRS5hmKGeh43CWjR2d+LT1Gok6wYgJgaS0jgA
+        ubEHGxbQXh6ohba9E239Awgsb4O4tRsVhj5UtvdB398NWXMnQhQNDN3Ky+qcPutK9EjVtEPZM4Rj+TpU
+        dg4hl+jBU7UjoW2IeQmw3btOUIPiriEkN3ajpW+IPINe6MjzqO8ZxOmaDhxTtiG/34TKjkHCuwdZWiPy
+        O4aR3tKLDcI5z4eca/qHIaw1oNjYj7imPug6+yHtGEJ4ZStiK+qRpO9GBHnRZvSNorp7BE19/SggL6rP
+        BKp5MtEK2UB+H6nWgEJtN5LrO1Gg70NV3zAiSnTYl10HbfcADhXokNM6hJTuURwixjL/96rFfvKyL+ke
+        hi8xCM/qDvgQXQp7Tcg1DmBPthpnFEYouoiMRK6ylnb4V7cjUWVEgqYDLW3tSNNQAzHz+8LXYiBbiYFs
+        IMwpNs7B3vwm8Mhb5qikAWE1RoSUGeBVqJ5Hs5HlPjY4Q7MU2sXwCixtQGBZM85X6HFa1gQ/eTP8Fc3w
+        JT9AbG0bjhbUOZRhA8c5G91C2i9TL4p1ufVIJHKfJjoElpAKSX6rUyVNCC5vwclyA0LLm1jvW08qtg+5
+        5/N0FU4TughlC3yL6sn9Ruwib9lYFXkW8hb4KVrgX9aEU8UN2FXQiKgqPdYv4BWkbMVmwu8UoQ2oaIWv
+        rBEhNW04RVszwofKeLCwAafK9ThH4FbUgCTysv1cOP/ZbBLp4JZdi5AqA/FYWrGVvMUDq4w4QloDnroN
+        O0ilTSAVeadQS1pNA46X6RFd2WIjD+V1nMhuftZa0koasV6sRaK6neEZSmQ7lKfBWcJ7d1YNDkubEVbR
+        gtBqI4LJC9KnrIW0muZ6wBjIm8TP2pLTQB6ayjlkOElng1oL7F2399mZe5b63a4EZ57RYnRxTveNpAKe
+        ktS7oM4rh63UQP5BDGRtpo40eTVYS5q99eStss4ZCFRMU70uvcZyVOHdpEq8nahkxRvxFaxYHV+O1+Lm
+        Y3UcOy3FXJ7/4lVexHvJVXgvpQr/IfiQX42PU2vwWVoNoxfVyTm9amwhWHAu4Ci33n+x3PqcOHgIahY8
+        zwV8bHiryO9zSR+nfqMF/Om9H1ueyeeW3/oz4kroB0dQ0diGWuJ2xKs7sI+0RkXEnRKo9fg0ba6cZnk+
+        J0fm+TLnl57tR5laNPUOoapzgLhKepQSfodJy6IZGMYmAdtzJfdY+Cyu7s15Lpbjh/wqRqZPLPzWOf2b
+        sz1v83GLDzGQV9//DM/HVeGvEYqLeNaC5yx4PtKMFxiU4m9RZrwSU4bXY8tJxS3HWwkVDM2zEa6Dxehk
+        1etlotPfY8rxOjHUN4lOVK93eMQYk5RYk1yJ94kBfkCNkPTNPiUP8VPmxzVXmoVYK1ge5vKiPxqVyZE+
+        C3+nF6NL8arld3qV4K/h8nk8nowqR8fICCQNLQgmnVa//DIYhkawm/jwpY0diCbuEKVjfmvy/f+INz+T
+        Z1me7eOxVahp64OqvRuNXaRf0kTcmuImbCUyBJZoGdkon9eIHKspH/KSe2aOPIute6/NqXsvkLKFv/uz
+        C/lxPKP5dZnqZ34Bf+4VglWvEAP5a2wlniaCLhVPWbAcHq4Iq15PhXGhhBVPh5cw9z+zTJjlMPNjeP9X
+        dFSQt24l/hJagifCzPggqYI5MmWhJYv6rek9c2GV+4mwxfFZqbr31By8dyLQbCBPx1QSBeSceNLONVfG
+        f1PuJ7/C5+LM97DRfBny/Td0XAzPxX7/cuRdeO97x4mBvEwM5C9RSvwppOT/8H/4P8zBu8cumA3kiTgV
+        /hRRvjyEl+HJaOXy+XxJeJzI8zhzXobHQstWXJ5l60PwIY+PowKfJeNgaiC2ZmgIapcHoQXL5UOHnNNq
+        ls3jCzpvRzr5X4Y8c7GdjmI98dZ/sGp7ClZtiZ+He04KsWpbAu45LMD3PQS47YAAD53OwKpNcXjEK8uG
+        ftXGGHzrsMi2/CtDHO46SeTaFENkicVNh9Jxy+fRWLU5Hv8MFzFlVxAaely1Oe4S6GcrtibgZ4fTcZW1
+        fJMF1nvo+UrpR757bUYWYHjHBgM1b6Kz9m0YZKsxUP82WkvfZKWD9jEwf7MzNpidmUZLSyOGetoxODaB
+        Jq0GEzO2dBQzpHyWpZwBZlBfpYHJ1I+Gphb0djQx9Oy0s9C0D7FfIxjtN6CtowvNrQZ0NGswNDXLyadj
+        cIyTz0VMm9A7MAxjawP6hkwO6dPS0rDqybeJgewmJ9t5l7AtEc9tTsTr7kLsSyzBq0fycKFsGC965mFb
+        oASbZHqGZt495Ee89UjW/LKvEqQC7Ze3wLu0CVl1rYg3dCFCWoO1/GbEa5oRVKjEXqEeyTUN+PupbKyJ
+        KcfdAXKklWhxobYbkfXNuP1IBo4mK3GqqR+bSvW4kFsD75JOpCsb8E5UGdbn6IjeK6QfMd71ogxS0f9p
+        A3HgK5AlvQhDwesIP/wi+qteBzpt6aD9A2gdmyYVlg15yXE4sm4rlM21MDbXoU7Vyko3OT2NKQK2a8Ak
+        Tmw7gWliKNH+acBYHcYmJgm9Le0MqYS1bYMcfIBiaQpKqjrRUCdHfmI54sNK2WkJn7Z+E6dec3mqNFq0
+        1FVDrW5zSJ+amjrHQGiFnwN/uQrf2Z+CDFUb9mUr8Z+YKuSotFi1NhqfSZps6C8ayMLyrwp7c/AHz1SE
+        aXrxZoAUu6q6EJBVgwci67AtrRwPk0q2JloHN1E5TgjV2B4jw9c98hEkUWJLZh3WylqwamcSfDJV+ETc
+        ALm+EwF5auzLbIW/tBoP+RXj6ZO8ldPPaiD6t23QmEcMJO91RLo9iZK81xDq8wJgtKWjBjLNYSBjY6Pw
+        8vZAZtwp8HPqcM7nGIan2GntGshUL7bt9kRrbRbOeIciL/EkarvYK689A6H8iZUj2DsIx0ISkXhmP0p7
+        uYxy1jkDGevEkbPhCPLbj/LaXucM5KUP1uKPiVo8FlW1LDwaWYmnk+qWzecrQ3S1Q5rfE5rfW+iY8xWU
+        93eRVXArqcJMu++S0as7CqV+GJX6gWVB2drPYLl8KHLUncvmUUUg1fV8KfLMRUgMj7sFOVtSg1sPpOBc
+        uhKfCirxAWlBsohv+ceYGpwoVrleC2IXPCh7B5l+Cu2TvJJVh+vWxTBv5VW7BTgUkU9aj2TcYrm+8vJy
+        tCC5zZiib1cbAKmJsUhLT8A+d3/GlWCjU7UNMW9tzrcmeWuHpFTDxy8AlToD03dYbAtC0dOph7efD3L5
+        QfjPLjdOOnstiNUliktMQXk2DyHJuXboSAsy4LgFoW1SWkww8ko1jmltXCyOPsjeeBlesfRBnjuRizO8
+        KngTX9/GF1/pPogdXLkjESGFRrhpuxGVXoaIhn68yydvZDoZJG0DX6rGKydF+PMBAfYmF5krpAvIbdMH
+        yW2y444A0pxMnNx3DKNgd41oZeSq9FYDiU3VYKRZjc7eYebzUgyE/onDBZiYnIJhaGLJBkINv0pVD1VZ
+        LuIjozhlX0wfpE6jR1lRqf3nMNdAuEax7j0lxBXbEvCgVzZ+ekyA7x4U4OHTGbjRPQM/O5bugqNYdrCD
+        z3TiqS53ufHxc08x7j8mxPdJp/ye4xn47RkxrvsiAbfvzcC93iwjdK4AIv+6nCaOURzSB9c3o6+vF02t
+        rZwjVWo6YgSOkSALqqproVTWoG9olJPW7igWwdjwILTNrRgfMNr/PgejWPSvoa4WHW16tLX12OXj1CgW
+        +eswNKNnYNgxrXUU69l/f4wfeEtw+8mcebjJIwvfO0GOR7JxC8G3j4nxLdJC0GvXH8q0ob/tWDb+N0Bm
+        U+5K+PaRTHyX6HSbdxEe8CmYd43qepsLyMiF7x0XY3OhgakIC9EzOo3+MYIJoG90Cv3jM6x0iqY+dLKU
+        X8I4BiZmCa8ZDJgmOenaiTtDwcVjaBLoGp7EIOFF0TXEzqdzyCwTOx8To0f3yCQjTx/RrXeYnU834aNu
+        H7Sj1yXZekcn0UeeVQen/JcQx0vhdrEOxUvxsHsagkWV+Cy6DB+El2Bzuhb/Q966cdoOWxfAhV0sMxJx
+        oKQFP/fKZ4LqPHOq8ScvMR4LlOKDZAVePJ+HD70zXdO9cuBiNajLEZmQhTN7tiKGn4/MrBzmbblYF2tq
+        ugWHvSJQLC9FfF4Z00os1sXC9DAiInho6m6Au3sQUoW5aCCVbfEu1ixiIxKgUUpx+nwEgg9uQ0790PJc
+        rKkh5JVUISMlHTMcbqjTfZDNAbl43E2A0AI1PguR4X3ir3+cqcWvz+QhrrEXq75YUJFc3UCICxWVV42T
+        FQbcGSDHerqqTt2BjaI6eCSUICuvCqsPp12WBmLQKiDKyUdadCAEmRIcOHx8aQZi6gLvpDeU4gj0Dk0x
+        HftFG8jMOAJO+6OnywBhgCfCz/iia4kGkhafgIzcbORkpSAm+Dzis9XL7INMIDkjF4WiDLQPO6ZnDOSZ
+        dz4iblQObnQTXsRNBFftScMNbum4Yncqrtmbhm/sF5AyPikT4mt7Uhmaufdctz8Nd3gXzCtzJVB5v3Eg
+        ndHhetIZp3p9bV8avk5wzT4BriQ6XkWOVvrrD6bb6LiSoDJvzG/FoGnCBiby249P058fGJ2cAfFMWOno
+        0OzQ2CTrNQbElSHeEcZm2e+3on90grhg7NcGTFPM23l0chbEu2LOR8bZv5PKQmXi+p5xcv8Y1Y2C8pyY
+        YqWj/Bu7h+3KbJWNiAUTeVYjHLzmgpfMt3TSaSd2a/w83Lw/hXnr3rwnGdcSfG1XMr59gI9v7EpiyhbS
+        03CM/6Gd9IXlK4oE3EpkvmFXom2ndzNHZ5iWb47DWwE55s8rroMFRCbaSadujy1mMTI8BJNpBD09faRS
+        zrLSqcnbGhzXGEyb0Nfbj4GBAYxPTnLSMW//GQ4eDKbR1z+E0aFemKamOemsnXR714eHhzExNoKhoWG7
+        dLTPwC3Ppec0OjwI0/iEE7QOQk1e2paEV92FOMiT47VjefhXWBn+HlmFA9EarM012LoAruhi7eajRteG
+        TREyuJca8T6/Cltkjfjl+RI09/RgZ4IKB8X1CGvqRJKwFG7V7WjpaUOMzgCBuNLWjXRRF4u6O6ZuLQql
+        WhjUtehZwjCv2WWaRWFCHB13glrfTmiXNsxL70/n8RB3Jh8RgTJOOmeGeUtLKxh3sShDxCnPYoZ51bVN
+        KC0qc36Yl8tAQktr8QPy9i2q74RHbhU+yVAjq1KHzxKViMxXXzYGomlsh0eAAu65GoiqDODJGhBa2YaC
+        Ei2eiqrA+vhKhBCazBIdzinbkZpRisA6PbKJzpeLgdBZkMioIORnJeOdd9aibWRp8yCm1jx4HDmONWs2
+        oLC6eckThaQzgw8/+hw8n33I0A0s2UDo3+G9XyAhPgzhsYmcgwbOGgh9TknhAcgqrnFMazWQl95fi8fi
+        NHg0onIefhuuxP+zHH8bQc+VljLz54X0j4RV4MlEtU35SsMq/28t8tPjQ6EVeDj8kk5PJtTiz1FzaMPZ
+        dVxpPbbJOlBtGGCHcZAcB1HDHNlpcjVd3PczMN9vjwdFlSW8wx4Nw8MBH4o8BzJd5GOHF6Upbuhx+F2X
+        npMTdAShNNTkCdqC7Eo1vy0vIgFueRW4aV8y3BIUeCuxFE8E0XXFatx9RIAtIbkL6BMZH/nbHpm25a4A
+        0iKGFdVha1Q2Vn0ehU+zGrA2rBCraLjJ+hhLaHsc86b+Ge2DrLS8bCAtNG1BZiz+/1xUFmcgKiEXnRox
+        0vPKcdznHPP2XUhH39azs7b3W1sKjHciMUeOxNg4tHT0sNJRWFsPtmv0L1uYgP7WKgSc2oEAnyDSuZ5k
+        pbX2i1i/h/hpCXF8hp8wKQR5/FBkKRo4vnOWmZfhkvcSZiGOS0SxUkMaHUe0pAVJs+Ni/XVDPFaTPsie
+        eBlePpyLd8PKcad3MR48mYKABMnl4WLNgYC4TJ5FzfCRNSGwzIhkVRc+41eirK4Nf+KpcFLZirBUBV49
+        mu6aQ712XCz6V1PdgOjAI0jI1iAvJYbVHXHkYuWeOg9xTCJKNPWobdRz0tlzsaZIJexs0zBh70FheRAI
+        hGjkGFJ1FM1bKpFDq5bjsOdZRsfURNHyXKzpGXQZ20m/RskYiFMulnkUyzbU5JngXFy9PRGrw4vxu7PZ
+        uNc7B2+GFjCtyurAfNZQk/9x1VCTrfF4M0yCBw+k49GzufjDuSI87ZWDE6o27AiX4BuHMvFykATPnRbh
+        eTpZuNLycoaaNDMd4IWok0tRXNVgDjlpaUdzxwwrXW37uN1RrOlRA4qlNZAVy8yhJhx0M5bKzT6iBFSV
+        5KCHGAX9KyuTM53rxY5i0b9KhRTdQyaMjhCXTiFGC+lcLWsUi1BqVEo0tbRx6mYzivX8u5/invNl+Lmf
+        ZB5+5FWIu3wl+KF3IX5CcMeZQvyAlP30TBFzbSH9nT5FeDi03Kb8v43bvQrwIyITPX8svAKPnJdx0j4V
+        psBdlvO7/aT40ekC/NT30vWfeBcwoOe/i1TiHt/599/p+9/RwRn8jDzfrXkytNbttoGhYTfaKZr2wKjb
+        jY5GWxoKY/WHaO6dQHPPCCvahqagH5hAa+8ojOS8hYOuqdsM1ms9o2gfnkRL7xjhN8nA2D/KSkv5F+t6
+        OL/DODgFw8A42gkPA4G+z8RKS+Wl4elces2FYXAC+v4xp2ijE5K5XSyfzDL80i0NUVnV2JikxL/jVODX
+        tODx81JEyFwkmpfIqW7qhFeqFD87lY2DMiPWhRJjOZ6J+/3z8GviLt1FWr4nzufigbM5SMqowp2nc3Dt
+        zkTccUyER/xyccs+Ph7xzcPXiPz/KjDiQFUn7iLXNlW349HjItx/Mht3eWbjwYBCbIiV4Rek5bn3tBj3
+        HOJ/ta6YnRWF1QHPIy7hZSSeeBbi0JfgeeZ5oG1xKwrHx8cQF3cOPJ8jKDX04cjW9WgdmFy0i4XZEXgc
+        OIG2DuLSup9GdEwc4sraF+1iMS4V7xzSUvOJi+WJ+IP7UKzuWp6LRdy/MI+TyJbXLH+Y971jGXjGPR3e
+        GZV496wEH8RW4rELpD/in4QNmQ2k4+gaBpKSrYRvkQEBUi18FG2Q1Xfi8wwN3FPKIK5owtHSdsSnysHL
+        rkBQaRt8pfV4LUKOL0T1iCpvwTuBEvjn1OMO3wL89mQejsdJEFWsRnZjH7zTGshLwYBPhFqsiZBBWm3A
+        DReUKNUZ8R4xOFcxkPHGtyCOegUC/2cgFf8D6pxXF73kdmpqEuf2+yPOT4TY0DhUFSZB09KzaAOZnhpH
+        XVUFSlq7wcuogK4oHOOT7GEr9gyEmgj/QhRGZqeQzhdheLgTUUGZyzSQGYxOjKEwp9D5PshT//wQ1+wX
+        4prdKfOwansSrt6VYmkpkkg/JWnecSH9FTt4+P6JHJvy/zYY+XZaZNtukZVU3A15DfgbDcunZTuSzXQW
+        2a+m9+2YQz9Hnyt2Wa4x9LxL9+0087h6p/naFeTzV6nnVeR7N2ZmYtbwrg3QRtBOsQYwkmPHGla6Ge0T
+        GJsCU2FtQGe86UKrWTAdbSZyiZSx0ZompjDGxmOSlpv5kAMz70DB+n0ElD8domXnM2XmMwPGIKeZRWDs
+        8lBj1feNcn7PPFqLflzyz0UK39qC0GHeBSvYrrC8oa+Y87ZedbGMZcXbljgmnHzFV97ZgVWni3D02ZWw
+        NR7rmBWFs+yYnmEwSSodFw1dUcg12TZ39GhqaopzsZTDFuTiiNE0kWXKLo11mNcRH0ff5fSKQka/Kcey
+        O+Nivb6XjxeJi3UoSYHVpwrwYWItTlU24ofbUhDIk9q6AK48zEsr2Bk5Tqs7cUxch12xcgTLmph0/u+I
+        6nBQqsGO4hbEt4+svKz2XCyumXRaSSaaUF7bg+z4JCbgkI3Gcbj7NCL5KjT2DUCnZ+83OGsgE6ZBBHin
+        M0OrXDSOZtIpmiVF8E9Ms2vYiwk1qa7SQvFlhJoES6tx58FUSLQd8MiuwqfRcvwltgyPe4igULKkv3F1
+        A/Etxf4KA9LqjPgspAAnMlXYLWlGVn0XJDVtuOFcGdbKjSsv6xINpEkpQFhoJPYcOIaBZRjI+x/vgb/f
+        eWIgncswkFkYK0XwOnrGbgV0xkAa6yrg6x/EGr6/WAOhJpIcGYTMokqHtBcN5G/vfYYHI2rwQFDpPPzq
+        ggK/JsdfXpAz5/cFks+B5rL/JZ8X0t9PrtGEDgvLXQcKRo9fMrqY9buP+Sxnyuj1+1j0chXQZ/9FcTsz
+        b8CGuo4R1HeNQNc9Sj4PstIU1HUTOvb7rdB1mwifUbt01C1S2+FxSZ5RBzREJm23A5phh3y0hA9dmWiP
+        5iIt4aUlPJ2hDY/jWSYKd/LNGT7m4OMUGa7dzcNHIUV4JlSCRz1F+GuIBPedyMe/48ps6OlE1i0eItty
+        V8AXCdiXWoF/XsjAqnXRWLU+lpnYZEJNNpDzDTHm8qO5lolFF5B5IeyEuzNJEvKlkBVJ0dPZBGFmPuuE
+        oN1w95kphEQJoSwWIq9Yh2xRMjr62EPMmbfxDMdE4cwQgkMT0dpcBn5uGVKS+UxfhGuCT21nolCYGgmj
+        vgPZ5I2fL4pFeU0XJx8aauJo4g/jPajRtSMzNhjtxA9dVrj7M+vj8cacUJP1/AYEaoz43S4etvM1l5eL
+        RZAlqcXh7Hr4lhvgKdFic2Y9vEp0ECl0eDO1DhHlbXgjuAY/cv+K5ze+BBerWBSNQ95x0FTXoqWpCRkZ
+        6UtaUZgel8TcJ6+oR29bI+FlXLyLNQv0NDdCWSCB/85jECgq0D7KntnEbqjJ1DT6WppIxR8nhl+MmQkT
+        qnUdy+6DNOsroJGrkS1gX51o42JxtSAfJsvwTWIMO9Or8VpkEdOC3HJUhD/5F+JfUcWXXwuSpsRzHtn4
+        e3QJvnYkHy9GS/HomRxsiJLjn6RFXJ9aih8dFeBuD9tn4RJw0ILoGjtQkitERa0KhcUy1lAK+y3INC6c
+        C0BmmB8yZdUQ8CPRO8i+sMhuCzI9iBOe59Gkb4Gsph7JiYkY4Vh85agFiY8OQyvhEx6bhLSwsyip0S2v
+        BZnoR4IwDzmJ4ehwtgWhfZDfRFTb+Ly/PG/tgygu9kHo8VeBCovPPp/+PuLL/yHGlo8rwNp3sn6+95yM
+        yctrvbbS8jmD++32QYah7SS+OtN/IP0QDp+d+vt2+yCMv0/u7zExfj1nH8Rh/2OY6QtRf7++i9vfp7IU
+        OuiDUD51nSNM38heH6TUyT6IVUfn+iBJ3C5WkKQad7qlIja7BlsE1fgwsgQHirTYE6mBV3795eNiEV2u
+        OleOr+1Mws37U5kAzLCyVnjlVOJb7gLc71uI75DjbW4CfG9/Gv7HPf3S3I8rwY6LBVM7CirrcXr3LqTy
+        M3Dcy595qy7WxRo1KnEmRgT3NVtQ3cLuzjgzimVsqsX5c0HISw5EULJiyaNYVK+dx/yhq5LCff82Vp0W
+        42JRmHp0iErKsDvPM8/F4jKQ1Xv5+BupLB4ppfiHZwE283XwrTTg8wg5EuvabH9AVzaQs6W4fncSQorV
+        ePMkqQD8MqxJa8Jr4TKUV3ZiT04DPgisxOeiBuzPqmWMacXlXoyB0MhXFQ0xN8HP8wIqS5aW9ifvTAxy
+        zgUyCRIU9folriicxkh/D9zd92F6agwXfIOXbCAqQRGUcjnahvQQFndyZllZzDBvelIUjp8N5zQ2bgNZ
+        OHNrqVzzZtIvXmObSXfl3LxzOt3OdMBXWlbWmXRzbl6uH3PKUmnNM+rslbfWidy8Vj7Lm0mfniMPN53j
+        eRDHPMwvCOdn0q3Pyhm6+bFYu1LmgcYnXbUrGdb4qyusMUiWGCZbeh6+d0JsU/7VwxJ3RWOlnKHfnYIr
+        rTrtXmnZuUFl3JCZianWd+dhUm+OwZo1rsEMjbkix2nDGqBtjQ3tVN0TGOeIxaIxSvQ4TQ3IEgM1yxFH
+        ZS8Wi+EzNW1OzEYxbT4fZ4nrsheLRb9/YnrGIoOZB5c8zsZi0ZQ/07OzZv2m2eO62GOx2KJ5jwqZaN7j
+        xB1521eC14LqUNmgx7UHRfDPcOFhXrcsyPU92BZfjL0F9TgUK4WPtAn/8pFic0ETvrc3CX+PKMfHwloE
+        qlrwvGcy7ouuwcFKI4TqBuzM1GB9QjE8ZVoc4VfCPbUWW5IU5A2+wkO/WzmieVvfQlHY35Dg/xxKclZD
+        mfkqpuvfQLTfy4De+WjerhYJ88YOSahEY3k2eF6RSE3MZHJtLaYFUVVWo7FZBa+AICR4ekBU2UVk8cKI
+        yXao114LMjFQg9qGHsReiEFzRwNi/UOI29eMIRZ5nHWxlFGRSCyuhvfO7WgfXWZmRd+scvyvWxpyVAYc
+        TFdiDZ9UqNI6vB0phbe00TXC3dngLkZqVSviRXWMQRRW65FX34tVB/Pxz+wm/OFMNs6Wt+CzzAb8M1oB
+        nwQpXhNo8S5xX5IFCuQbu/BBhAZpNQacztMjXWfEjgSFeajVFQ1E9zpOuT+LuAsvQJr+GqI8n4Gm4FUk
+        +jznfLg7easW8r2gH57BZxuPIIyXDFFyFA4cZQ/x4DQQykfIg6AgH7HREThzYD+ihTWIi7+A/sHRRRlI
+        S1UaUpLTcOq4F5r7+nHe0xNeZyPNrdISDURdWYTgcCGy0y4gv5h99ywbA3l+zae450IZs8JuLn7sTVfp
+        SfFDr0L85EwRs5KQnv/Up4i5tpCernh7OKzCpvyrxj1+ErPMjJyFzPmPvM0rIN/O1uE+fynusOhDdfmJ
+        j3m13h2E5keW1ZK0nN7zkzOFzOc7yOe7z66sXnR15+7CYuJGfTEfxm1A13agkxzbCDrJefs25vNCWlP9
+        +2jqmbi4InAu9AOTzAq/9uEpGAcn0No3TjrH7LSNLGVWtPabV+xRHnRVop5UXOPg5LyViHNXJNIVhWx8
+        Wsj36wfGmRWJTd3DhI/1nIWWWVHYzynTRdkIT8PAGAyDU8wqREf0UQlJ3GvSnw3Jw9U7EvGcTw5uOZSF
+        Ow8k4zdnxLjjRDaeDii4vNaku4nweHAJaRnjzVlMaHgJE3JiyWhCj8y675hL566GTbH4PKfZvJ5hAVoa
+        tVBU6VEql0BVq4eiQn1pbccc1LTZW5M+i7GBBuQraqEsL0ffEPv6bwpHa9I1qnKMD7VCIpOjMFfC9EO4
+        Jvg0HBOFDCZ6IM4vRZdRgwqlmnMdubNr0ulfvaYGxWVKu2vznQo1sWY1OZxSRtwTMdZGyBCk1uP+LQnY
+        JKpx3T7IQliGeVetj8IG0sLltBqwN1WJrHYTLpDKcDizBXH1BvxuTwo+OF+Bc2Va83qXlZabzcWyM8wr
+        kyoxO9qP9DQREnlJSxrmVSYKkHjcHynpGahrWVq4O5PVxKhmvj/RJwZ95GgcG2eldTSK1VJSjsxkIej8
+        vyxftuzMiuaNhiYglZY7Pw/ClRfrQG4FbtqTjEBZEx4KlmJTbCG+55mD96PL8FpEiSWEY849LpsXKwFX
+        npZgHV+LF0mnO7y8AafFakSp2vF73zzS36jA27EKeKdXYbV3FdwUdcw9Ky/3AmyhC6bY82KJw/0QIZLg
+        vPdxJCUlITY+jXlDLiYvFmM4w3ok5ZUiJCiUdIx7l5wXKzncC+pqCcJDExDgG4zxpeTForymh0h/KA2y
+        rEQIMrMubt6z9LxYMyjMyGZkdIaWyYtFMyv+Lk7DZBmcC2sWxUfmZFOk578Nv3RtLmhmxScS1TblrgRr
+        tsgHQyvwEJF3peVZrOx2MyvOyYrIlRmRZlascSKzoqPsg0xmRQdZCR3JwtCQ73Mqs6KDjJH0mqyh16ls
+        iYxMBueyK4bO28RzgVvC5OY9yEecuBb3nivHS15SlNQb8feIIsSQt6/NsKerulgWfeiKQs/Cenxnn3l9
+        N11bfvUOHn7ulcesPb96p3W9uQu6V45crFEDCsrrEei7H6mJuTgTmXAxqHAxLtZknxZ+cZkoFQfC0GU7
+        6uSMi0XR32HA0YAgCI96ICW/lpPO4UQh6TeFX/BHTWUufC7Ecsq+mJl0mps3czG5eTmzu29PwiukD3KU
+        X45V7jl41z8b95wpxrO+fJxKKLL9AV3dQHzk+O7+FBwuqUdIVRf+GFSCrMpm7CvQw40nR7JIC/8M5eVp
+        IORPXd8IZbYEirJa6JtUS+qD5JyKRH5gCGYndTB2DjOz8os3kFnoG9QY7GtgXJ9Q36QlG4ipqx4bPt8A
+        3RAg50czhrAcA6F/tapFZnfn2h+EZlCkvvgtNMBvVxKu25uCWw6k4GqLMVwe+4PMAY0IIPrcSPS4aR8f
+        VxFDuJG0Jt8knfNrd/Hwrb188tn2ObgMaLh7LntmRfpvYHgcAwNDGDWNY2h4jCOzosnu6M3M1BjhMYxx
+        0xBME0vfH2R6ehKDg4MYHR7A6Bg3H4ejWLOzmJycxPjYCIZHRu3y6Rhwcn+QkSGMLWZ/kKff+Qg3HhHj
+        Rrf0ebhyTyqzy9KVe1OZ3aPoDlO07JvknJYtpL/24g5T6SsOKu9Ve9NwvQO6ay16XXtQyGRk+fG+S3pd
+        d3Dl9Zin0wEBNmXnYKT5IxuY9B9jovVjTLV/gnFynCHH4SZbulHNC6CbwXLt9jRh2X1pnFR+OoPOvVMT
+        9w5Tg6ZJTMG8wxQN7aAJJLh2tRom5XT+wt4OU3T3rAm6GJCeT7DzMe8wNeJwxyhmNy6i39jUjFO0vBQ+
+        t4u1yT8Hj7sLcF5UjStOSrAzSQmeogarozU4XNDi0i7W/SFyRBfW4W8+JdicqcQXghJsFZTi4XMK7BCW
+        489+Ijx8Nh83eRVib6oUTwUpcDi9Eu9FqPGHc7nYlK7ArkwdnrlQgt3CClxJW8yV1otrJp1A5PNXFBe+
+        Bkno3yDLWI3MiBcWnTiOvqnrNIVo1KoQHC5GdGgc66y1IxdrdnYS8cEhqFGIcMg7Bht27scEqdhs7pqj
+        xHFNDTLEnQqFV2wyQtx3oVA3vCwXi7p/OmU+0rOVy++DHE4oxsNuaRAqW3H7eRmiJHR4VIUTcTXwLWpy
+        aQN5JEKO2z+JwAZFNzxya/Hw5gQ8siUBPtIe+Elq8SlPiyeJkfzqRCYCi/V4N6cFiY09+MOpQuys6oRq
+        cBiFLYN4KqEOoTI1rtvs2gZSFP4i0qNfhsjvOVQVrIYw5lVA//biUo+OmeC2+yQKkgKRUqjE2RMn0TXM
+        3lG3ayBjA4iK5SE2IRSeB72QIhajaWTxm3jSvzPuHihT14KfnIggr5NIyqtfnoEQ3RVlJcjMynU+syKz
+        T/oZKW4/mTsPN3tk4/snc3Dj4UzcdkyMm49k46bDWbj1eDZzvpD+u8fF+GVAiU35SuC7RN7vncrFd45m
+        4X+OZuM2Ukbx7WNZ+BaR/QNxLW4/KsYPCM0txKgp3Y0eWbjtRA5uJjrecCiT6JpJdLLoemrldaKR0tvz
+        CjBrWGcDdKw3o3sD0EY+t9vSUExo30D7oGWP8IUgvtcg8WP6iE/Ub5rCAPGxmP3NWWjbrPuks6B9cJzZ
+        G71ndIbZ55zyYfZmZ6HttOzdzsqHYIDI0muaZvZJ7yfnPSPjrLRUTjqfwqrXAvQSn61ndJJT/rlg9kln
+        OunbbUNNfumZgSu2JeCXR4ivvleAm/cm45cnRcS35+O7B23paajJt1w11MSKXXz8/HgG0+FlQMNMaNjJ
+        Rsv5Ssu3xFAT6goZ9B3oJDWqzdhhTtPJQlfTNmHurs/OsIB2GPqhrtOhpbmZdK7HOOguddC5rtO/juYa
+        DHYaMEy33+WkM3fSOa/PmqBS1TGB89qGZrt8qIFz85kjl74JPQP2vvMS7IaaPLcpAa+7C3GEDvO6ieGd
+        qcXpdBncxS34d0zh5RNqMheexXDLqEZ+kxH/ilHgQIURBa3tiCusQai8fuXlc+RicQzz0p9eyItFUa4Y
+        Z0MSMMThRjncxJPcF3c2BTGR0ahfRuK4ns5W5JdJ4fH5FlS3cg/jOpwHoRlWhFlQqEqRnpy27HkQ+len
+        0aOsqHQJmRUXrGDzK6nBrftTIKxtx2ORcpzOrEacugmrzytwvKDm8ltRSHFKijtJ67crQYF/JyrhqzDg
+        vXApEqR6eBbqVl4+hysK2Q2EDuGGnz8LibwOzfUNnJ1rxkA45hIoTLo8HDsagNOn/aDVs2814IyB0O3T
+        Rvq0yIg+giwZd1i5wzXp/fXYceAUo1+BON9OxXdyRSGhTIsJRl6ZxjGt1UBe+mAt/pioxWNRVcvCo5GV
+        eDqpbtl8/lv4fXQ1fu8CciwVv4uswnZZB7NRzFKRo+5c1v1WKFv7GXwZvL4MmWjoi1TX86XIMxch80JN
+        FryxzslV+M4BPoKIS3KvfxneCS6At6wZn8bJcCK28PJoQXYmI7XKgAPxhXgzKp/0O+JhzZN18XxHCv58
+        SmiZ/Eyw+PtxeNw9feXld7IFmSYv0dSEGAglFUiPD2WdRXemBaFICz4FXqmONVTF2Raku6MVXr5nkOvj
+        jbRC7gRtzmwDHRPHg6YiH9kKbj5MC+JkVhOtUoRSda/zLQhXH+T5zYl47WK4ew7e8RXhH/EV5Dr/stnE
+        8ztHMvGXg3ycLzHALbcO/GwlAlMrsEnYiMAsJdYI6rA5S4sY0r86R1zIUHETKurasP5CHl48YdnKwQX0
+        cNQHMYdxEzdEEIdtW7dD3cMeXu4o1IQuua3MEcHDW2g364fDfdLJX1ZoGsaHhxAdlL5kA5kirKo1WpQK
+        8iD5EvogZtnaUVrdzRlGY2MgXKNYPz+Rzrxp7/fMwg0HUvFjt1T80EPAJG24/7jwshnFuu9UJn5yMBU/
+        OCzAnSdF+O7eZGYr628Tna7fl4rb3AX4xbFM3E0M4vZDQvzslAi37E7CPYfTVlz2haNYNLMi1+hMm7EV
+        fQNDmKCjT0z4iS0dTfjGPYplxlB/J4bHJuzSOBrFGh8ZQoPegK62RnT12xldcjSKRScLdRr0EZna23uX
+        P4pFYBrqgqG9mwa8OzeKRedBvu9VhO8dF1/CCTFuPJSJ28j5DR6ZzDzBt0jrcB1Tlo0bj2TPpyegNDRj
+        4cJyV8H1h0S4ySOL0Y3i1qPZF89vO2Y5J3S3uoCsbKAybi7UM3MHbOgbm8EgqddDU0DfCDsNnXOgcwZc
+        PCgGxiYxQOcxhsc5aTos4LreNTyBIcKjf4LKws2nm8hS2txnR54JDFN9TDNErmlOOiorNTR7es19TnSe
+        xxnaeDoPwuViucVK8Ah5u4Znq3Cjlwyb46pQ0tJM3q7pCEsuvixcLCvo9nAnU0vxx2AZnvTMwT8SFXgv
+        uhRvRpfg5fMSfMirxs998vH/Tmdiw7mveO/BL8HFoiEUtWoVwsJDEHXOG6qBpe8Pci62Al4eR1DX2sG5
+        +Y3DYd6GBuw+7YULh3wRLyhbeh9kdhgnD/siNz2WyJXNKc9iQk0qioRIyVQsfwOdrRdy8Uc3AWKLdbjO
+        R4LI0iZ4ZVXhx4fSkJZTictpHoQayM4oOQS6Ptx8SoK30lQQFxtxrqQJ+5J1OCJtgbCxE+Lscrx7IuMy
+        NJAZ6OQCtPYBOelpnP0HZwzE4zQPWQolqnQtS+6DmEwjKJXnoSwrAhEi3ZINZNbUh+wUHmLTUxEZFLX8
+        PsjsLHRNjcgR54IrdN7GQJ555yN862gObnbPmIer9wpwI+mk0wheGkl69d40cp6GG9xIGTlfSH89ofnp
+        mUKbclcBje69hoDqdDXR6WuWiN9r9qVZdEvFVfuJngQrLSsbaETvxvxWDIxOsGKU9NP7iTszOjXLSVPR
+        ao6c5bpOQSNxaeQsjcDloukj6LfDY3BsCuOk3o4QZrQ/w0lHZKHDxVzXqStEo4FHp2iUMbdeVNaGrmG7
+        ellBo3lHJ2ecouUl87nXg9C1H8x6kL0puGpHMq7dmYzvuPGZluL7pMPuyutBriTy3riTZx7KpSEl1o4u
+        E2Iy55wcbzqQhpv2peAamqiBlF13IJXB1y2fL96/0npt4t7+YGx0EAODIxjo7cLomAkDAwNMJ3Qhnd3t
+        Dwi6uvtgGh7AwPAoBvp7OTe+sZ/VZBbDQ/2YmR7H0KgJvR1dmJxZynqQWUaPyckx9A8OYqi/C2PT7LJb
+        O+nOrPHAzCSGhrkztjid1eRF4kK9SlcUppYzKwrP5jTibf8CHIgpxFrikti4Ia7kYh0QIVJUgYMVehRq
+        OhCY34IkQQX2V7ah2qjHkbwa5DR14vZ1MfhUpMbaonZk5DfAV2lAXPsIYo1D4InqcazMCIXBiF/QF8JK
+        6+RgJr1YJoaqVI1o7xAEEHeEzc1y5GIlR8YzI0fiLCWKRXx0do0s2sWiWU2MehWKgk4iOa8EB9dsZ9Zx
+        LNbFovxL8iWMPMKEKOTElyAhsnyZLhZQUFqKstIKJ/orDvogIaW1uP0AH9KGbvw+phRHc5QIkjUx25dt
+        LzW4roGQt+3q1HoEiasQUNaO+NomnC9pR0BxHc4r25CTV4Utgmakadtx3RfR+EykweelbUgR1+NspR7/
+        kbTio6JmJAu1OFlcj8CsGqLbCmdVdGAgfB93nAxPRdi548jNK4Cff9jil9xOT+LDNf9BQtgJRCSVw+f0
+        HjSTF8ViDYQaa4jXLpSWZsHreAT2uXmi07T4cHdamc97HkFCKg9+gZGIOrEd0g72naoWNw8CyEpKnTcQ
+        mtXksfg6JlRkLmj2j4vHCPNxXtkCepp148lEjU35imCOvPbARvtoBEvZSuvDPHMlE2pSZQmtmItqw+Ac
+        mD+z0eVaMoiwXWP4GBfw4KCt5Lh/rjxVhktycfGxZlqxx2cuuPjQLCXFDT12ZZoHO89gLpisJhfzYs0N
+        ayB9j8P5Sty8LxlHE0vxZmoZXoutRmCJGk8F5pFr9ea36tx7aF6sI5krH5KxEESX9yWkxdubjj+SFnHV
+        hjhm887XgiW47bDQsomnBcTPX3WqyLzufqXlXgjSQnNG85K3bXZGKgJCfeF1JtxuqIm9EJLpvnJ4nghG
+        eGAoDJ19nHSOtiQYbGvDhbhEZEScQWHrAGerZe0XcfGh7/t0XgwdNoBfkJ2sJovY/gCmNqRmFS5/mNea
+        WfFQchn5nI3Xzovwc+9iPHaCh7OZ5bYugKu4WAtBdNmp6oKqRouPeBpktrZjW7QM25Mr4V/fjw8iixEm
+        bcYJbSdiSuvw2wuV+IGbC27k6SjUZKIZBWIFzp70Z82A7sjFYio8uS8vV4lOYnD1+jbOiuNomHfCZIJa
+        Vw1JSho8/XK4DcDBMO94dz127DqIhJQkHD/hDbpmZTkuFjWl5KQYXIjg2Q2lmWcgXLl5nwjMYbYreyVE
+        gpfD8nGXdw5eJa3H7e4C8/bJLKEmrpqb977zRYzMf/TLx6thEvxsPx+/8hTj8cBipNU044GTWfhNoAR/
+        9BLjlp3J+KEby4KwlYYl1IRrxKeh1rywqKyq2hxpwkJnDTXh4jE91AyFQo4y4qMPjXBvimkvo4l1VK1U
+        IYOxuRZDk+bQlqVkNaF/Q3395lAavcEuH6dHschfb08PJy+bUazn3/0EPw8oxV2+RfPwg9MFuNOnCLd7
+        FeDHFnzfswA/Ikd6bSH9T70L8WBIuU25K+BnZ8wZ27/vNV9umtX9tlP5+LmvZMVldIQ7iQ5bJEYmA/tC
+        NPeaYCBv0LahaRgHx9E+OMFKR/10mtWc7ZoVnSPTMAxM2qVrtoDremufickSb6CZ4gfGuOnId1CZuL9n
+        FB2jVJ4JtBG9uOjo5jm0z2BPr4u0/ePkWdl/BlZEJyRzu1jeGWX4lVsa4rJr8FSUFOvTtYivbMbGtDqE
+        VrKsvnNhF+uagAr843wmCvKqiCHn4Lfe2XjIJxcP+hXiP4GF+IV3Ln59TIjfnczGrW5ZuGqHC8i9CBcL
+        Ez0oqqhDBj8Q4QFxOB0aw9rXcJhZ0TSIHdvdoSmNR2sH+xCvQxdregYdLVp4HD6G1H17ICrjnpF3HO4+
+        inX/2gFxSizi4jO56RYximXQ5kGi5F4t6XQf5D8nMvC0ezoCxCo8Svzyv4dk4Q/nixFXooJfqf7yCTXZ
+        RrO7l+FwdReiCrU4WdkBr9xm7E+sxuGcFkjqOrFFWIvIrCqkZJTD2N7hev0PRwZCXKtCuRLC8DjIFFVQ
+        VSoWP8xL0KVTYP3Hn6G/vQTaVu5OuqM+SGuzClXF6RgZ6cEFH/6SDYQmsivPFKOoWo4jnpFfQiwWkX2w
+        DmJpg/MGQvco/NqBDHxtD38eaCZCumef+QdKsuxNaN6vkB4X0l+5M4nJgrKw3CWwK9msk1WHuaBlO+fv
+        xbji8rLgaqLDhrxmZm/AhTBZ9vCbwaUkDtZ9BOeCDquOs9w/F/R+mqhtklRGLprRiSlW/laMT81cShwx
+        w82H7ltIk2lzXTdNmudVJqZn7fKZJHyou2ZPr4vfOQ1mjsUZ2kt7FC4c5iW4cof57XslMZArGFh2vCUt
+        h/WaSw3zfmGWmZHxi/nlzK681m0EOO61nl9haXVo2cVzV4CdYV7mzTg1xex5MTE5ydlKOBzmJaD30yRy
+        0xx7cVA43HmWXKM8pqbYE8ZZ4WiY16rX1PQUIxcXzWKGeScZmRaxyy2Xi/XanhS8SFysE2kVTJzVOoGa
+        uCdN+NWOFHin1tq6ACvtYhEZY1XdSKg24osYFXyVTYjMVCGj2gBhdSdC69shamnCfyKy8fSFfNwdIkdM
+        UTM+iixGQUMXXj0twjd2i/GEbxZeiqvAJ+HFiNR1ILm6CfsyVDgiN+AdX4FLulj0Let9/DCKhcnY7+dg
+        ya2dCjHWqUZ8RAL2HzmKzv6hJSavNhtQT1ctEv1yERkq53ahHLhYdClxibyM0ScxOOhLyWpSU1UPhWQR
+        yau5DCS4uAY/PZiKYm0nqXjNeDe6GL+PVGBtXDnOFetcrw+yIRb/CpfjeX4l/MSNcMvW4GReK5LUBC29
+        eMy/HEd1vfiPsBV3e6TgrzFV8C5shKC6DUV0O4ctCfiulxz7FO2Qaokxkcp4TtMGXlY1Xo9WIVJrwBMn
+        hS5pIPSn58VcgIiXhIP7TmF8iQYyMT6KsHPBCLhwFjWNS58HMepqsfu4H+JP70eaqmfJBkL/juz7AqXl
+        VRi0uGvLMRBmHiQiEJmSKudbkBff+wwPRarwm+CyebgvsJQ5/ipQwZz/OqgUDwSZj9Zrc/FrQvd4bI1N
+        +VeFB0PKLsp4/xxQWe8jsj0QTD6T4ytpavzGQverCwqin/k6o4OFhtE5yFx+3xydH1gh3SiovNskddA0
+        ZrCivjkL2uZM6FqyUMdBU6GKh7p9hHFruFDXOQItAZ2f4KKptYDruqZ9mOFR1zmKOjt86HcU1HXblUfb
+        NQpNx7B9mTuGoGjqtUszV786B/ysCI/jWSYKd/LNGT3mYG1qCa7dnYTPQyX4K2k9nvHPxTOhUjx1Wop/
+        RUrNmUHm3rMpFrd4iGz4uBL+wlNh1V4+PoouwarPovBCUiWu/ySSkX0V6QTfQ0PbXUBOVhDZ1mcIAcOb
+        NmgTvQRp9iuQRDyLysJXkZf0N6DNlg7aR82d+dkZG0xOjoPHi0atUAhJZSNSk8PR1WtipZ3bAiwEZkcQ
+        GpqIri4tEpLTwUtMYvoRrLTEOaSTl+zXAEFyGCryKyAoKEERPxQNpllOPswWbCzX5oK6ovICMZR15glX
+        R/RpaXZcrGfWx+MNGmpCs5psSsfHvDIEqfQ4FFuFYyVtrudiOYFPS/XIL9MhVt0Nz4wqRDQMYldqGYIL
+        jAgileIBOmPtAnJyulgcyav7ZatRLHgVBZEvgB/zMgoSXwLaF5fdfZpUiLrCYugrKiEUKdCuUqF7YPHJ
+        qyn//oYa6Em9FZ0LQUZ5JdpGF7+J59QU6cc0NqKuRodCRS7yeZWIDWHvzzjrYjHLAqT5yCmQOe9iXVow
+        NfeNFY/3eFJ8YxcPW4lPv1lAXJDTmbjpSAbuPCTCSxeybd9wtAU57NotyOOk/7Tq00j8m7Qcjx7NwGp+
+        DT6JkOIO32I8G1SI77t4C7KOtiD6N23QVPAS5OJXkBv2HKqzXkZhCjEQoy0dbUFmOcJQJsZNSBRloaI4
+        A4raLvBSeOjsG2SlZSr3DEcox3g/whLS0NGiRIYwj7REyRiZZN9Ex16oCf3jxUdBrpAhO7cIJRkxaB5j
+        l93agjgTZlIkFkFD+pNOL5j6G+mDPBBezfjec3FvgJzxwe89L8cvLfhFQAlzpGUL6X91voTJXriw3BXw
+        v0Ru5miR+74Lcvw5UkmOCqYfstLyOQMq8z6ZBtN96azAoAgzfcSAhrMw3ctOY2yKJ/73KOOzs2MEjT0m
+        NHSbUN85zElHKzXtW3Bd1xIfn+FBoOsasUM3hEJttx15hqDrHkU94WGPD5WVZkexx2c+P27d5iIiLonb
+        xQosqsJdbqlIFKvwD34ZPo2vR0VjG9Yn1SCy6PIKNXFrHMGtpwvhl6XBDw+m4Zb9aXj0rBjfPSnG6345
+        uPVQOr57gI8fuglw3d408/yHq2GrnaQNpFkICfAhlbYRa19fj7EljmJNDaqw+YtjOB8cgdK6pSdt6O9p
+        x7ETJ1HAD0ZQimJZo1iRUfEoF/MRkZT1pWzimRIVjMyiSuddLC4DeWN/Kl5wT8dpYSV+7FmKlwLScbe3
+        BDxxLTbl6S8rA9mh6oKipAIJmh74pOkgrDbgY6EWq8NkKG3oxiahGoGCMiQKSzHcezmGmgC1mmaUFMpg
+        KC9D8/QSDYR01CuivFFJOrLt3ey7OTljILRT3t7RyKwnv+AbsmQDoYYvkRQz+hXGJYBr05vFzINUKTWQ
+        L2YTT1YDsVSsi8e5mHvtcjAQZ3TZxrMtdzVYDMQ6i70Q8yo6B43KaDYQrusL5xm46CYt4OQz7RyfGYvR
+        cvNxTi+rgdjjs5CfM7TmWKy3P8TV+4RMrM9cMCEl1hglK5gwE/PRlj6R2WVqYbmrwBxyYtbJWkZdqTtO
+        5zIxWPTzVbtS8OrZHHJceXkXgub2Wp/XjImpaRtMzpjjsOjRuvBpnIWuxjjAVGw2HhSzwMWtExh+HLRM
+        TBMB27VxGvJC47mmzTwoz0mO75u0GC2XPNMwx4TNWOSa4pCHymvoG+XkMx8zTH4sZ2j5fDsu1rtH0vFX
+        4mJ5C5S4YmciTsraES2rIpUpGduKjJfdMG+Bph9x2l74KHR4O7EG/qpWnC7UIEDSis/CixCQVIXPcnRI
+        Jm6WS7YidlysiYlhpCQVQFMjQqpQjgK5bAnRvNMIC4jAhaM8JMfmwjTaiDot+2y6fRcLqKuRottYgWBB
+        ETq6e9EwtISkDQS5GWKYpqegrCpF1El3FDcscxNPYq0V6hooFBVMvNjSXSxSQfyyK3DvwVQU1LbBT9GI
+        L4S1iC7XYV18JXansVQiFzeQjMwy3HBOjlxNK/YX6fHnsFJEFGsRkt8MQaUeRSWtOJRTh+ys8svOQEqL
+        BDgfmoLuVjniUiuQk522hKwmU1j/8VqUZEVDIG/BwV37oO8eWLSB0BYjLvAImvVV8HI7jU/e3whNO/va
+        EkdZTUJ8TkPAT8Rx/1D4HNgLQVHz8gxkZhY93R3kJSJ2vg/ywppPcW9gOe7xL56HO85IcPfZYvz4TBF+
+        QnCnr4Q5p0eKXyygp6vyHgmvsOHjKviJD5HZT2LWxacId5HzO0jZT8g5oyM5/ynzWbLisrLhbj8ptkra
+        mP3AF6Klbxz6/jFyPoqW3lE095jQ2DVsQyfR9aCJ5X4r2oamGF50taBhcJJZ0cdGR7MYsvE3Yxj6gUnz
+        KsfBCWZlIeXHRktloRvfcPOZYGAYIPoReahubLSUP83QyKXXPBC5W4hsztBGxSdxr0l/MSwf1+xIxIu+
+        YjwUkIv/55uDZ4MleMavCA94ZV1Wa9IZHBDhO7vj8aPdROn1MeYMJuujzdlM1seaz9nW2rsK7KxJ1+uq
+        UFJeB1VVNYaHuiFVlLGuS1e32VuTTjquwx0oyIhHQW4R+odH7a5J586sCNRWKzA+2IICiRzTg60wLWGi
+        kMFEN0RiGcaGu1Dfyj5puag16YRSU1MJTWOL82vSOUNNNphDTZgNdNYl45/hhfhLuAx378nBe3RG+nLq
+        g1CX6YwcPnI1jhd1IKWqARtj5AhuHMTeNCX8iVt1Xt2DqJY213SvHLhY9K+kuBKqiirmXCLKXLSLZd3E
+        MyIwEcr6RlToWjlpHWVW7DSqme9PPR8Hn6gUqNv7l9QHaVUoIeSlYwTjSM9t4Qy/d9bFYka8pgZQVKB0
+        3sW6mBeLBh/OwV5xOW7ck4yzRfXwltbg9z4FeC9BgbvCFdhG/PmF9MyCKY9M23JXwYlC8hZOxRsRKmxJ
+        lePZuGqsjirEj3YJEFBQgWdTa/Bmtnbl5eQCeQGtIwbCvL0XIDfSHyFpuRDzYyHKz0FUHI+poAvprAum
+        2HiYK8w4RmamkMqPQ+/gCCed1TjYrtE/fqQPeVNLERnJZz6bCE82WuuCKa7vwcwwIpJSMdzdCL8gHqfs
+        F4MVOfhcBKEUpieiuFTFzKk4ok+lwYovvr8Wj8ZqmMyIc/FwWIXlqMQjDCoulj2ygNZK/0SC2qbc1fCI
+        RYcHgsvx24iVl2cxcm+TdViyHi7EIGqMg8yQqfXIRpen6WKus/MwQ0XcMApHdPZgloHyMPOyR5dnyfbI
+        KY9xyK5OZppByBp6nZTNed1CY3ncLlaoQoUfHuQjPqsG72dWwkNiQI62ET/eL8I5ntTWBXBlF8uCb5/M
+        xbFcA/7gl8WsU/866Y9cTdeg03NypMuKbVxHV4E9F2vUAHFJLSJDotBl0ME7Mn5JWU3o0ta1G/bA97Qv
+        tMvYJ72/Q48j5wKRzTuPtzbt5aRzZiY9IjAARVkxCE7M5aRbTKhJUngAMqXVTox4ORjmfXl7El4hfZBj
+        qeW46bAMbgWV2Bwtx7fdU3DhMjWQTwo7cPWmaKRqB/F2UiVeCpQgoawdH8XKENw5ZlmbvvJyLtpAyJ+6
+        vgHlsjJUK9XQN6mWlNWkXZWHD9d8gOigQJSoG5doILPQN2gw2NeAiYlx9NlZk+7IQExd9diwbiMy8gtx
+        2CPwS1lyW6tqROliQk3Yw90TcP3eZMb3pXtn3LiPvGHJW5YeaSW6iV67DMPdqezX7UnBN/em4BrSYly9
+        g4dvWlqP63bRShi/8jLaC3fPbSYtA1gxODIO0+gYTOOTGCbn5rD2+ahtN4Ft35BLmMWYyYTR0WFmIo2L
+        ztr/4Lw+TWQYHsbUBPdImFOjWLMzTPIHGtM1NjFhl48z4e5UPxPRbXyCfVSNdRTr6Xc+wg2Hs3H9QcE8
+        XLHbvLPUFXtScQ3dfWk3MaJdfHxzXyquJOc3LKCn5T/xyrfh4xIgetAdpL6+L81G7ssF1+5Pw8YsMUab
+        P7TBlPEjjLZ8hEnDR5jt+Bjj+o8w0/6xDZ1J8zyGxs27R7FhbMa8u9T45DQmyJGm3WGjoztDUbDyGZ9i
+        dqkaHp9hjnSHqGGO7xshxkwzxbPLM2GWYWqGOQ6PTzPhM2y0NA0RnVPh0ssK05Q5pdEETUk3bp+WIimF
+        1Pk/vbHG3ILQbO0XEY+1Z7LwhwNpOCesxLcOp2KP2Iis+kb84IAIAVnaBfQJTFaRm5l5kAQXA50DycdD
+        pzJxLK4cV50oxHZxNV6KKoe7RI0donK8mVSB34fJ8bxvDh46Iyd9kZWWmQWb4vA5s+T2jfloewMpUS/C
+        UPYyqjNfgCTmOXTrXkfU0T8DxgW02t/CPEHCsrUzeetXl6fg/KFwJPGK0FSehMq6tkVvA92tUSNXXg3j
+        cCeOu4VBUqNG3wTHttL2toEmf3s2fo4KRQnOnI9Cc2024jIal7UNdF+XAekZ6ShI5EGqMDqkT+UTuziT
+        KsfhzDocFmnmwTdTA/+sOoQUNeKAsB6R8iZEFjdiv7AWAVI9Di2gPyRS41i21oaPK8AjrxEeRJ9oSQPi
+        JC2ILNIRHVpxWlyPBHkrDot1CKvoINcakFOjZ3RZaZkXgsp0XloHYbnMBnFFxfDj5cObX4gkqRSZFTJE
+        5Rbb0KWXFiC9ugPpVe02SFO24GBwGiKzpPARqhCdrUK6qpOV1h5Ete1wO5eM9NouxGdXIoWUJVe2sdNX
+        tyOp3Mh6TUh+B0F5K4KzapBQrMap8BScTFZw8uErOb5jHs9OJMp14MmaEF/Y5JA+pqgO/x+fdll/wQ6t
+        jwAAAABJRU5ErkJggg==
+</property>
+</report>

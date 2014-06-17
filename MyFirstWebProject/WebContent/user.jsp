@@ -32,12 +32,9 @@
 	%>
 	<br><br>
 	<br><br>
-	<p><button><a href="<%= request.getContextPath( ) + "/frameset?__report=testRapport.rptdesign&sample=my+parameter" %>">Rapport Général <%=currentUser.getGroupe()%></a></button>
-	<br>
-	<form action="CustomReport" method="post">
-		<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
-		<input type="submit" value="Rapport Paramétrable" />
-	</form><br>
+	<p><a href="<%= request.getContextPath( ) + "/frameset?__report=testRapport.rptdesign" %>"><button>Rapport Général <%=currentUser.getGroupe()%></button></a>
+	<br><br>
+	<p><a href="<%= request.getContextPath( ) + "/frameset?__report=testRapportParam.rptdesign" %>"><button>Rapport Paramétrable </button></a>
 	<form action="sendInfoUser" method="post">
 		<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
 		<input type="hidden" name="password" value="<%=currentUser.getPassword()%>">

@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/j2ee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>Portail LLT</display-name>
+	<display-name>PortailLLT</display-name>
 	<servlet>
 		<description>
 		</description>
@@ -374,6 +374,13 @@
 		<servlet-name>EngineServlet</servlet-name>
 		<servlet-class>org.eclipse.birt.report.servlet.BirtEngineServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Upload</display-name>
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>com.llt.ftp.Upload</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ViewerServlet</servlet-name>
@@ -413,6 +420,10 @@
 	<servlet-mapping>
 		<servlet-name>EngineServlet</servlet-name>
 		<url-pattern>/extract</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/Upload</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

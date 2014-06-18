@@ -6,10 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
 
@@ -55,13 +53,9 @@ public class UploadFile extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("-----------DoPost de UploadFile----------");
 
-		String value = "";
 		String filename = "";
 		String type = "";
 		File f = null;
-
-		// Check that we have a file upload request
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
 		MultipartRequest multi = new MultipartRequest(request, ".");
 		Enumeration<String> files = multi.getFileNames();

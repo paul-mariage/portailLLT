@@ -381,6 +381,20 @@
 		<servlet-name>Upload</servlet-name>
 		<servlet-class>com.llt.ftp.Upload</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>FTPserver</display-name>
+		<servlet-name>FTPserver</servlet-name>
+		<servlet-class>com.llt.ftp.FTPserver</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>UploadFile</display-name>
+		<servlet-name>UploadFile</servlet-name>
+		<servlet-class>com.llt.ftp.UploadFile</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ViewerServlet</servlet-name>
@@ -424,6 +438,14 @@
 	<servlet-mapping>
 		<servlet-name>Upload</servlet-name>
 		<url-pattern>/Upload</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FTPserver</servlet-name>
+		<url-pattern>/FTPserver</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadFile</servlet-name>
+		<url-pattern>/UploadFile</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

@@ -4,13 +4,30 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.annotation.MultipartConfig;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
+
 
 /**
  * Servlet implementation class Upload
@@ -45,24 +62,15 @@ public class Upload extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("-----------DoPost de Upload----------");
-		String name = "";
-		String value = "";
-		String filename = "";
-		String type = "";
-		File f = null;
-		
-		try{
-			
-		// On sait que cela va être une requete multipart/form-data
 
-		// On construit la multipartrequest
-		// On ecrit à la racine en imposant une limite à 5Mo
+		String value = "";
+		String name = "";
+
 		System.out.println("CREATION DE LA MULTIPARTREQUEST");
 		MultipartRequest multi = new MultipartRequest(request, ".",
 				5 * 1024 * 1024);
 		System.out.println("MutlipartRequest crée");
-		
-		
+
 		System.out.println("CREATION DE L'ENUM PARAMS");
 		Enumeration params = multi.getParameterNames();
 		while (params.hasMoreElements()) {
@@ -70,26 +78,10 @@ public class Upload extends HttpServlet {
 			value = multi.getParameter(name);
 			System.out.println(name + " = " + value);
 		}
-		System.out.println("CREATION DE L'ENUM FILES");
-		Enumeration<File> files = multi.getFileNames();
-		System.out.println(files.hasMoreElements());
-		while (files.hasMoreElements()) {
-			filename = multi.getFilesystemName(name);
-			type = multi.getContentType(name);
-			f = multi.getFile(name);
 
-			System.out.println("nom du fichier = " + name);
-			System.out.println("type du fichier = " + type);
-			System.out.println("Longeur du fichier = " + f.length());
-		}
-		}
-		catch (Exception e){
-			e.printStackTrace();
-			e.getCause();
-			
-		}
+		
 		System.out.println("Fin de l'upload");
-
+		
 	}
 
 }

@@ -95,6 +95,7 @@ public class UploadFile extends HttpServlet {
 		String monHeure = null;
 		String maMinute = null;
 		String maSeconde = null;
+		String monSite= null;
 
 		try {
 			// Création du flux bufférisé sur un FileReader, immédiatement suivi
@@ -106,32 +107,34 @@ public class UploadFile extends HttpServlet {
 
 			try {
 				String line;
+				line = buff.readLine();
 				// Lecture du fichier ligne par ligne. Cette boucle se termine
 				// quand la méthode retourne la valeur null.
-				String site = buff.readLine();
-				System.out.println("Sur le site "+site);
 				while ((line = buff.readLine()) != null) {
 					if (line.compareTo("")!=0)
 					{
-					StringTokenizer st = new StringTokenizer(line, "*");
+					StringTokenizer st = new StringTokenizer(line, ";");
 					if (st.hasMoreTokens())
-						maDate = new String(st.nextToken());
+						monSite = (new String(st.nextToken())).replace("\"", "");
 					if (st.hasMoreTokens())
-						maVariable = new String(st.nextToken());
+						maDate = (new String(st.nextToken())).replace("\"", "");
+					if (st.hasMoreTokens())
+						maVariable = (new String(st.nextToken())).replace("\"", "");
 					if (st.hasMoreTokens())
 						maValue = new String(st.nextToken());
+					//System.out.println("A "+monSite+" le "+maDate+" ,la variable "+maVariable+" avait la valeur "+maValue);
 
 
 					StringTokenizer st2 = new StringTokenizer(maDate, "/");
 
 					if (st2.hasMoreTokens())
-						monAnnee = new String(st2.nextToken());
+						monJour = new String(st2.nextToken());
 
 					if (st2.hasMoreTokens())
 						monMois = new String(st2.nextToken());
 
 					if (st2.hasMoreTokens())
-						monJour = new String(st2.nextToken());
+						monAnnee = new String(st2.nextToken());
 
 					if (st2.hasMoreTokens())
 						monHeure = new String(st2.nextToken());
@@ -144,8 +147,10 @@ public class UploadFile extends HttpServlet {
 
 
 					
-					Releve monReleve = new Releve(site, monAnnee, monMois, monJour, monHeure, maMinute, maSeconde,maVariable,Float.parseFloat(maValue));
+					Releve monReleve = new Releve(monSite, monAnnee, monMois, monJour, monHeure, maMinute, maSeconde,maVariable,Float.parseFloat(maValue));
 					TraiterReleve(monReleve);
+					//System.out.println(monReleve.toString());
+					
 				}
 				}
 			} finally {

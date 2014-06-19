@@ -5,10 +5,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
@@ -18,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.llt.beans.Group;
 import com.llt.beans.Releve;
 import com.mysql.jdbc.Driver;
 import com.oreilly.servlet.MultipartRequest;
@@ -27,6 +33,7 @@ import com.oreilly.servlet.MultipartRequest;
  */
 public class UploadFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	List<String> SiteList = new ArrayList<String>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -73,7 +80,13 @@ public class UploadFile extends HttpServlet {
 			System.out.println("type du fichier = " + type);
 			System.out.println("Longeur du fichier = " + f.length());
 			System.out.println(f.getAbsolutePath());
-			ParseFile(f);
+			try {
+				System.out.println("ParseFile");
+				ParseFile(f);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			f.delete();
 			System.out.println("Fichier Supprimé!");
 		}
@@ -84,7 +97,7 @@ public class UploadFile extends HttpServlet {
 
 	}
 
-	public void ParseFile(File f) {
+	public void ParseFile(File f) throws SQLException {
 		System.out.println("Parsing du fichier!");
 		String maDate = "";
 		String maVariable = "";
@@ -95,7 +108,7 @@ public class UploadFile extends HttpServlet {
 		String monHeure = null;
 		String maMinute = null;
 		String maSeconde = null;
-		String monSite= null;
+		String monSite = null;
 
 		try {
 			// Création du flux bufférisé sur un FileReader, immédiatement suivi
@@ -107,51 +120,55 @@ public class UploadFile extends HttpServlet {
 
 			try {
 				String line;
-				line = buff.readLine();
+				monSite = buff.readLine().replace("\"","");
+				System.out.println("La premiere ligne : -"+monSite+"-");
+				
+				existeSite(monSite);
+				System.out.println("Fin existeSchema");
 				// Lecture du fichier ligne par ligne. Cette boucle se termine
 				// quand la méthode retourne la valeur null.
+				
 				while ((line = buff.readLine()) != null) {
-					if (line.compareTo("")!=0)
-					{
-					StringTokenizer st = new StringTokenizer(line, ";");
-					if (st.hasMoreTokens())
-						monSite = (new String(st.nextToken())).replace("\"", "");
-					if (st.hasMoreTokens())
-						maDate = (new String(st.nextToken())).replace("\"", "");
-					if (st.hasMoreTokens())
-						maVariable = (new String(st.nextToken())).replace("\"", "");
-					if (st.hasMoreTokens())
-						maValue = new String(st.nextToken());
-					//System.out.println("A "+monSite+" le "+maDate+" ,la variable "+maVariable+" avait la valeur "+maValue);
+					if (line.compareTo("") != 0) {
+						StringTokenizer st = new StringTokenizer(line, ";");
+						if (st.hasMoreTokens())
+							maDate = (new String(st.nextToken())).replace("\"",
+									"");
+						if (st.hasMoreTokens())
+							maVariable = (new String(st.nextToken())).replace(
+									"\"", "");
+						if (st.hasMoreTokens())
+							maValue = new String(st.nextToken());
+						// System.out.println("A "+monSite+" le "+maDate+" ,la variable "+maVariable+" avait la valeur "+maValue);
 
+						StringTokenizer st2 = new StringTokenizer(maDate, "/");
 
-					StringTokenizer st2 = new StringTokenizer(maDate, "/");
+						if (st2.hasMoreTokens())
+							monJour = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						monJour = new String(st2.nextToken());
+						if (st2.hasMoreTokens())
+							monMois = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						monMois = new String(st2.nextToken());
+						if (st2.hasMoreTokens())
+							monAnnee = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						monAnnee = new String(st2.nextToken());
+						if (st2.hasMoreTokens())
+							monHeure = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						monHeure = new String(st2.nextToken());
+						if (st2.hasMoreTokens())
+							maMinute = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						maMinute = new String(st2.nextToken());
+						if (st2.hasMoreTokens())
+							maSeconde = new String(st2.nextToken());
 
-					if (st2.hasMoreTokens())
-						maSeconde = new String(st2.nextToken());
+						Releve monReleve = new Releve(monSite, monAnnee,
+								monMois, monJour, monHeure, maMinute,
+								maSeconde, maVariable,
+								Float.parseFloat(maValue));
+						TraiterReleve(monReleve);
+						// System.out.println(monReleve.toString());
 
-
-					
-					Releve monReleve = new Releve(monSite, monAnnee, monMois, monJour, monHeure, maMinute, maSeconde,maVariable,Float.parseFloat(maValue));
-					TraiterReleve(monReleve);
-					//System.out.println(monReleve.toString());
-					
-				}
+					}
 				}
 			} finally {
 				// dans tous les cas, on ferme nos flux
@@ -165,9 +182,10 @@ public class UploadFile extends HttpServlet {
 	}
 
 	private void TraiterReleve(Releve monReleve) {
+
 		
 		/* Connexion à la base de données */
-		String url = "jdbc:mysql://localhost:8082/"+monReleve.getSite();
+		String url = "jdbc:mysql://localhost:8082/" + monReleve.getSite();
 		String utilisateur = "root";
 		String motDePasse = "root";
 		Connection connexion = null;
@@ -186,13 +204,26 @@ public class UploadFile extends HttpServlet {
 			// Création du statement
 			stmt = connexion.createStatement();
 			
-			String date = monReleve.getAnnee()+"-"+monReleve.getMois()+"-"+monReleve.getJour()+" "+monReleve.getHeure()+":"+monReleve.getMinute()+":"+monReleve.getSeconde();
 			
-			System.out.println("Requete : INSERT INTO "+monReleve.getNomVariable()+" (DateReleve,Value) VALUES ('" + date + "','"
-					+ monReleve.getValue()+"');");
+			if (!existeTable(connexion,monReleve.getNomVariable()))
+			{
+				stmt.executeUpdate("CREATE TABLE `"+monReleve.getSite()+"`.`"+monReleve.getNomVariable()+"` (`numReleve` INT UNIQUE NOT NULL AUTO_INCREMENT,`DateReleve` DATETIME NULL,`Value` DECIMAL NULL,PRIMARY KEY (`numReleve`));");
+				
+			}
+
+			String date = monReleve.getAnnee() + "-" + monReleve.getMois()
+					+ "-" + monReleve.getJour() + " " + monReleve.getHeure()
+					+ ":" + monReleve.getMinute() + ":"
+					+ monReleve.getSeconde();
+
+			System.out.println("Requete : INSERT INTO "
+					+ monReleve.getNomVariable()
+					+ " (DateReleve,Value) VALUES ('" + date + "','"
+					+ monReleve.getValue() + "');");
 			// Récupération des utilisateurs
-			stmt.executeUpdate("INSERT INTO "+monReleve.getNomVariable()+" (DateReleve,Value) VALUES ('" + date + "','"
-					+ monReleve.getValue()+"');");
+			stmt.executeUpdate("INSERT INTO " + monReleve.getNomVariable()
+					+ " (DateReleve,Value) VALUES ('" + date + "','"
+					+ monReleve.getValue() + "');");
 
 		} catch (SQLException e) {
 			/* Gérer les éventuelles erreurs ici */
@@ -231,6 +262,51 @@ public class UploadFile extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-		
+
 	}
+
+	public boolean existeTable(Connection connection, String nomTable)
+			throws SQLException {
+		boolean existe;
+		DatabaseMetaData dmd = connection.getMetaData();
+		ResultSet tables = dmd.getTables(connection.getCatalog(), null,
+				nomTable, null);
+		existe = tables.next();
+		tables.close();
+		return existe;
+	}
+	
+	public void existeSite(String nomSite)
+			throws SQLException {
+		boolean existe = false ;
+		Iterator<String> it = SiteList.iterator();
+		while (it.hasNext()) {
+			existe = (it.next().toString().compareTo(nomSite)==0);
+		}
+		
+		if(!existe)
+		{
+		SiteList.add(nomSite);
+		String url = "jdbc:mysql://localhost:8082/";
+		String utilisateur = "root";
+		String motDePasse = "root";
+		String tableSchema = "";
+		Connection connexion = DriverManager.getConnection(url, utilisateur,
+				motDePasse);
+		
+		
+		DatabaseMetaData dmd = connexion.getMetaData();
+		Statement stmt = connexion.createStatement();
+		
+
+			System.out.println("Creation du schema");
+			stmt.executeUpdate("CREATE SCHEMA `"+nomSite+"`");
+
+			connexion.close();
+			stmt.close();
+		}
+
+
+	}
+	
 }

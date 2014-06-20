@@ -50,9 +50,9 @@ public class Upload extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String test = request.getParameter("Test");
-
-		System.out.println("test GET : " + test);
+		System.out.println("Tentative d'accès direct à la servlet Upload");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux et Lotz- Création d'un utilisateur</title>
+<title>Outil de reporting Leroux et Lotz - Création d'un utilisateur</title>
 </head>
 <body>
 	<img src="image/logo-llt.png" align="left" height="200" />

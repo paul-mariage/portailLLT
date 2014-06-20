@@ -49,7 +49,9 @@ public class UploadFile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Tentative d'accès direct à la servlet UploadFile");
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request,
+				response);
 	}
 
 	/**
@@ -80,13 +82,8 @@ public class UploadFile extends HttpServlet {
 			System.out.println("type du fichier = " + type);
 			System.out.println("Longeur du fichier = " + f.length());
 			System.out.println(f.getAbsolutePath());
-			try {
 				System.out.println("ParseFile");
 				ParseFile(f);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			f.delete();
 			System.out.println("Fichier Supprimé!");
 		}
@@ -97,7 +94,7 @@ public class UploadFile extends HttpServlet {
 
 	}
 
-	public void ParseFile(File f) throws SQLException {
+	public void ParseFile(File f) {
 		System.out.println("Parsing du fichier!");
 		String maDate = "";
 		String maVariable = "";
@@ -123,7 +120,12 @@ public class UploadFile extends HttpServlet {
 				monSite = buff.readLine().replace("\"","");
 				System.out.println("La premiere ligne : -"+monSite+"-");
 				
-				existeSite(monSite);
+				try {
+					existeSite(monSite);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Le schéma existe déja!");
+				}
 				System.out.println("Fin existeSchema");
 				// Lecture du fichier ligne par ligne. Cette boucle se termine
 				// quand la méthode retourne la valeur null.

@@ -16,7 +16,7 @@
 	<br><br>
 	<br><br><center>
 	Ce compte n'existe pas.<br>
-	<a href="createUser.jsp"><button>Créer un compte</button> </a>
+	<a href="createUser.jsp"><button>Créer un compte</button></a>
 	<button onClick="history.back()">Retour</button> 
 
 

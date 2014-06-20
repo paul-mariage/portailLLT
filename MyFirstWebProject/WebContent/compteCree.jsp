@@ -15,7 +15,10 @@
 	<h1 style="FONT-SIZE: xx-large" align=center ><b>Compté crée!</b></h1>
 	<br><br>
 	<br><br><center>
-	<%
+<% if(request.getSession().getAttribute("user") == null){
+		out.print("Vous n'êtes pas connecté. Cliquez <a href=\"home.jsp\">ici</a> pour vous authentifier");
+		
+	} else { 
 			User currentUser = (User) request.getSession().getAttribute("user");
 			out.print("Votre compte a bien été créer.");
 			out.print("<br />");
@@ -27,7 +30,7 @@
 			out.print(String.format("Votre email : %s<br>", currentUser.getEmail()));
 			out.print("Un email a été envoyé à l'administrateur pour qu'il valide votre compte");
 			out.print("<p><a href=\"LogoutServlet\">Retour Accueil</a></p>");
-
+	}
 	%>
 	</center>
 </body>

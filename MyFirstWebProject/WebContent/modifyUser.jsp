@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Outil de reporting Leroux et Lotz- Création d'un utilisateur</title>
+<title>Outil de reporting Leroux et Lotz- Modification d'un utilisateur</title>
 </head>
 <%@page import="com.llt.beans.User" %>
 <body>
@@ -14,10 +14,14 @@
 	<br><br>
 	<br><br>
 	<center><h3>Formulaire</h3></center>
-	
+		<div><center>
+	<% if(request.getSession().getAttribute("user") == null){
+		out.print("Vous n'êtes pas connecté. Cliquez <a href=\"home.jsp\">ici</a> pour vous authentifier");
+		
+	} else { %>
 	<% User currentUser = (User) request.getSession().getAttribute("user");%>
 	
-	<div><center>
+
 		<form action="updateUser" method="post">
 			<input type="hidden" name="currentlogin" value="<%=currentUser.getLogin()%>">
 			<input type="hidden" name=groupe value="<%=currentUser.getGroupe()%>">
@@ -30,7 +34,8 @@
 			<input type="submit" value="Modifier mes infos" />
 		</form><br>
 		<button onClick="history.back()">Retour</button>
-		</center>
+	<%} %>
+			</center>
 	</div>
 </body>
 </html>

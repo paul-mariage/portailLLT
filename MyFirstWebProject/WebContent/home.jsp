@@ -20,7 +20,9 @@
 			Password : <input type="password" name="password" />
 			<input type="submit" value="Connexion" />
 		</form><br />
-		<a href="createUser.jsp"><button>Créer un compte</button> </a>
+		<a href="recoverLogin.jsp">Login oublié</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="recoverPassword.jsp">Mot de passe oublié</a><br/><br/>
+		<a href="createUser.jsp"><button>Créer un compte</button></a>
 	</div></center>
 
 </body>

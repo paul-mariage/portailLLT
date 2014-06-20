@@ -395,6 +395,13 @@
 		<servlet-name>UploadFile</servlet-name>
 		<servlet-class>com.llt.ftp.UploadFile</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>recoverInformation</display-name>
+		<servlet-name>recoverInformation</servlet-name>
+		<servlet-class>com.llt.servlets.recoverInformation</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ViewerServlet</servlet-name>
@@ -446,6 +453,10 @@
 	<servlet-mapping>
 		<servlet-name>UploadFile</servlet-name>
 		<url-pattern>/UploadFile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>recoverInformation</servlet-name>
+		<url-pattern>/recoverInformation</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

@@ -99,13 +99,13 @@ public class recoverInformation extends HttpServlet {
 				{
 					if ((getUsers.getString("login").compareTo(login)==0)&&(getUsers.getString("email").compareTo(email)==0))
 					{
-						envoyerMailSMTP(new User(login,getUsers.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),email,"invite",false),champ, getUsers.getString("password"), true);
+						envoyerMailSMTP(new User(login,getUsers.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),email,"invite",false),champ, getUsers.getString("password"), false);
 					}
 				}
 				else {
 					if (getUsers.getString("email").compareTo(email)==0)
 					{
-						envoyerMailSMTP(new User(getUsers.getString("login"),getUsers.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),email,"invite",false),champ, getUsers.getString("login"), true);
+						envoyerMailSMTP(new User(getUsers.getString("login"),getUsers.getString("password"),getUsers.getString("nom"),getUsers.getString("prenom"),email,"invite",false),champ, getUsers.getString("login"), false);
 					}
 				}
 
@@ -162,9 +162,13 @@ public class recoverInformation extends HttpServlet {
 					System.out.println("Erreur SQLExeption 4");
 				}
 		}
-
-		request.getRequestDispatcher("ShowUsers.jsp")
-				.forward(request, response);
+		request.getSession().setAttribute("user", new User());
+		if (champ.compareTo("login")==0)
+		{
+			request.getRequestDispatcher("loginEnvoye.jsp").forward(request, response);
+		}
+		else request.getRequestDispatcher("mdpEnvoye.jsp").forward(request, response);
+				
 	}
 
 	public static boolean envoyerMailSMTP(User user,String champ, String info,boolean debug) {

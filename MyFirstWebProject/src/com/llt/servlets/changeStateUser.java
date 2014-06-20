@@ -104,7 +104,7 @@ public class changeStateUser extends HttpServlet {
 					+ "' WHERE login='" + login + "';");
 			
 			//Envoi du mail disant que le compte est activé
-			envoyerMailSMTP(new User(login, "", nom, prenom, email, "invite", autorise),true);
+			envoyerMailSMTP(new User(login, "", nom, prenom, email, "invite", autorise),false);
 
 			
 			System.out.println("Requete : SELECT * FROM user where nomGroup='"+groupe+"';");

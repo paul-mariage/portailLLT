@@ -67,6 +67,9 @@
                	<% if (currentUser.isAllowed()){ %>
                			<TD> <FORM action="changeStateUser" method="post">
        						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="nom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="prenom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="email" value="<%=currentUser.getEmail()%>">
        						<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
        						<input type="hidden" name="allowed" value="0">
         					<center><INPUT TYPE="submit" VALUE="Désactiver"></center>
@@ -74,6 +77,9 @@
     			<%} else { %>
     					<TD> <FORM action="changeStateUser" method="post">
        						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="nom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="prenom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="email" value="<%=currentUser.getEmail()%>">
        						<input type="hidden" name="groupe" value="<%=currentUser.getGroupe()%>">
        						<input type="hidden" name="allowed" value="1">
         					<center><INPUT TYPE="submit" VALUE="Activer"></center>
@@ -81,6 +87,9 @@
             	<% } %>
                 <TD> <FORM action="deleteUser" method="post">
        						<input type="hidden" name="login" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="nom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="prenom" value="<%=currentUser.getLogin()%>">
+       						<input type="hidden" name="email" value="<%=currentUser.getEmail()%>">
         					<center><INPUT TYPE="submit" VALUE="Delete"></center>
     					</FORM></TD>
             </TR>

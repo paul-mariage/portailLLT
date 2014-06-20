@@ -45,7 +45,7 @@
 		<input type="submit" value="Modifier mes infos" />
 	</form><br><br>
 	<form action="LogoutServlet" method="get">
-		<input type="submit" value="Déconnection" />
+		<input type="submit" value="Déconnexion" />
 	</form>
 </center>
 <%}%>

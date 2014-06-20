@@ -7,9 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +64,9 @@ public class changeStateUser extends HttpServlet {
 
 		//On récupère le login, le groupe et l'autorisation de l'utilisateur
 		String login = request.getParameter("login");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
 		String groupe = request.getParameter("groupe");
 		String allowed = request.getParameter("allowed");
 		
@@ -71,6 +82,7 @@ public class changeStateUser extends HttpServlet {
 		List<User> listeUser = new ArrayList<User>();
 		ResultSet getGroups = null;
 		List<Group> listeGroup = new ArrayList<Group>();
+		boolean autorise = (allowed.compareTo("true")==0);
 
 		try {
 
@@ -92,7 +104,7 @@ public class changeStateUser extends HttpServlet {
 					+ "' WHERE login='" + login + "';");
 			
 			//Envoi du mail disant que le compte est activé
-			envoyerMailSMTP(true);
+			envoyerMailSMTP(new User(login, "", nom, prenom, email, "invite", autorise),true);
 
 			
 			System.out.println("Requete : SELECT * FROM user where nomGroup='"+groupe+"';");
@@ -177,42 +189,48 @@ public class changeStateUser extends HttpServlet {
 
 	}
 	
-	public static boolean envoyerMailSMTP(boolean debug) {
+	public static boolean envoyerMailSMTP(User user,boolean debug) {
 		boolean result = false;
-		
-	/*		Session session = null;
-			try {
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			session = (Session) envCtx.lookup("mail/NomDeLaRessource");
-			} catch (Exception ex) {
-			System.out.println("erreur au lookup");
-			System.out.println( ex.getMessage());
-			}
+		String val = "";
+		System.out.println(">>>envoyerMailSMTP");
+		if (user.isAllowed()){
+			val= "activé";
+		}
+		else val = "désactivé";
+		try {
+		    Properties properties = new Properties(); 
+		    properties.setProperty("mail.transport.protocol", "smtp"); 
+		    properties.setProperty("mail.smtp.host", "localhost"); 
+		    properties.setProperty("mail.smtp.user", "root"); 
+		    properties.setProperty("mail.from", "Portail LLT"); 
+		    Session session = Session.getInstance(properties); 
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("Portail@llt.fr"));
+			System.out.println(">>>>>>>Parcours des admins");
+	
+				InternetAddress[] internetAddresses = new InternetAddress[1];
+					internetAddresses[0] = new InternetAddress(user.getEmail());
+
+				message.setRecipients(Message.RecipientType.TO,internetAddresses);
+				message.setSubject("Compte "+val);
+				message.setText("Bonjour "+user.getPrenom()+" "+user.getNom()+"!\n\nVotre compte viens d'être"+val+".\n\n\nPortail Leroux & Lotz");
+				message.setHeader("X-Mailer", "Java");
+				message.setSentDate(new Date());
+				session.setDebug(debug);
+				Transport.send(message);
+
+			result = true;
 			
-		Message message = new MimeMessage(session);*/
-		System.out.println("Compte activé, Envoi d'un mail ici");
-		
-		//Problème avec librairie
-		
-		/*message.setFrom(new InternetAddress("no-reply@portailLLT.fr"));
-		InternetAddress[] internetAddresses = new InternetAddress[1];
-		internetAddresses[0] = new InternetAddress("paul.mariage@live.fr");
-		message.setRecipients(Message.RecipientType.TO,internetAddresses);
-		message.setSubject("Test");
-		message.setText("test mail");
-		message.setHeader("X-Mailer", "Java");
-		message.setSentDate(new Date());
-		session.setDebug(debug);
-		Transport.send(message);*/
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		result = true;
 	
 		return result;
 		
-		
-
 	}
 
 }
